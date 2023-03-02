@@ -195,6 +195,7 @@ a{
     .noBorderRight{
         border-right: none;
         width: 85%;
+        position: relative;
     }
 
     .noBorder{
