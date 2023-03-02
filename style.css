@@ -213,7 +213,7 @@ a{
     }
 
     .createMaterials .rowContent span , .generativeMaterials span {
-        font-size: 3.5vw;
+        font-size: calc(var(--vh, 1vh) * 2.2);
     }
 
     .createMaterials .rowContent span{
@@ -225,6 +225,7 @@ a{
     }
     .indexColumn3Dif {
         width: 45%;
+        position: relative;
     }
 
     .createMaterials .rowContent{
@@ -233,9 +234,14 @@ a{
     }
 
     .createMaterials .rowContent img{
-        width:40%;
+        width: 35%;
         align-self: end;
-        margin:4vw 4vw 0 0;
+        margin: 0 4%;
+        position: absolute;
+        right: 0;
+    }
+    .createMaterials .rowContent img:hover{
+        width: 38%;
     }
 
     .indexMain_row4 {
