@@ -239,15 +239,15 @@ a{
     }
 
     .indexMain_row4 {
-        height: 20vh;
+        height: 20%;
     }
 
     .indexMain_row2 {
-        height: 63vh;
+        height: 63%;
     }
 
     .indexMain_row3 {
-        height: 10vh;
+        height: 10%;
     }
 
     .menuMobileIcon{
@@ -269,11 +269,11 @@ a{
 /*------------------------------------------------------------------------------------Página de Criação*/
 
 .createMain_row1{
-    height: 7vh;
+    height: 7%;
 }
 
 .createMain_row2{
-    min-height: 93vh;
+    min-height: 93%;
 }
 
 .createColumn1{
@@ -295,7 +295,7 @@ a{
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    height: calc(93vh - 4px);
+    height: calc(93% - 4px);
     position: sticky;
     top: 7vh;
     flex-direction: column;
@@ -508,7 +508,7 @@ textarea{
     -webkit-transition: .2s;
     transition: opacity .2s;
     outline: none;
-    height: 1vh;
+    height: 1%;
 }
 
 .slider:hover{
@@ -539,7 +539,7 @@ textarea{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(93vh - 4px);
+    height: calc(93% - 4px);
     position: sticky;
     top:7vh;
 }
