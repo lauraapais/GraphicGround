@@ -190,7 +190,7 @@ a{
 
     .noBorderRight{
         border-right: none;
-        width: 85vh;
+        width: 85%;
     }
 
     .noBorder{
@@ -216,10 +216,10 @@ a{
     }
 
     .indexColumn2Dif {
-        width: 40vw;
+        width: 40%;
     }
     .indexColumn3Dif {
-        width: 45vw;
+        width: 45%;
     }
 
     .createMaterials .rowContent{
