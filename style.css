@@ -267,7 +267,7 @@ a{
 
     .menu{
         display: block;
-        background-color: #D3D3D3;
+        background-color: #1d1d1d;
         height: 100vh;
         position: fixed;
         top: -100vh;
@@ -278,7 +278,9 @@ a{
         -webkit-transition: .2s;
         transition: top 1s;
     }
-
+.menu span{
+    color:#D3D3D3;
+}
 
     .menuSpan{
         flex-direction: column;
@@ -294,7 +296,7 @@ a{
     }
 
     .row1MenuMobile{
-        border: 2px solid rgba(29, 29 , 29, 0.5);
+        border: 1px solid rgba(29, 29 , 29, 0.5);
         display: flex;
         justify-content: space-between;
         align-items: center;
