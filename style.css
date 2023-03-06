@@ -599,6 +599,43 @@ textarea{
     top:7vh;
 }
 
+
+@media only screen and (max-width: 820px) {
+    .createColumn4{
+        display: none;
+    }
+
+    .mobileColumn{
+        display:none
+    }
+
+    .createColumn3 {
+        width: 100%;
+    }
+
+    .createColumn2 {
+        width: 85%;
+    }
+
+    .othersColumn2{
+        align-items: center;
+    }
+
+    .logoSpan{
+        font-size: 6vw;
+        padding-left: 3vw;
+    }
+
+    .logoSpan:hover{
+        font-size: 6vw;
+    }
+
+
+    .logo{
+        justify-content: space-between;
+    }
+}
+
 /*------------------------------------------------------------------------------------Página About*/
 
 .starIcon{
@@ -651,8 +688,6 @@ textarea{
     margin-top: 5vh;
 }
 
-
-
 @media only screen and (max-width: 820px) {
     .othersColumn1{
         display: none;
@@ -699,5 +734,4 @@ textarea{
     .othersColumn2{
         justify-content: space-between;
     }
-
 }
