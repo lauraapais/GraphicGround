@@ -1,6 +1,7 @@
 //SHOW CONTENT ON CREATE
 var contentText = document.getElementById("content");
 var inputPoster = document.getElementById("inputPoster");
+
 contentText.onclick = function(){
     if(inputPoster.style.display!== "none") {
         inputPoster.style.display = "none";
@@ -9,6 +10,7 @@ contentText.onclick = function(){
     }
     setInputSize();
 }
+
 
 //SHOW EQUALIZER ON CREATE
 var equalizerText = document.getElementById("equalizer");
@@ -115,3 +117,4 @@ buttonSavePNG.addEventListener("click", savePNG);
 function savePNG() {
     saveCanvas(poster, 'GraphicGround', 'png');
 }
+

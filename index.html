@@ -11,15 +11,15 @@
 </head>
 <body>
 <div class="main_row indexMain_row1">
-<div class="row indexColumn1"></div>
-<div class="row indexColumn2 noBorderRight menuMobile">
-    <img class="menuMobileIcon" src="data/index/menu.png">
-</div>
-<div class="row header indexColumn3 noBorder">
-    <span><a href="about.html">About</a></span>
-    <span><a href="create.html">Create</a></span>
-    <span><a href="gallery.html">Gallery</a></span>
-</div>
+    <div class="row indexColumn1"></div>
+    <div class="row indexColumn2 noBorderRight menuMobile">
+        <img id="openMenu" class="menuMobileIcon" src="data/index/menu.png">
+    </div>
+    <div class="row header indexColumn3 noBorder">
+        <span><a href="about.html">About</a></span>
+        <span><a href="create.html">Create</a></span>
+        <span><a href="gallery.html">Gallery</a></span>
+    </div>
 </div>
 
 <div class="main_row indexMain_row2">
@@ -43,15 +43,27 @@
 
     <div class="row indexColumn3 createMaterials indexColumn3Dif">
         <a href="create.html">
-        <div class="rowContent">
-        <span>Create <br> Your <br> Materials</span>
-        <img src="data/index/arrow.png">
-        </div>
+            <div class="rowContent">
+                <span>Create <br> Your <br> Materials</span>
+                <img src="data/index/arrow.png">
+            </div>
         </a>
     </div>
 
 </div>
 
+<div id="menu" class="menu">
+    <div class="indexMain_row1 row1MenuMobile">
+        <span class="mobileTitle">Graphic Ground</span>
+        <img id="closeMenu" class="menuMobileIcon" src="data/index/closeMenu.png">
+    </div>
+    <div class="menuSpan">
+        <span>About</span>
+        <span>Create</span>
+        <span>Gallery</span>
+    </div>
+</div>
 <script src="js/pageHeight.js"></script>
+<script src="js/interactIndex.js"></script>
 </body>
 </html>

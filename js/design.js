@@ -4,6 +4,7 @@ var inputUpper = document.getElementById("inputUpper");
 
 
 
+
 window.onload = (event) => {
     setInputSize();
 };
@@ -37,3 +38,5 @@ function scrollStop (callback, refresh = 66) {
 scrollStop(function () {
     document.documentElement.style.setProperty('--my-color', 'transparent');
 });
+
+
