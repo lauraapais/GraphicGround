@@ -718,12 +718,12 @@ textarea{
 
     .mainAbout {
         width: calc(100% - 8vw);
-        margin: 10vw 4vw 0 4vw;
+        margin: 0vw 4vw 0 4vw;
     }
 
     .mainAbout span {
         font-size: 7vh;
-        margin-top: 5vh;
+        margin-top: 0vh;
     }
 
     .mainAbout p{
