@@ -24,6 +24,33 @@ equalizerText.onclick = function(){
     setInputSize();
 }
 
+//SHOW CONTENT ON RANDOMIZER
+var randomizerText = document.getElementById("randomizer");
+var inputButtons = document.getElementById("inputButtons");
+
+randomizerText.onclick = function(){
+    if(inputButtons.style.display!== "none") {
+        inputButtons.style.display = "none";
+    } else {
+        inputButtons.style.display = "block";
+    }
+    setInputSize();
+}
+
+//SHOW CONTENT ON Export
+var exportText = document.getElementById("exportTitle");
+var exportButtons = document.getElementById("exportContent");
+
+exportText.onclick = function(){
+    if(exportButtons.style.display!== "none") {
+        exportButtons.style.display = "none";
+    } else {
+        exportButtons.style.display = "flex";
+    }
+    setInputSize();
+}
+
+
 //RANDOMIZE LAYOUT
 var buttonLayout = document.getElementById("buttonLayout");
 buttonLayout.addEventListener("click", layoutChange);

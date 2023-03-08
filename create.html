@@ -12,132 +12,160 @@
     <title>Graphic Ground</title>
 </head>
 <body>
-    <div class="main_row createMain_row1">
-        <div class="row createColumn1">
-            <a href="index.html"> <img src="data/pageElements/arrow.png"></a>
-        </div>
-        <div class="row createColumn2 logo">
-            <span class="logoSpan"><a href="index.html">Graphic Ground</a></span>
-            <img id="openMenu" class="menuMobileIcon" src="data/index/menu.png">
-        </div>
-        <div class="row createColumn3 mobileColumn"></div>
-        <div class="row header createColumn4 .mobileColumn">
-            <span><a href="about.html">About</a></span>
-            <span class="pagAtual"><a href="create.html">Create</a></span>
-            <span><a href="gallery.html">Gallery</a></span>
-        </div>
+<div class="main_row createMain_row1">
+    <div class="row createColumn1">
+        <a href="index.html"> <img src="data/pageElements/arrow.png"></a>
     </div>
-    <div class="main_row createMain_row2">
-        <div class="row createColumn1 mobileColumn">
-        </div>
-        <div class="row createColumn2 mobileColumn">
-            <div id="inputUpper">
-                <div class="content_poster">
-                    <div id="content" class="contentStyle">
-                        <h2>Content</h2>
-                        <img src="data/pageElements/arrow2.png">
-                    </div>
-                    <div id="inputPoster" class="inputs_poster">
-                        <form action="/url" method="GET">
-                            <div class="input">
-                                <h3>Text 1</h3>
-                                <input type="text" name="text1" id="title" value="This is a title.">
-                            </div>
-                            <div class="input">
-                                <h3>Text 2</h3>
-                                <input type="text" name="text2" id="subtitle" value="This can be used as a subtitle.">
-                            </div>
-
-                            <div class="input">
-                                <h3><label for="add_info">Additional Information</label></h3>
-                                <textarea placeholder="You can add some additional information here!" name="add_info"
-                                          id="aditionalInfo">And here you can add some additional information.</textarea>
-                            </div>
-
-                            <div class="input">
-                                <label for="keywords"><h3>Keywords</h3></label>
-                                <select name="style" id="keywords">
-                                    <option value="contained">Contained</option>
-                                    <option value="balanced">Balanced</option>
-                                    <option value="powerful">Powerful</option>
-                                    <option value="minimal">Minimal</option>
-                                </select>
-
-                            </div>
-
-                            <div class="image_input">
-                                <h3>Add image</h3>
-                                <div class="image_container">
-                                    <label id="add-img-label" for="add-single-img">+</label>
-                                    <input type="file" id="add-single-img" accept="image/jpeg"/>
-                                </div>
-                                <!-- <input
-                                         type="file"
-                                         id="image-input"
-                                         name="photos"
-                                         accept="image/jpeg"
-                                         multiple
-                                 />-->
-                            </div>
-                            <button type="submit"></button>
-                        </form>
-                    </div>
+    <div class="row createColumn2 logo">
+        <span class="logoSpan"><a href="index.html">Graphic Ground</a></span>
+        <img id="openMenu" class="menuMobileIcon" src="data/index/menu.png">
+    </div>
+    <div class="row createColumn3 mobileColumn"></div>
+    <div class="row header createColumn4 mobileColumn">
+        <span><a href="about.html">About</a></span>
+        <span class="pagAtual"><a href="create.html">Create</a></span>
+        <span><a href="gallery.html">Gallery</a></span>
+    </div>
+</div>
+<div class="main_row createMain_row2">
+    <div class="row createColumn1 mobileColumn">
+    </div>
+    <div class="row createColumn2">
+        <div id="inputUpper">
+            <div class="content_poster">
+                <div id="content" class="contentStyle">
+                    <h2>Content</h2>
+                    <img src="data/pageElements/arrow2.png">
                 </div>
-                <div class="equalizer">
-                    <div class="contentStyle">
-                        <h2 id="equalizer"> Equalizer</h2>
-                        <img src="data/pageElements/arrow2.png">
-                    </div>
-                    <div class="equalizerInputs" id="equalizerInputs">
-                        <div class="equalizer_slides">
-                            <h3>Pattern Scale</h3>
-                            <input type="range" min="2" max="8" value="3" class="slider" id="patternScale">
+                <div id="inputPoster" class="inputs_poster">
+                    <form action="/url" method="GET">
+                        <div class="input">
+                            <h3>Text 1</h3>
+                            <input type="text" name="text1" id="title" value="This is a title.">
                         </div>
-                        <div class="equalizer_slides">
-                            <h3>Pattern Probability</h3>
-                            <input type="range" min="0" max="100" value="100" class="slider" id="patternProbability">
+                        <div class="input">
+                            <h3>Text 2</h3>
+                            <input type="text" name="text2" id="subtitle" value="This can be used as a subtitle.">
                         </div>
-                    </div>
+
+                        <div class="input">
+                            <h3><label for="add_info">Additional Information</label></h3>
+                            <textarea placeholder="You can add some additional information here!" name="add_info"
+                                      id="aditionalInfo">And here you can add some additional information.</textarea>
+                        </div>
+
+                        <div class="input">
+                            <label for="keywords"><h3>Keywords</h3></label>
+                            <select name="style" id="keywords">
+                                <option value="contained">Contained</option>
+                                <option value="balanced">Balanced</option>
+                                <option value="powerful">Powerful</option>
+                                <option value="minimal">Minimal</option>
+                            </select>
+                        </div>
+
+                        <div class="image_input">
+                            <h3>Add image</h3>
+                            <div class="image_container">
+                                <label id="add-img-label" for="add-single-img">+</label>
+                                <input type="file" id="add-single-img" accept="image/jpeg"/>
+                            </div>
+                            <!-- <input
+                                     type="file"
+                                     id="image-input"
+                                     name="photos"
+                                     accept="image/jpeg"
+                                     multiple
+                             />-->
+                        </div>
+                        <button type="submit"></button>
+                    </form>
                 </div>
             </div>
-            <div id="inputSpacer"></div>
-            <div id="inputBottom" class="buttons">
-                <div>
+
+            <div class="randomizer">
+                <div class="contentStyle" id="randomizer">
+                    <h2> Randomizer</h2>
+                    <img src="data/pageElements/arrow2.png">
+                </div>
+                <div class="buttons" id="inputButtons">
                     <button class="botao" id="buttonLayout" type="button">Randomize Layout</button>
                     <button class="botao" id="buttonPositionPattern" type="button">Randomize Pattern Position</button>
                     <button class="botao" id="buttonPattern" type="button">Randomize Pattern</button>
                     <button class="botao" id="buttonColors" type="button">Randomize Colors</button>
                     <button class="botao" id="buttonFont" type="button">Randomize Font</button>
-                    <div class="checkbox">
-                        <input id="checkboxGrid" type="checkbox" name="showGrids" value="Bike">
-                        <label for="showGrids"><h3>Show Grids</h3></label><br>
+                </div>
+            </div>
+
+            <div class="equalizer">
+                <div class="contentStyle">
+                    <h2 id="equalizer"> Equalizer</h2>
+                    <img src="data/pageElements/arrow2.png">
+                </div>
+                <div class="equalizerInputs" id="equalizerInputs">
+                    <div class="equalizer_slides">
+                        <h3>Pattern Scale</h3>
+                        <input type="range" min="2" max="8" value="3" class="slider" id="patternScale">
+                    </div>
+                    <div class="equalizer_slides">
+                        <h3>Pattern Probability</h3>
+                        <input type="range" min="0" max="100" value="100" class="slider" id="patternProbability">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row createColumn3" id="canvas_parent">
-            <div id="canvas_poster">
-            </div>
-        </div>
-        <div class="row createColumn4 row_outputs">
-            <div class="exportSection">
-                <button id="savePDF" class="botao" type="button">Export .PDF</button>
-                <button id="savePNG" class="botao" type="button">Export .PNG</button>
-            </div>
-        </div>
     </div>
+    <div class="row createColumn3" id="canvas_parent">
+        <div class="creationBox">
+            <div class="checkbox">
+                <input id="checkboxGrid" type="checkbox" name="showGrids" value="Bike">
+                <label for="showGrids"><h3>Show Grids</h3></label><br>
+            </div>
 
-    <div id="menu" class="menu">
-        <div class="indexMain_row1 row1MenuMobile">
-            <span class="mobileTitle">Graphic Ground</span>
-            <img id="closeMenu" class="menuMobileIcon" src="data/index/closeMenu.png">
-        </div>
-        <div class="menuSpan">
-            <span ><a href="about.html">About</a></span>
-            <span class="pagAtual"><a href="create.html">Create</a></span>
-            <span><a href="gallery.html">Gallery</a></span>
+            <div id="canvas_poster"></div>
+
+            <div class="buttonsCanvas">
+                <select name="style" id="style">
+                    <option value="contained">Classic</option>
+                    <option value="balanced">Modern</option>
+                    <option value="powerful">Post-Modern</option>
+                    <option value="minimal">Surprise Me</option>
+                </select>
+                <select name="style" id="format">
+                    <option value="contained">A4 Poster</option>
+                    <option value="balanced">A3 Poster</option>
+                </select>
+            </div>
         </div>
     </div>
+    <div class="row createColumn4 row_outputs">
+        <div class="exportSection">
+            <div class="exportOptions">
+                <div class="contentStyle" id="exportTitle">
+                    <h2>Export</h2>
+                    <img src="data/pageElements/arrow2.png">
+                </div>
+                <div id="exportContent">
+                    <button class="botao" type="button">Exhibit</button>
+                    <button id="savePDF" class="botao" type="button">Export .PDF</button>
+                    <button id="savePNG" class="botao" type="button">Export .PNG</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="menu" class="menu">
+    <div class="indexMain_row1 row1MenuMobile">
+        <span class="mobileTitle">Graphic Ground</span>
+        <img id="closeMenu" class="menuMobileIcon" src="data/index/closeMenu.png">
+    </div>
+    <div class="menuSpan">
+        <span><a href="about.html">About</a></span>
+        <span class="pagAtual"><a href="create.html">Create</a></span>
+        <span><a href="gallery.html">Gallery</a></span>
+    </div>
+</div>
 </div>
 
 
@@ -145,7 +173,7 @@
 <script src="js/canvas_p5.js"></script>
 <script src="js/pattern.js"></script>
 <script src="js/design.js"></script>
-    <script src="js/interactIndex.js"></script>
+<script src="js/interactIndex.js"></script>
 
 
 </body>
