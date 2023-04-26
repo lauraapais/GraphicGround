@@ -54,18 +54,13 @@
                                       id="aditionalInfo">And here you can add some additional information.</textarea>
                         </div>
 
-                        <div class="input">
-                            <label for="keywords"><h3>Keywords</h3></label>
-                            <select name="style" id="keywords">
-                                <option value="contained">Contained</option>
-                                <option value="balanced">Balanced</option>
-                                <option value="powerful">Powerful</option>
-                                <option value="minimal">Minimal</option>
-                            </select>
-                        </div>
 
                         <div class="image_input">
                             <h3>Add image</h3>
+                            <div class="imageIcons">
+                                <img id="addImage" src="data/pageElements/plusCreate.png">
+                                <img id="deleteImage" src="data/pageElements/trashCreate.png">
+                            </div>
                             <div class="image_container">
                                 <label id="add-img-label" for="add-single-img">+</label>
                                 <input type="file" id="add-single-img" accept="image/jpeg"/>
@@ -125,11 +120,10 @@
             <div id="canvas_poster"></div>
 
             <div class="buttonsCanvas">
-                <select name="style" id="style">
-                    <option value="contained">Classic</option>
-                    <option value="balanced">Modern</option>
-                    <option value="powerful">Post-Modern</option>
-                    <option value="minimal">Surprise Me</option>
+                <select name="stylePoster" id="stylePoster">
+                    <option value="classic">Classic</option>
+                    <option value="modern">Modern</option>
+                    <option value="postmodern">Post-Modern</option>
                 </select>
                 <select name="style" id="format">
                     <option value="contained">A4 Poster</option>
@@ -168,10 +162,11 @@
 </div>
 </div>
 
+<script src="js/p5_scripts/posterStyles.js"></script>
+<script src="js/p5_scripts/canvas.js"></script>
 
+<script src="js/image_input.js"></script>
 <script src="js/interact.js"></script>
-<script src="js/canvas_p5.js"></script>
-<script src="js/pattern.js"></script>
 <script src="js/design.js"></script>
 <script src="js/interactIndex.js"></script>
 

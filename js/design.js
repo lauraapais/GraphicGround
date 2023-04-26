@@ -5,7 +5,7 @@ var inputUpper = document.getElementById("inputUpper");
 
 
 
-window.onload = (event) => {
+/*window.onload = (event) => {
     setInputSize();
 };
 
@@ -13,7 +13,7 @@ function setInputSize() {
     var total = window.innerHeight*(100-8)/100;
     inputSpacer.style.height = Math.max(total - inputUpper.offsetHeight - inputBottom.offsetHeight, 0)+"px";
     return "RESIZED";
-}
+}*/
 
 
 function scrollStop (callback, refresh = 66) {

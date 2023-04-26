@@ -419,7 +419,6 @@ input[type="checkbox"] {
     width: 1em;
     height: 1em;
     border: 1px solid #1D1D1D;
-    border-radius: 5px;
 }
 
 input[type="checkbox"]:checked {
@@ -513,7 +512,6 @@ button[type=submit]:hover {
     background-color: #D3D3D3;
     padding: 8px 20px;
     color: #1D1D1D;
-    border-radius: 10px;
     box-sizing: border-box;
     font-size: 2vh;
     margin-top: 1vh;
@@ -556,6 +554,10 @@ button[type=submit]:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: solid 1px #1D1D1D;
 }
 
 .image_container label {
@@ -566,17 +568,16 @@ button[type=submit]:hover {
     cursor: pointer;
     width: 100%;
     height: 150px;
-    border: solid 1px #1D1D1D;
-    border-radius: 5px;
     object-fit: cover;
     margin: 8px 0;
 }
 
 .image_container img {
-    width:90%;
-    height: 150px;
-    border: solid 1px #1D1D1D;
-    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -588,7 +589,6 @@ input[type=text], select, textarea {
     border: solid 1px #1D1D1D;
     background-color: #D3D3D3;
     color:#1D1D1D;
-    border-radius: 20px;
     box-sizing: border-box;
     font-size: 1.8vh;
 }
@@ -604,11 +604,25 @@ textarea{
     min-height:45px;
 }
 
+.imageIcons{
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center
+}
+
+.imageIcons img{
+    width:6%;
+    margin: 2% 0 2% 4%;
+    cursor: pointer;
+    height: max-content;
+}
 
 .equalizerInputs input{
     width:100%;
     margin: 8px 0;
-    background-color: #C5C2C2;
+    background-color: transparent;
+    border: #1D1D1D 1px solid;
 }
 
 #equalizer{
@@ -629,7 +643,6 @@ textarea{
     transition: opacity .2s;
     outline: none;
     height: 1%;
-    border-radius: 20px;
 }
 
 .slider:hover{
@@ -639,17 +652,15 @@ textarea{
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 15px;
+    width: 30px;
     height: 15px;
-    border-radius: 50%;
     background: #1D1D1D;
     cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
-    width: 15px;
+    width: 30px;
     height: 15px;
-    border-radius: 50%;
     background: #1D1D1D;
     color:#BCBCBC;
     cursor: pointer;
@@ -686,6 +697,48 @@ textarea{
 
     .logo{
         justify-content: space-between;
+    }
+
+    .createMain_row2{
+        flex-direction: column;
+    }
+
+    .createColumn2{
+        order:2;
+        width: 100%;
+    }
+
+    .createColumn4{
+        order:3;
+        width:100%;
+    }
+
+    .createColumn4 .exportSection{
+        height: auto;
+    }
+
+    .row_outputs{
+        border:none;
+    }
+
+    .equalizer{
+        border: none;
+    }
+
+    .contentStyle img{
+        width:5vw;
+    }
+
+    .contentStyle{
+        width:90%;
+    }
+
+    .contentStyle h2{
+        margin-left: 3vw;
+    }
+
+    .creationBox {
+        height: calc(var(--vh, 1vh) * 72 - 4px);
     }
 }
 

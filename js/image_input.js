@@ -1,4 +1,4 @@
-/*const imgInputHelper = document.getElementById("add-single-img");
+const imgInputHelper = document.getElementById("add-single-img");
 const imgInputHelperLabel = document.getElementById("add-img-label");
 const imgContainer = document.querySelector(".image_container");
 const imgFiles = [];
@@ -6,36 +6,45 @@ const imgFiles = [];
 const addImgHandler = () => {
     const file = imgInputHelper.files[0];
     if (!file) return;
+
     // Generate img preview
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
         const newImg = document.createElement("img");
         newImg.src = reader.result;
-        imgContainer.insertBefore(newImg, imgInputHelperLabel);
+        const existingImg = imgContainer.querySelector("img");
+        if (existingImg) {
+            imgContainer.replaceChild(newImg, existingImg);
+        } else {
+            imgContainer.appendChild(newImg);
+        }
     };
+
     // Store img file
     imgFiles.push(file);
+
     // Reset image input
     imgInputHelper.value = "";
-    return;
 };
 imgInputHelper.addEventListener("change", addImgHandler);
 
-const getImgFileList = (imgFiles) => {
-    const imgFilesHelper = new DataTransfer();
-    imgFiles.forEach((imgFile) => imgFilesHelper.items.add(imgFile));
-    return imgFilesHelper.files;
-};*/
-
-// SUBMIT BUTTON https://onestepcode.com/style-html-img-file-input/
-// ----------------------------------------------------------------
-/*const customFormSubmitHandler = (ev) => {
-    ev.preventDefault();
-    const firstImgInput = document.getElementById("image_input");
-    firstImgInput.files = getImgFileList(imgFiles);
-    // submit form to server, etc
+const imageContainerHandler = () => {
+    imgInputHelper.click();
 };
-document
-    .querySelector(".custom__form")
-    .addEventListener("submit", customFormSubmitHandler);*/
+imgContainer.addEventListener("click", imageContainerHandler);
+
+const addImage = document.getElementById("addImage");
+addImage.addEventListener("click", () => {
+    imgInputHelper.click();
+});
+
+const deleteImage = document.getElementById("deleteImage");
+deleteImage.addEventListener("click", () => {
+    const existingImg = imgContainer.querySelector("img");
+    if (existingImg) {
+        imgContainer.removeChild(existingImg);
+        imgFiles.length = 0;
+        imgInputHelper.value = "";
+    }
+});
