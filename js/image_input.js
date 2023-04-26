@@ -1,19 +1,22 @@
-const imgInputHelper = document.getElementById("add-single-img");
-const imgInputHelperLabel = document.getElementById("add-img-label");
-const imgContainer = document.querySelector(".image_container");
-const imgFiles = [];
+var imgInputHelper = document.getElementById("add-single-img");
+var imgInputHelperLabel = document.getElementById("add-img-label");
+var imgContainer = document.querySelector(".image_container");
+var imgFiles = [];
 
-const addImgHandler = () => {
-    const file = imgInputHelper.files[0];
+var addImgHandler = () => {
+    var file = imgInputHelper.files[0];
     if (!file) return;
 
     // Generate img preview
-    const reader = new FileReader();
+    var reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-        const newImg = document.createElement("img");
+        var newImg = document.createElement("img");
         newImg.src = reader.result;
-        const existingImg = imgContainer.querySelector("img");
+
+        img = loadImage(reader.result); // LOAD TO P5.JS VARIABLE
+
+        var existingImg = imgContainer.querySelector("img");
         if (existingImg) {
             imgContainer.replaceChild(newImg, existingImg);
         } else {
@@ -29,22 +32,24 @@ const addImgHandler = () => {
 };
 imgInputHelper.addEventListener("change", addImgHandler);
 
-const imageContainerHandler = () => {
+var imageContainerHandler = () => {
     imgInputHelper.click();
 };
+
 imgContainer.addEventListener("click", imageContainerHandler);
 
-const addImage = document.getElementById("addImage");
+var addImage = document.getElementById("addImage");
 addImage.addEventListener("click", () => {
     imgInputHelper.click();
 });
 
-const deleteImage = document.getElementById("deleteImage");
+var deleteImage = document.getElementById("deleteImage");
 deleteImage.addEventListener("click", () => {
-    const existingImg = imgContainer.querySelector("img");
+    var existingImg = imgContainer.querySelector("img");
     if (existingImg) {
         imgContainer.removeChild(existingImg);
         imgFiles.length = 0;
         imgInputHelper.value = "";
+        img = null;
     }
 });

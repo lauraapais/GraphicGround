@@ -24,6 +24,7 @@ subtitleText.addEventListener("change", subtitleLayout);
 var aditionalInfoText = document.getElementById("aditionalInfo");
 aditionalInfoText.addEventListener("change", aditionalInfoLayout);
 
+var img = null;
 
 function preload() {
     loadTemplates();
@@ -60,6 +61,9 @@ function draw() {
     }
 
     pop();
+
+    if (img)
+        image(img, 0, 0, width, height)
 }
 
 function drawGrid() {
