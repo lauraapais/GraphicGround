@@ -36,7 +36,7 @@ function preload() {
     fonts["Switzer-Black"] = loadFont('data/fonts/Switzer-Black.otf');
     fonts["Redacted-Regular"] = loadFont('data/fonts/Redacted-Regular.ttf');
     fonts["Melodrama-Bold"] = loadFont('data/fonts/Melodrama-Bold.otf');
-    fonts["Panchang-Light"] = loadFont('data/fonts/Panchang-Light.otf');
+    fonts["Panchang-Regular"] = loadFont('data/fonts/Panchang-Regular.otf');
 
     texturePosModern = loadImage('data/texture.jpg');
 }

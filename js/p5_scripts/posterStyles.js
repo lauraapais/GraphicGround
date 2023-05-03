@@ -116,7 +116,7 @@ function  loadTemplates() {
 
         "text": {
             "fontTitle": ["Melodrama-Bold"],
-            "fontOthers": ["Panchang-Light"],
+            "fontOthers": ["Panchang-Regular"],
             "marginText": 1,
 
             "alignment": [0, 2],
