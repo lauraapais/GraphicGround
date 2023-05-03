@@ -26,7 +26,7 @@ var aditionalInfoText = document.getElementById("aditionalInfo");
 aditionalInfoText.addEventListener("change", aditionalInfoLayout);
 
 var originalImg = null, effectImg = null;
-var imageInfo = {"width": 0, "height": 0, "posX": 0, "posY": 0, "originalWidth": 0};
+var imageInfo = {"width": 0, "height": 0, "posX": 0, "posY": 0, "originalWidth": 0, "orientation": 0};
 
 function preload() {
     loadTemplates();
@@ -294,16 +294,27 @@ function randInt(min, max) {
 }
 
 function imageEffect(original) {
-    var original_size = template.image[0].columnsMinMax[0] * gridValues.sizeColumn + (template.image[0].columnsMinMax[0] - 1) * gridValues.gapColumn;
-    var image_size = original_size * template.image[0].horizontalScale[0];
+    let resizedImg = original;
+    let original_size_w;
 
-    var resizedImg = original;
+    if(original.height > original.width) {
+        imageInfo.orientation = 1;
+        original_size_w = template.image[0].columnsMinMaxHeight[0] * gridValues.sizeColumn + (template.image[0].columnsMinMaxHeight[0] - 1) * gridValues.gapColumn;
+        let original_size_h = original_size_w*original.height/original.width
 
-    resizedImg.resize(image_size, 0);
+        let image_size = original_size_h * template.image[0].verticalScale[0];
+        resizedImg.resize(0, image_size);
+    } else {
+        imageInfo.orientation = 0;
+        original_size_w = template.image[0].columnsMinMaxWidth[0] * gridValues.sizeColumn + (template.image[0].columnsMinMaxWidth[0] - 1) * gridValues.gapColumn;
 
-    imageInfo.originalWidth = original_size;
-    imageInfo.width = image_size;
-    imageInfo.height = original.height * image_size / original.width;
+        let image_size = original_size_w * template.image[0].horizontalScale[0];
+        resizedImg.resize(image_size, 0);
+    }
+
+    imageInfo.originalWidth = original_size_w;
+    imageInfo.width = resizedImg.width;
+    imageInfo.height = resizedImg.height;
 
     calcPosImage();
 
@@ -322,7 +333,12 @@ function calcPosImage(){
     if (template.image[0].alignment == 1) { // CENTER
         imageInfo.posX = imageInfo.originalWidth / 2 - imageInfo.width / 2;
     } else if(template.image[0].alignment == 0){
-        let columnStart = randInt(0, template.composition.columns-template.image[0].columnsMinMax[0]+1);
+        let columnStart;
+        if(imageInfo.orientation == 1)
+            columnStart = randInt(0, template.composition.columns-template.image[0].columnsMinMaxHeight[0]+1);
+        else if(imageInfo.orientation == 0)
+            columnStart = randInt(0, template.composition.columns-template.image[0].columnsMinMaxWidth[0]+1);
+
         imageInfo.posX = gridValues.sizeColumn * (columnStart) + gridValues.gapColumn * Math.max(0, columnStart);
     }
     else if(template.image[0].alignment == 2){

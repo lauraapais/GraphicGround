@@ -43,7 +43,8 @@ function  loadTemplates() {
             "effect": "engraving",
             "texture": 0,
             "rotation": [0],
-            "columnsMinMax":  [2],
+            "columnsMinMaxWidth":  [2],
+            "columnsMinMaxHeight": [2],
             "horizontalScale": [0.5],
             "verticalScale": [0.3],
             "alignment": 1,
@@ -88,8 +89,10 @@ function  loadTemplates() {
             "effect": "blackWhite",
             "texture":0,
             "rotation": [0],
-            "columnsMinMax":  [2],
+            "columnsMinMaxWidth": [2],
+            "columnsMinMaxHeight": [1],
             "horizontalScale": [1],
+            "verticalScale": [1],
             "alignment": 0,
             "shapes": null
         }]
@@ -132,8 +135,10 @@ function  loadTemplates() {
             "effect": "duotone",
             "texture": 1,
             "rotation": [45],
-            "columnsMinMax":  [1],
-            "horizontalScale": [0.6],
+            "columnsMinMaxWidth": [1],
+            "columnsMinMaxHeight": [1],
+            "horizontalScale": [0.7],
+            "verticalScale": [0.6],
             "alignment": 2,
             "shapes": null
         }]
