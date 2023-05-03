@@ -8,7 +8,6 @@ contentText.onclick = function(){
     } else {
         inputPoster.style.display = "block";
     }
-    setInputSize();
 }
 
 
@@ -79,4 +78,10 @@ function layoutChange(){
     titleLayout(titleText);
     subtitleLayout(subtitleText);
     aditionalInfoLayout(aditionalInfoText);
+}
+
+var buttonImagePosition = document.getElementById("buttonImagePosition");
+buttonImagePosition.addEventListener("click", imagePositionChange);
+function imagePositionChange(){
+    calcPosImage();
 }

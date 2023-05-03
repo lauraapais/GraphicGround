@@ -1,6 +1,7 @@
 var canvas_parent = document.getElementById("canvas_parent");
 var showGridsButton = document.getElementById("checkboxGrid");
 var poster;
+var texturePosModern;
 
 //var canvasValues;
 //var gridValues;
@@ -24,7 +25,8 @@ subtitleText.addEventListener("change", subtitleLayout);
 var aditionalInfoText = document.getElementById("aditionalInfo");
 aditionalInfoText.addEventListener("change", aditionalInfoLayout);
 
-var img = null;
+var originalImg = null, effectImg = null;
+var imageInfo = {"width": 0, "height": 0, "posX": 0, "posY": 0, "originalWidth": 0};
 
 function preload() {
     loadTemplates();
@@ -33,6 +35,10 @@ function preload() {
     fonts["Switzer-Bold"] = loadFont('data/fonts/Switzer-Bold.otf');
     fonts["Switzer-Black"] = loadFont('data/fonts/Switzer-Black.otf');
     fonts["Redacted-Regular"] = loadFont('data/fonts/Redacted-Regular.ttf');
+    fonts["Melodrama-Bold"] = loadFont('data/fonts/Melodrama-Bold.otf');
+    fonts["Panchang-Light"] = loadFont('data/fonts/Panchang-Light.otf');
+
+    texturePosModern = loadImage('data/texture.jpg');
 }
 
 function setup() {
@@ -51,19 +57,37 @@ function setup() {
 function draw() {
     background(template.palettes[0].background[0]);
 
+    if(template.image[0].texture){
+        blendMode(LIGHTEST);
+        image(texturePosModern, 0,0, canvasValues.canvasWidth, canvasValues.canvasHeight);
+        blendMode(BLEND);
+    }
+
     push();
     translate(canvasValues.marginWidth, canvasValues.marginHeight);
 
+    //image
+    if (effectImg) {
+        if (effectImg instanceof p5.Image) {
+            image(effectImg, imageInfo.posX, imageInfo.posY, imageInfo.width, imageInfo.height);
+        } else {
+            push();
+            translate(imageInfo.posX, imageInfo.posY);
+            drawEngravingVersion(effectImg);
+            pop();
+        }
+    }
+
+    //text
+
     drawText(textInputs, gridValues);
+
     //show grids
     if(showGridsButton.checked == true) {
         drawGrid();
     }
 
     pop();
-
-    if (img)
-        image(img, 0, 0, width, height)
 }
 
 function drawGrid() {
@@ -113,6 +137,10 @@ function onResize() {
 function loadPosterStyles() {
     canvasValues = calcPoster(width, height, 0.1, 0.1);
     gridValues = calcGrid(template.composition.columns, 0.05, canvasValues.posterWidth, nLinhastmp, 0.1, canvasValues.posterHeight);
+    // LOAD IMAGE EFFECT
+    if (originalImg) {
+        effectImg = imageEffect(originalImg);
+    }
 }
 
 function windowSize() {
@@ -124,8 +152,8 @@ function windowSize() {
     return createVector(wDiv * scale, hPoster * wDiv * scale / wPoster);
 }
 
-function formatText(txt, boxWidth, txtSize, nCollumns) {
-    textFont(fonts[template.text.fonts[0]]);
+function formatText(txt, boxWidth, txtSize, nCollumns, currentFont) {
+    textFont(fonts[currentFont]);
     textSize(txtSize);
     textLeading(txtSize*1.02);
 
@@ -172,13 +200,21 @@ function formatText(txt, boxWidth, txtSize, nCollumns) {
 }
 
 function drawText(textInputs, gridValues) {
-    textFont(fonts[template.text.fonts[0]]);
     fill(template.palettes[0].text[0]);
     noStroke();
 
+        //push();
+        //rotate(45);
+    textFont(fonts[template.text.fontTitle[0]]);
     textSetup(textInputs.title, gridValues);
+        //pop();
+
+
+    textFont(fonts[template.text.fontOthers[0]]);
     textSetup(textInputs.subtitle, gridValues);
     textSetup(textInputs.aditionalInfo, gridValues);
+
+
 }
 
 function textSetup(textInput, gridValues) {
@@ -208,13 +244,14 @@ function titleLayout() {
     textInputs.title.columnEnd = textInputs.title.columnStart + nColumns;
 
 
-    textInputs.title.content = formatText(text, nColumns*gridValues.sizeColumn+(nColumns-1)*gridValues.gapColumn, textInputs.title.size, nColumns);
+    textInputs.title.content = formatText(text, nColumns*gridValues.sizeColumn+(nColumns-1)*gridValues.gapColumn, textInputs.title.size, nColumns, template.text.fontTitle[0]);
 
     var textHeight = (textInputs.title.content.nBreaks+1)*textInputs.title.size + textInputs.title.content.nBreaks*(1-textInputs.title.content.leading);
     var nRows = Math.round(textHeight/gridValues.sizeRow);
 
     textInputs.title.rowStart = randInt(0, nLinhastmp-nRows);
     textInputs.title.rowEnd = textInputs.title.rowStart + nRows;
+
 }
 
 function subtitleLayout() {
@@ -225,7 +262,7 @@ function subtitleLayout() {
     textInputs.subtitle.columnStart = randInt(0, template.composition.columns-nColumns+1);
     textInputs.subtitle.columnEnd = textInputs.subtitle.columnStart + nColumns;
 
-    textInputs.subtitle.content = formatText(text, nColumns*gridValues.sizeColumn+(nColumns-1)*gridValues.gapColumn, textInputs.subtitle.size, nColumns);
+    textInputs.subtitle.content = formatText(text, nColumns*gridValues.sizeColumn+(nColumns-1)*gridValues.gapColumn, textInputs.subtitle.size, nColumns, template.text.fontOthers[0]);
 
     var textHeight = (textInputs.subtitle.content.nBreaks+1)*textInputs.subtitle.size + textInputs.subtitle.content.nBreaks*(1-textInputs.subtitle.content.leading);
 
@@ -243,7 +280,7 @@ function aditionalInfoLayout() {
     textInputs.aditionalInfo.columnStart = randInt(0, template.composition.columns-nColumns+1);
     textInputs.aditionalInfo.columnEnd = textInputs.aditionalInfo.columnStart + nColumns;
 
-    textInputs.aditionalInfo.content = formatText(text, nColumns*gridValues.sizeColumn+(nColumns-1)*gridValues.gapColumn, textInputs.aditionalInfo.size, nColumns);
+    textInputs.aditionalInfo.content = formatText(text, nColumns*gridValues.sizeColumn+(nColumns-1)*gridValues.gapColumn, textInputs.aditionalInfo.size, nColumns,  template.text.fontOthers[0]);
 
     var textHeight = (textInputs.aditionalInfo.content.nBreaks+1)*textInputs.aditionalInfo.size + textInputs.aditionalInfo.content.nBreaks*(1-textInputs.aditionalInfo.content.leading);
     var nRows = Math.round(textHeight/gridValues.sizeRow);
@@ -254,4 +291,132 @@ function aditionalInfoLayout() {
 
 function randInt(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
+}
+
+function imageEffect(original) {
+    var original_size = template.image[0].columnsMinMax[0] * gridValues.sizeColumn + (template.image[0].columnsMinMax[0] - 1) * gridValues.gapColumn;
+    var image_size = original_size * template.image[0].horizontalScale[0];
+
+    var resizedImg = original;
+
+    resizedImg.resize(image_size, 0);
+
+    imageInfo.originalWidth = original_size;
+    imageInfo.width = image_size;
+    imageInfo.height = original.height * image_size / original.width;
+
+    calcPosImage();
+
+    if (template.image[0].effect == "duotone") {
+        return getDuotoneVersion(resizedImg, template.palettes[0].image.one, template.palettes[0].image.two);
+    } else if (template.image[0].effect == "blackWhite") {
+        return getBlackWhiteVersion(resizedImg, 90);
+    } else if (template.image[0].effect == "engraving") {
+        return getEngravingVersion(resizedImg, 4);
+    } else {
+        return resizedImg;
+    }
+}
+
+function calcPosImage(){
+    if (template.image[0].alignment == 1) { // CENTER
+        imageInfo.posX = imageInfo.originalWidth / 2 - imageInfo.width / 2;
+    } else if(template.image[0].alignment == 0){
+        let columnStart = randInt(0, template.composition.columns-template.image[0].columnsMinMax[0]+1);
+        imageInfo.posX = gridValues.sizeColumn * (columnStart) + gridValues.gapColumn * Math.max(0, columnStart);
+    }
+    else if(template.image[0].alignment == 2){
+        imageInfo.posX = Math.random()*(canvasValues.posterWidth - imageInfo.width);
+    }
+
+    imageInfo.posY = Math.random()*(canvasValues.posterHeight - imageInfo.height);
+}
+
+function getDuotoneVersion(baseImg, cDark, cBright) {
+    let newImg = createImage(baseImg.width, baseImg.height);
+    for (var y = 0; y < baseImg.height; y++) {
+        for (var x = 0; x < baseImg.width; x++) {
+            let p = baseImg.get(x, y);
+            let bright = 0.2126 * p[0] + 0.7152 * p[1] + 0.0722 * p[2];
+            //let newP = color(bright);
+            let r = map(bright, 0, 255, cDark[0], cBright[0]);
+            let g = map(bright, 0, 255, cDark[1], cBright[1]);
+            let b = map(bright, 0, 255, cDark[2], cBright[2]);
+            let newP = color(r, g, b);
+            newImg.set(x, y, newP);
+        }
+    }
+    newImg.updatePixels();
+    return newImg;
+}
+
+function getBlackWhiteVersion(baseImg, contrast) {
+    let newImg = createImage(baseImg.width, baseImg.height);
+    for (let y = 0; y < baseImg.height; y++) {
+        for (let x = 0; x < baseImg.width; x++) {
+            let p = baseImg.get(x, y);
+            let l = (p[0] + p[1] + p[2]) / 3;
+            let d = (l - 128) * (contrast / 100) + 128;
+            let newP = color(d);
+            newImg.set(x, y, newP);
+        }
+    }
+    newImg.updatePixels();
+    return newImg;
+}
+
+function getEngravingVersion(baseImg, quadSize) {
+    let info = {"quads": [], "quadSize": quadSize};
+
+    baseImg.loadPixels();
+    for (let x = 0; x < baseImg.width; x += quadSize) {
+        info.quads.push([]);
+        for (let y = 0; y < baseImg.height; y += quadSize) {
+            let avgBrightness = 0;
+            let count = 0;
+            for (let i = x; i < x + quadSize; i++) {
+                for (let j = y; j < y + quadSize; j++) {
+                    let index = (i + j * baseImg.width) * 4;
+                    let r = baseImg.pixels[index];
+                    let g = baseImg.pixels[index + 1];
+                    let b = baseImg.pixels[index + 2];
+                    avgBrightness += (r + g + b) / 3 / 255;
+                    count++;
+                }
+            }
+            avgBrightness /= count;
+
+            let rotation = null;
+            if (avgBrightness < 0.2) {
+                rotation = radians(135);
+            } else if (avgBrightness < 0.4) {
+                rotation = radians(45);
+            } else {
+                // no line
+            }
+
+            info.quads[info.quads.length - 1].push(rotation);
+        }
+    }
+
+    return info;
+}
+
+
+function drawEngravingVersion(info) {
+    strokeWeight(info.quadSize*0.05);
+    for (let x = 0; x < info.quads.length; x++) {
+        for (let y = 0; y < info.quads[x].length; y++) {
+            if (info.quads[x][y] < 255/2) {
+                push();
+                translate(x * info.quadSize, y * info.quadSize);
+                if(info.quads[x][y]!=null) {
+                    rotate(info.quads[x][y]);
+                    stroke(0);
+                    line(-info.quadSize / 2, 0, info.quadSize / 2, 0);
+                }
+                pop();
+            }
+        }
+    }
 }

@@ -16,11 +16,15 @@ function  loadTemplates() {
             "text": [color(26,26,26)],
             "additionalInformation": [color(26,26,26)],
             "background":  [color(232, 232, 230)],
-            "image": [color(26,26,26)]
+            "image": {
+                "one": [160, 93, 160],
+                "two": [135, 198, 98]
+            }
         }],
 
         "text": {
-            "fonts": ["Gambetta-Regular"],
+            "fontTitle": ["Gambetta-Regular"],
+            "fontOthers": ["Gambetta-Regular"],
             "marginText": 0.8,
 
             "alignment": [1],
@@ -36,10 +40,13 @@ function  loadTemplates() {
         },
 
         "image": [{
-            "effect": null,
+            "effect": "engraving",
+            "texture": 0,
             "rotation": [0],
             "columnsMinMax":  [2],
-            "horizontalScale": [0.2],
+            "horizontalScale": [0.5],
+            "verticalScale": [0.3],
+            "alignment": 1,
             "shapes": null
         }]
     };
@@ -51,22 +58,26 @@ function  loadTemplates() {
         },
 
         "palettes": [{
-            "text": [color(239,240,242)],
-            "aditionalInformation": [color(239,240,242)],
-            "background":  [color(243,186,18)],
-            "image": [color(180,20,20)]
+            "text": [color(57,54,51)],
+            "aditionalInformation": [color(57,54,51)],
+            "background":  [color(232,228,226)],
+            "image": {
+                "one": [160, 93, 160],
+                "two": [135, 198, 98]
+            }
         }],
 
         "text": {
-            "fonts": ["Switzer-Bold"],
+            "fontTitle": ["Switzer-Bold"],
+            "fontOthers": ["Switzer-Bold"],
             "marginText": 1,
 
             "alignment": [0],
             "rotation":  [0],
 
-            "titleScale": 17,
-            "subTitleScale": 8,
-            "additionalScale": 8,
+            "titleScale": 20,
+            "subTitleScale": 12,
+            "additionalScale": 9,
 
             "titleCollumns": [2],
             "subTitleCollumns": [2, 1],
@@ -74,10 +85,12 @@ function  loadTemplates() {
         },
 
         "image": [{
-            "effect": null,
+            "effect": "blackWhite",
+            "texture":0,
             "rotation": [0],
-            "columnsMinMax":  [1,2],
+            "columnsMinMax":  [2],
             "horizontalScale": [1],
+            "alignment": 0,
             "shapes": null
         }]
     };
@@ -89,21 +102,25 @@ function  loadTemplates() {
         },
 
         "palettes": [{
-            "text": [color(135,198,98)],
-            "aditionalInformation": [color(135,198,98)],
-            "background":  [color(160,93,160)],
-            "image": [color(0), color(255,0,0)]
+            "text": [color(138, 198, 98)],
+            "aditionalInformation": [color(138, 198, 98)],
+            "background":  [color(125,99,171)],
+            "image": {
+                "one": [125,99,171],
+                "two": [246, 134, 42]
+            }
         }],
 
         "text": {
-            "fonts": ["Redacted-Regular"],
+            "fontTitle": ["Melodrama-Bold"],
+            "fontOthers": ["Panchang-Light"],
             "marginText": 1,
 
             "alignment": [0, 2],
             "rotation":  [45],
 
-            "titleScale": 10,
-            "subTitleScale": 10,
+            "titleScale": 75,
+            "subTitleScale": 17,
             "additionalScale": 10,
 
             "titleCollumns": [1],
@@ -112,10 +129,12 @@ function  loadTemplates() {
         },
 
         "image": [{
-            "effect": null,
+            "effect": "duotone",
+            "texture": 1,
             "rotation": [45],
-            "columnsMinMax":  [2],
-            "horizontalScale": [0.6,0.9],
+            "columnsMinMax":  [1],
+            "horizontalScale": [0.6],
+            "alignment": 2,
             "shapes": null
         }]
     };
@@ -130,7 +149,10 @@ function  loadTemplates() {
             "text": null,
             "additionalInformation": null,
             "background":  null,
-            "image": null
+            "image": {
+                "one": null,
+                "two": null
+            }
         },
 
         "text": {

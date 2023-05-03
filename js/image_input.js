@@ -1,5 +1,4 @@
 var imgInputHelper = document.getElementById("add-single-img");
-var imgInputHelperLabel = document.getElementById("add-img-label");
 var imgContainer = document.querySelector(".image_container");
 var imgFiles = [];
 
@@ -14,7 +13,10 @@ var addImgHandler = () => {
         var newImg = document.createElement("img");
         newImg.src = reader.result;
 
-        img = loadImage(reader.result); // LOAD TO P5.JS VARIABLE
+        originalImg = loadImage(reader.result, originalImg => {
+            effectImg = imageEffect(originalImg);
+        }); // LOAD TO P5.JS VARIABLE
+
 
         var existingImg = imgContainer.querySelector("img");
         if (existingImg) {
@@ -50,6 +52,8 @@ deleteImage.addEventListener("click", () => {
         imgContainer.removeChild(existingImg);
         imgFiles.length = 0;
         imgInputHelper.value = "";
-        img = null;
+        originalImg = null;
+        effectImg= null;
     }
 });
+
