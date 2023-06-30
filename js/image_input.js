@@ -2,29 +2,34 @@ var imgInputHelper = document.getElementById("add-single-img");
 var imgContainer = document.querySelector(".image_container");
 var imgFiles = [];
 
-var addImgHandler = () => {
+var addImgHandler = async () => {
     var file = imgInputHelper.files[0];
     if (!file) return;
 
     // Generate img preview
     var reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => {
-        var newImg = document.createElement("img");
-        newImg.src = reader.result;
+    await new Promise((resolve, reject) => {
+        reader.onload = () => {
+            var newImg = document.createElement("img");
+            newImg.src = reader.result;
 
-        originalImg = loadImage(reader.result, originalImg => {
-            effectImg = imageEffect(originalImg);
-        }); // LOAD TO P5.JS VARIABLE
+            originalImg = loadImage(reader.result, originalImg => {
+                effectImg = imageEffect(originalImg);
+                layoutChange();
+            }); // LOAD TO P5.JS VARIABLE
 
 
-        var existingImg = imgContainer.querySelector("img");
-        if (existingImg) {
-            imgContainer.replaceChild(newImg, existingImg);
-        } else {
-            imgContainer.appendChild(newImg);
+            var existingImg = imgContainer.querySelector("img");
+            if (existingImg) {
+                imgContainer.replaceChild(newImg, existingImg);
+            } else {
+                imgContainer.appendChild(newImg);
+            }
+            ;
         }
-    };
+        reader.onerror = reject;
+    });
 
     // Store img file
     imgFiles.push(file);
@@ -53,7 +58,7 @@ deleteImage.addEventListener("click", () => {
         imgFiles.length = 0;
         imgInputHelper.value = "";
         originalImg = null;
-        effectImg= null;
+        effectImg = null;
     }
 });
 

@@ -325,11 +325,21 @@ a{
 
 .creationBox {
     height: calc(var(--vh, 1vh) * 93 - 4px);
-    position: sticky;
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
     top: calc(var(--vh, 1vh) * 7 - 3px);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.buttonsCreation{
+    position: absolute;
+    right: 2vw;
+    bottom: 6.5vh;
+}
+
+#canvas_parent{
+    position:relative;
+    position: sticky;
 }
 
 .createMain_row1{
@@ -390,7 +400,7 @@ a{
 
 #exportContent{
     margin-bottom: 2vh;
-    display: none;
+    display: flex;
     justify-content: center;
     flex-direction: column;
 }
@@ -402,12 +412,12 @@ a{
 
 .buttonsCanvas select{
     align-self: center;
-    width: auto;
+    width:11vw;
     margin: 0.5vw;
 }
 
 #canvas_parent .checkbox{
-    align-self: flex-end;
+    margin-left: 0.5vw;
 }
 
 input[type="checkbox"] {
@@ -479,10 +489,33 @@ input[type="checkbox"]:checked {
     border-bottom: 2px solid rgba(29, 29 , 29, 0.5);
 }
 
+.hide {
+    display: none!important;
+}
+
 #inputPoster, .equalizerInputs{
-    display: none;
     width: 90%;
     margin: 1vh auto 2vh auto;
+}
+
+.equalizerButtons .botao{
+    width:49%;
+}
+
+.equalizerButtons{
+    margin: 2vh 0 3vh 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.triangleLegenda img{
+    width: 4%;
+    height: fit-content;
+    margin-right: 0.5vw;
 }
 
 button[type=submit] {
@@ -525,7 +558,6 @@ button[type=submit]:hover {
 .buttons{
     text-align: center;
     margin-bottom: 3vh;
-    display: none;
 }
 
 .buttons > div {
@@ -536,7 +568,7 @@ button[type=submit]:hover {
 .checkbox{
     display: flex;
     justify-content: center;
-    margin-top: 3vh;
+    margin-bottom: 0.3vw;
 }
 
 .checkbox h3{
@@ -666,6 +698,39 @@ textarea{
     cursor: pointer;
     border: #1D1D1D 1px solid;
 }
+
+.roudButtons{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 5vh;
+}
+
+.buttonRound{
+    border: transparent;
+    background-color: transparent;
+}
+
+.legendaTipos{
+    font-weight: 400;
+    font-size: 0.7vw;
+}
+
+.triangleLegenda div{
+    margin-bottom: 0.5vh;
+}
+
+.roudButtons img{
+    width:60%;
+    filter: drop-shadow(0px 4px 6px #AAAAAA);
+}
+
+.roudButtons{
+    width:60%;
+    margin: 0 auto;
+    margin-bottom: 6vh;
+}
+
+
 
 @media only screen and (max-width: 820px) {
 
@@ -798,6 +863,8 @@ textarea{
     align-items: center;
 }
 
+
+
 @media only screen and (max-width: 820px) {
     .othersColumn1{
         display: none;
@@ -844,4 +911,10 @@ textarea{
     .othersColumn2{
         justify-content: space-between;
     }
+}
+
+/*------------------------------------------------------------------------------------Triangulo*/
+#canvasTriangle{
+    display: block;
+    margin-top: 20px;
 }
