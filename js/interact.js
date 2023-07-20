@@ -1,50 +1,55 @@
-//SHOW CONTENT ON CREATE
+// SHOW CONTENT ON CREATE
+var mainPoster = document.getElementById("mainPoster");
 var contentText = document.getElementById("content");
-var inputPoster = document.getElementById("inputPoster");
 var currentFontRandom;
 
 contentText.onclick = function () {
-    if (inputPoster.classList.contains("hide")) {
-        inputPoster.classList.remove("hide");
+    if (mainPoster.classList.contains("hide")) {
+        mainPoster.classList.remove("hide");
+        mainEqualize.classList.add("hide");
+        mainRandomizer.classList.add("hide");
     } else {
-        inputPoster.classList.add("hide");
+        mainPoster.classList.add("hide");
     }
 }
 
-
-//SHOW EQUALIZER ON CREATE
+// SHOW EQUALIZER ON CREATE
+var mainEqualize = document.getElementById("mainEqualizer");
 var equalizerText = document.getElementById("equalizer");
-var inputEq = document.getElementById("equalizerInputs");
 
 equalizerText.onclick = function () {
-    if (inputEq.classList.contains("hide")) {
-        inputEq.classList.remove("hide");
+    if (mainEqualize.classList.contains("hide")) {
+        mainEqualize.classList.remove("hide");
+        mainPoster.classList.add("hide");
+        mainRandomizer.classList.add("hide");
     } else {
-        inputEq.classList.add("hide");
+        mainEqualize.classList.add("hide");
     }
 }
 
-//SHOW CONTENT ON RANDOMIZER
+// SHOW RANDOMIZER ON RANDOMIZER
+var mainRandomizer = document.getElementById("mainRandomizer");
 var randomizerText = document.getElementById("randomizer");
-var inputButtons = document.getElementById("inputButtons");
 
 randomizerText.onclick = function () {
-    if (inputButtons.classList.contains("hide")) {
-        inputButtons.classList.remove("hide");
+    if (mainRandomizer.classList.contains("hide")) {
+        mainRandomizer.classList.remove("hide");
+        mainPoster.classList.add("hide"); // Hide the content
+        mainEqualize.classList.add("hide"); // Hide the equalizer
     } else {
-        inputButtons.classList.add("hide");
+        mainRandomizer.classList.add("hide");
     }
 }
 
 //SHOW CONTENT ON Export
 var exportText = document.getElementById("exportTitle");
-var exportButtons = document.getElementById("exportContent");
+var mainExport = document.getElementById("mainExport");
 
 exportText.onclick = function () {
-    if (exportButtons.classList.contains("hide")) {
-        exportButtons.classList.remove("hide");
+    if (mainExport.classList.contains("hide")) {
+        mainExport.classList.remove("hide");
     } else {
-        exportButtons.classList.add("hide");
+        mainExport.classList.add("hide");
     }
 }
 
@@ -54,12 +59,12 @@ var buttonSavePNG = document.getElementById("savePNG");
 buttonSavePNG.addEventListener("click", savePNG);
 
 function savePNG() {
-    saveCanvas(poster, 'GraphicGround', 'png');
+    s1Sketch.saveCanvas(poster, 'GraphicGround', 'png');
 }
 
 //Style (Temporário)
-var buttonStyle = document.getElementById("stylePoster");
-buttonStyle.addEventListener("change", styleChange);
+//var buttonStyle = document.getElementById("stylePoster");
+//buttonStyle.addEventListener("change", styleChange);
 
 function styleChange() {
     /*if (this.value == "classic") {
@@ -102,17 +107,10 @@ function layoutChange(calls = 0) {
             gridArray[mix_template.composition.fillRows[i] - 1][x] = 1;
         }
     }
-    imageInfo.rotation = mix_template.image[0].rotation[randInt(0, mix_template.image[0].rotation.length)];
+    //imageInfo.rotation = mix_template.image[0].rotation[randInt(0, mix_template.image[0].rotation.length)];
 
-    if (effectImg) {
-        let pOverflow = imageInfo.overflow;
-        calcPosImage();
-        if (imageInfo.overflow != pOverflow) {
-            if(effectImg instanceof p5.Image) effectImg = imageEffect(originalImg);
-            else if(effectImg instanceof p5.Graphics) effectImg = createShape();
-        }
-        setGridAvailability(imageInfo);
-    }
+    imageChange();
+
     let error = false;
     if (calls < maxCalls) {
         error = titleLayout(0);
@@ -124,22 +122,24 @@ function layoutChange(calls = 0) {
     }
 }
 
+function imageChange(recreate = false) {
+    if (effectImg) {
+        let pOverflow = imageInfo.overflow;
+        calcPosImage();
+        if (imageInfo.overflow != pOverflow) {
+            if(effectImg instanceof p5.Image) effectImg = imageEffect(originalImg);
+            else if(effectImg instanceof p5.Graphics) effectImg = createShape(recreate);
+        }
+        setGridAvailability(imageInfo);
+    }
+}
+
 
 //RANDOMIZE FONT
 var buttonFont = document.getElementById("buttonFont");
 buttonFont.addEventListener("click", fontChange);
 
 function fontChange() {
-    /*if (buttonStyle.value == "classic") {
-        //template=classic_template;
-        setTemplate(classic_template);
-    } else if (buttonStyle.value == "modern") {
-        //template=modern_template;
-        setTemplate(modern_template);
-    } else if (buttonStyle.value == "postmodern") {
-        //template=postModern_template;
-        setTemplate(postModern_template);
-    }*/
     setTemplateFont(randTemplate(att_template.tipografia));
 
     textInputs.title.content = formatText(titleText.value, mix_template.text.titleCollumns[0] * gridValues.sizeColumn + (mix_template.text.titleCollumns[0] - 1) * gridValues.gapColumn, textInputs.title.size, mix_template.text.titleCollumns[0], mix_template.text.fontTitle);
@@ -153,7 +153,7 @@ buttonColors.addEventListener("click", colorsChange);
 
 function colorsChange() {
     setTemplateColors(randTemplate(att_template.cor));
-    shapeChange();
+    shapeChange(true);
     if (effectImg instanceof p5.Image) {
         if (mix_template.image[0].effect == "duotone") {
             effectImg = originalImg;
@@ -168,7 +168,6 @@ function colorsChange() {
 var buttonShape = document.getElementById("buttonShape");
 buttonShape.addEventListener("click", shapeChange);
 
-function shapeChange() {
-    let sketch = s1.sketch;
-    if (effectImg instanceof p5.Graphics) effectImg = createShape(sketch);
+function shapeChange(recreate = false) {
+    if (effectImg instanceof p5.Graphics) effectImg = createShape(recreate);
 }

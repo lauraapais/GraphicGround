@@ -14,7 +14,7 @@ var addImgHandler = async () => {
             var newImg = document.createElement("img");
             newImg.src = reader.result;
 
-            originalImg = loadImage(reader.result, originalImg => {
+            originalImg = s1Sketch.loadImage(reader.result, originalImg => {
                 effectImg = imageEffect(originalImg);
                 layoutChange();
             }); // LOAD TO P5.JS VARIABLE

@@ -3,12 +3,12 @@ var s1Sketch;
 
 var att_template = {"figura": [1, 0, 0], "cor": [1, 0, 0], "tipografia": [1, 0, 0], "composicao": [1, 0, 0]}
 
-
 var canvas_parent = document.getElementById("canvas_parent");
 var showGridsButton = document.getElementById("checkboxGrid");
 var poster;
 var randomTexture, randomFrame;
 var texturePosModern = [];
+var pdf, pdfSave = false;
 
 //var canvasValues;
 //var gridValues;
@@ -72,19 +72,28 @@ var maxCalls = 20;
 
 s1 = function (sketch) {
     s1Sketch = sketch;
-    
+
     s1Sketch.preload = function () {
         loadTemplates();
+
         //Clássico
-        fonts["PlayfairDisplay-Bold"] = s1Sketch.loadFont('data/fonts/classic/PlayfairDisplay-Bold.ttf');
-        fonts["PlayfairDisplay-Regular"] = s1Sketch.loadFont('data/fonts/classic/PlayfairDisplay-Regular.ttf');
         fonts["BodoniModa_18pt-Bold"] = s1Sketch.loadFont('data/fonts/classic/BodoniModa_18pt-Bold.ttf');
         fonts["BodoniModa_18pt-Regular"] = s1Sketch.loadFont('data/fonts/classic/BodoniModa_18pt-Regular.ttf');
-        fonts["Oranienbaum-Regular"] = s1Sketch.loadFont('data/fonts/classic/Oranienbaum-Regular.ttf');
-        fonts["Brygada1918-Bold"] = s1Sketch.loadFont('data/fonts/classic/Brygada1918-Bold.ttf');
-        fonts["Brygada1918-Regular"] = s1Sketch.loadFont('data/fonts/classic/Brygada1918-Regular.ttf');
-        fonts["Melodrama-Bold"] = s1Sketch.loadFont('data/fonts/classic/Melodrama-Bold.otf');
-        fonts["Melodrama-Regular"] = s1Sketch.loadFont('data/fonts/classic/Melodrama-Regular.otf');
+        fonts["CormorantInfant-Bold"] = s1Sketch.loadFont('data/fonts/classic/CormorantInfant-Bold.ttf');
+        fonts["CormorantInfant-Regular"] = s1Sketch.loadFont('data/fonts/classic/CormorantInfant-Regular.ttf');
+        fonts["EBGaramond-Bold"] = s1Sketch.loadFont('data/fonts/classic/EBGaramond-Bold.ttf');
+        fonts["EBGaramond-Regular"] = s1Sketch.loadFont('data/fonts/classic/EBGaramond-Regular.ttf');
+        fonts["Gloock-Regular"] = s1Sketch.loadFont('data/fonts/classic/Gloock-Regular.ttf');
+        fonts["KaiseiHarunoUmi-Bold"] = s1Sketch.loadFont('data/fonts/classic/KaiseiHarunoUmi-Bold.ttf');
+        fonts["KaiseiHarunoUmi-Regular"] = s1Sketch.loadFont('data/fonts/classic/KaiseiHarunoUmi-Regular.ttf');
+        fonts["NanumMyeongjo-Bold"] = s1Sketch.loadFont('data/fonts/classic/NanumMyeongjo-Bold.ttf');
+        fonts["NanumMyeongjo-Regular"] = s1Sketch.loadFont('data/fonts/classic/NanumMyeongjo-Regular.ttf');
+        fonts["NotoSerifDisplay-Bold"] = s1Sketch.loadFont('data/fonts/classic/NotoSerifDisplay-Bold.ttf');
+        fonts["NotoSerifDisplay-Regular"] = s1Sketch.loadFont('data/fonts/classic/NotoSerifDisplay-Regular.ttf');
+       fonts["PlayfairDisplay-Bold"] = s1Sketch.loadFont('data/fonts/classic/PlayfairDisplay-Bold.ttf');
+        fonts["PlayfairDisplay-Regular"] = s1Sketch.loadFont('data/fonts/classic/PlayfairDisplay-Regular.ttf');
+        fonts["Prata-Regular"] = s1Sketch.loadFont('data/fonts/classic/Prata-Regular.ttf');
+        fonts["Rosarivo-Regular"] = s1Sketch.loadFont('data/fonts/classic/Rosarivo-Regular.ttf');
 
         //Modern
         fonts["Satoshi-Black"] = s1Sketch.loadFont('data/fonts/modern/Satoshi-Black.otf');
@@ -98,12 +107,57 @@ s1 = function (sketch) {
         fonts["Switzer-Black"] = s1Sketch.loadFont('data/fonts/modern/Switzer-Black.otf');
         fonts["Switzer-Medium"] = s1Sketch.loadFont('data/fonts/modern/Switzer-Medium.otf');
 
+        fonts["Alata-Regular"] = s1Sketch.loadFont('data/fonts/modern/Alata-Regular.ttf');
+        fonts["CabinCondensed-Bold"] = s1Sketch.loadFont('data/fonts/modern/CabinCondensed-Bold.ttf');
+        fonts["CabinCondensed-Medium"] = s1Sketch.loadFont('data/fonts/modern/CabinCondensed-Medium.ttf');
+        fonts["IBMPlexSans-Bold"] = s1Sketch.loadFont('data/fonts/modern/IBMPlexSans-Bold.ttf');
+        fonts["IBMPlexSans-Regular"] = s1Sketch.loadFont('data/fonts/modern/IBMPlexSans-Regular.ttf');
+        fonts["KumbhSans-Bold"] = s1Sketch.loadFont('data/fonts/modern/KumbhSans-Bold.ttf');
+        fonts["KumbhSans-Regular"] = s1Sketch.loadFont('data/fonts/modern/KumbhSans-Regular.ttf');
+        fonts["LexendDeca-Bold"] = s1Sketch.loadFont('data/fonts/modern/LexendDeca-Bold.ttf');
+        fonts["LexendDeca-Medium"] = s1Sketch.loadFont('data/fonts/modern/LexendDeca-Medium.ttf');
+        fonts["LibreFranklin-Bold"] = s1Sketch.loadFont('data/fonts/modern/LibreFranklin-Bold.ttf');
+        fonts["LibreFranklin-Regular"] = s1Sketch.loadFont('data/fonts/modern/LibreFranklin-Regular.ttf');
+        fonts["Manrope-Bold"] = s1Sketch.loadFont('data/fonts/modern/Manrope-Bold.ttf');
+        fonts["Manrope-SemiBold"] = s1Sketch.loadFont('data/fonts/modern/Manrope-SemiBold.ttf');
+        fonts["Outfit-Bold"] = s1Sketch.loadFont('data/fonts/modern/Outfit-Bold.ttf');
+        fonts["Outfit-SemiBold"] = s1Sketch.loadFont('data/fonts/modern/Outfit-SemiBold.ttf');
+        fonts["Poppins-Black"] = s1Sketch.loadFont('data/fonts/modern/Poppins-Black.ttf');
+
+
+
+
+
         //Pós Moderno
-        fonts["SyneMono-Regular"] = s1Sketch.loadFont('data/fonts/postModern/SyneMono-Regular.ttf');
+        fonts["Righteous-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Righteous-Regular.ttf');
         fonts["Redacted-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Redacted-Regular.ttf');
-        fonts["esimene"] = s1Sketch.loadFont('data/fonts/postModern/esimene.otf');
+        fonts["SpecialElite-Regular"] = s1Sketch.loadFont('data/fonts/postModern/SpecialElite-Regular.ttf');
+        fonts["SyneMono-Regular"] = s1Sketch.loadFont('data/fonts/postModern/SyneMono-Regular.ttf');
         fonts["Jaan"] = s1Sketch.loadFont('data/fonts/postModern/Jaan.ttf');
+        fonts["esimene"] = s1Sketch.loadFont('data/fonts/postModern/esimene.otf');
         fonts["davidcarson-Regular"] = s1Sketch.loadFont('data/fonts/postModern/davidcarson-Regular.otf');
+        fonts["Comfortaa-Bold"] = s1Sketch.loadFont('data/fonts/postModern/Comfortaa-Bold.ttf');
+        fonts["NovaCut-Regular"] = s1Sketch.loadFont('data/fonts/postModern/NovaCut-Regular.ttf');
+        fonts["BrunoAce-Regular"] = s1Sketch.loadFont('data/fonts/postModern/BrunoAce-Regular.ttf');
+        fonts["BrunoAceSC-Regular"] = s1Sketch.loadFont('data/fonts/postModern/BrunoAceSC-Regular.ttf');
+        fonts["UnicaOne-Regular"] = s1Sketch.loadFont('data/fonts/postModern/UnicaOne-Regular.ttf');
+        fonts["Lalezar-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Lalezar-Regular.ttf');
+        fonts["BlackOpsOne-Regular"] = s1Sketch.loadFont('data/fonts/postModern/BlackOpsOne-Regular.ttf');
+        fonts["Wallpoet-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Wallpoet-Regular.ttf');
+        fonts["Graduate-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Graduate-Regular.ttf');
+        fonts["KellySlab-Regular"] = s1Sketch.loadFont('data/fonts/postModern/KellySlab-Regular.ttf');
+        fonts["Silkscreen-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Silkscreen-Regular.ttf');
+        fonts["Goldman-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Goldman-Regular.ttf');
+        fonts["Codystar-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Codystar-Regular.ttf');
+        fonts["Iceland-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Iceland-Regular.ttf');
+        fonts["ZillaSlabHighlight-Regular"] = s1Sketch.loadFont('data/fonts/postModern/ZillaSlabHighlight-Regular.ttf');
+        fonts["Plaster-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Plaster-Regular.ttf');
+        fonts["Wellfleet-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Wellfleet-Regular.ttf');
+        fonts["ZenDots-Regular"] = s1Sketch.loadFont('data/fonts/postModern/ZenDots-Regular.ttf');
+        fonts["NovaSlim-Regular"] = s1Sketch.loadFont('data/fonts/postModern/NovaSlim-Regular.ttf');
+        fonts["BigShouldersInlineText-Black"] = s1Sketch.loadFont('data/fonts/postModern/BigShouldersInlineText-Black.ttf');
+        fonts["BigShouldersDisplay-Black"] = s1Sketch.loadFont('data/fonts/postModern/BigShouldersDisplay-Black.ttf');
+        fonts["LibreBarcode39-Regular"] = s1Sketch.loadFont('data/fonts/postModern/LibreBarcode39-Regular.ttf');
 
 
         texturePosModern.push(s1Sketch.loadImage('data/textures/texture1.png'));
@@ -111,7 +165,7 @@ s1 = function (sketch) {
     }
 
     s1Sketch.setup = function () {
-        triangleTemplate();
+        triangleTemplate(-1);
 
         let panel = document.getElementById("canvas_poster");
 
@@ -120,6 +174,8 @@ s1 = function (sketch) {
 
         onResize(sketch);
         layoutChange();
+
+        pdf=s1Sketch.createPDF();
     }
 
     s1Sketch.draw = function () {
@@ -129,7 +185,7 @@ s1 = function (sketch) {
         s1Sketch.translate(canvasValues.marginWidth, canvasValues.marginHeight);
 
         //frame
-        if (mix_template.composition.type == "Classic" && randomFrame == 0) {
+        if (mix_template.image.frame == 1 && randomFrame == 0) {
             s1Sketch.noFill();
             s1Sketch.rect(0, 0, canvasValues.posterWidth, canvasValues.posterHeight);
         }
@@ -145,16 +201,16 @@ s1 = function (sketch) {
                 s1Sketch.push();
                 s1Sketch.translate(imageInfo.posX, imageInfo.posY);
                 s1Sketch.translate(imageInfo.width / 2, imageInfo.height / 2);
-                if (effectImg instanceof p5.Image) {
+                //if (effectImg instanceof p5.Image) {
                     s1Sketch.rotate(imageInfo.rotation);
-                }
+                //}
                 s1Sketch.translate(-imageInfo.width / 2, -imageInfo.height / 2);
                 s1Sketch.image(effectImg, 0, 0, imageInfo.width, imageInfo.height);
                 s1Sketch.pop();
             } else {
                 s1Sketch.push();
                 s1Sketch.translate(imageInfo.posX - canvasValues.posterWidth / 2, imageInfo.posY);
-                s1Sketch.drawEngravingVersion(effectImg);
+                drawEngravingVersion(effectImg);
                 s1Sketch.pop();
             }
             s1Sketch.pop();
@@ -171,26 +227,57 @@ s1 = function (sketch) {
 
         s1Sketch.pop();
 
-        if (mix_template.image[0].texture) {
+       /* if (mix_template.image[0].texture) {
             s1Sketch.blendMode(s1Sketch.LIGHTEST);
             s1Sketch.image(texturePosModern[randomTexture], 0, 0, canvasValues.canvasWidth, canvasValues.canvasHeight);
             s1Sketch.blendMode(s1Sketch.BLEND);
+        }*/
+
+        if(pdfSave) {
+            pdfSave=false;
+            pdf.endRecord();
+            pdf.save();
         }
     }
 }
 
 new p5(s1);
 
-function triangleTemplate() {
-    generateTemplate(
-        getJsonObjectById(points, 0),
-        getJsonObjectById(points, 1),
-        getJsonObjectById(points, 2),
-        getJsonObjectById(points, 3),
-    );
+function triangleTemplate(changed) {
+    updateDistance();
+    att_template.figura = getJsonObjectById(points, 0).distance;
+    att_template.cor = getJsonObjectById(points, 1).distance;
+    att_template.tipografia = getJsonObjectById(points, 2).distance;
+    att_template.composicao = getJsonObjectById(points, 3).distance;
+    if (changed == -1) {
+        generateTemplate(
+            att_template.figura,
+            att_template.cor,
+            att_template.tipografia,
+            att_template.composicao
+        );
+    } else if (changed.id == 0) {
+        // --- FIGURA ---
+        setTemplateFigure(randTemplate(att_template.figura));
+        shapeChange();
+        imageChange();
+    } else if (changed.id == 1) {
+        // ---- COR ----
+        setTemplateColors(randTemplate(att_template.cor));
+        shapeChange(true);
+    } else if (changed.id == 2) {
+        // --- TIPOGRAFIA ---
+        setTemplateFont(randTemplate(att_template.tipografia));
+    } else if (changed.id == 3) {
+        // ---- COMPOSIÇÃO ----
+        setTemplateComposition(randTemplate(att_template.composicao));
+
+        loadPosterStyles();
+        layoutChange();
+    }
 }
 
-function drawGrid(sketch) {
+function drawGrid() {
     s1Sketch.noFill();
     s1Sketch.stroke(0);
     s1Sketch.rect(0, 0, canvasValues.posterWidth, canvasValues.posterHeight);
@@ -206,7 +293,7 @@ function drawGrid(sketch) {
     }
 }
 
-function calcGrid(nColumns, columnGapScale, gridWidth, nRows, rowGapScale, gridHeight, sketch) {
+function calcGrid(nColumns, columnGapScale, gridWidth, nRows, rowGapScale, gridHeight) {
     var gapColumn = s1Sketch.min(gridWidth / (nColumns - 1), gridWidth) * columnGapScale;
 
     var sizeColumn = (gridWidth - (gapColumn * (nColumns - 1))) / nColumns;
@@ -231,17 +318,17 @@ function calcPoster(canvasWidth, canvasHeight, marginXScale, marginYScale) {
     }
 }
 
-function onResize(sketch) {
-    var v = windowSize(sketch);
+function onResize() {
+    var v = windowSize();
 
     s1Sketch.resizeCanvas(v.x, v.y);
 
-    loadPosterStyles(sketch);
+    loadPosterStyles();
 }
 
-function loadPosterStyles(sketch) {
+function loadPosterStyles() {
     canvasValues = calcPoster(s1Sketch.width, s1Sketch.height, 0.12, 0.12);
-    gridValues = calcGrid(mix_template.composition.columns, 0.12, canvasValues.posterWidth, nLinhastmp, 0.17, canvasValues.posterHeight, sketch);
+    gridValues = calcGrid(mix_template.composition.columns, 0.12, canvasValues.posterWidth, nLinhastmp, 0.17, canvasValues.posterHeight);
     // LOAD IMAGE EFFECT
     if (originalImg) {
         effectImg = imageEffect(originalImg);
@@ -250,7 +337,7 @@ function loadPosterStyles(sketch) {
     }
 }
 
-function windowSize(sketch) {
+function windowSize() {
     var scale = 0.45;
     var wDiv = canvas_parent.clientWidth;
     var wPoster = 297;
@@ -326,7 +413,7 @@ function drawText(textInputs, gridValues, sketch) {
     textSetup(textInputs.aditionalInfo, gridValues, sketch);
 }
 
-function textSetup(textInput, gridValues, sketch) {
+function textSetup(textInput, gridValues) {
     s1Sketch.push();
     let xValue = gridValues.sizeColumn * (textInput.columnStart) + gridValues.gapColumn * Math.max(0, textInput.columnStart);
     let yValue = gridValues.sizeRow * (textInput.rowStart) + gridValues.gapRow * Math.max(0, textInput.rowStart) - textInput.size / 5;
@@ -482,7 +569,7 @@ function imageEffect(original) {
     let original_size_w;
 
     if (original.height > original.width) {
-        imageInfo.nCollumns = mix_template.image[0].columnsMinMaxHeight[0];
+        imageInfo.nCollumns = mix_template.composition.columnsMinMaxHeightImage[0];
 
         imageInfo.orientation = 1;
         original_size_w = imageInfo.nCollumns * gridValues.sizeColumn + (imageInfo.nCollumns - 1) * gridValues.gapColumn;
@@ -493,10 +580,10 @@ function imageEffect(original) {
         // ---
         let original_size_h = original_size_w * original.height / original.width
 
-        let image_size = original_size_h * mix_template.image[0].verticalScale[0];
+        let image_size = original_size_h * mix_template.composition.imageVerticalScale[0];
         resizedImg.resize(0, image_size);
     } else {
-        imageInfo.nCollumns = mix_template.image[0].columnsMinMaxWidth[0];
+        imageInfo.nCollumns = mix_template.composition.columnsMinMaxWidthImage[0];
 
         imageInfo.orientation = 0;
         original_size_w = imageInfo.nCollumns * gridValues.sizeColumn + (imageInfo.nCollumns - 1) * gridValues.gapColumn;
@@ -505,7 +592,18 @@ function imageEffect(original) {
             original_size_w += canvasValues.marginWidth;
         }
         // ---
-        let image_size = original_size_w * mix_template.image[0].horizontalScale[0];
+
+        let image_size;
+        if(mix_template.composition.columns==2 && mix_template.image[0].shapes==2){
+            image_size = original_size_w * 0.2;
+        }
+        else if(mix_template.composition.columns==2 && mix_template.image[0].shapes==3){
+            image_size = original_size_w * 0.05;
+        }
+        else{
+            image_size = original_size_w * mix_template.composition.imageHorizontalScale[0]
+        }
+
         resizedImg.resize(image_size, 0);
     }
 
@@ -536,21 +634,25 @@ async function calcPosImage() {
         imageInfo.columnEnd = gridValues.nColumns - 1;
         imageInfo.overflow = 0;
 
-    } else if (mix_template.image[0].alignment == 0) { // IN GRID
+    }
+    else if (mix_template.image[0].alignment == 0) { // IN GRID
         if (imageInfo.orientation == 1) {
-            imageInfo.columnStart = randInt(0, mix_template.composition.columns - mix_template.image[0].columnsMinMaxHeight[0] + 1);
+            imageInfo.columnStart = randInt(0, mix_template.composition.columns - mix_template.composition.columnsMinMaxHeightImage[0] + 1);
         } else if (imageInfo.orientation == 0) {
-            imageInfo.columnStart = randInt(0, mix_template.composition.columns - mix_template.image[0].columnsMinMaxWidth[0] + 1);
+            imageInfo.columnStart = randInt(0, mix_template.composition.columns - mix_template.composition.columnsMinMaxWidthImage[0] + 1);
         }
 
         // OVERFLOW
-        if (imageInfo.columnStart == 0) {
+        if (mix_template.composition.columns==1) {
+            imageInfo.overflow = 0;
+        } else if (imageInfo.columnStart == 0) {
             imageInfo.overflow = -1;
-        } else if (imageInfo.columnStart == mix_template.composition.columns - mix_template.image[0].columnsMinMaxWidth[0]) {
+        } else if (imageInfo.columnStart == mix_template.composition.columns - mix_template.composition.columnsMinMaxWidthImage[0]) {
             imageInfo.overflow = 1;
         } else {
             imageInfo.overflow = 0;
         }
+
         // ----
 
         imageInfo.posX = gridValues.sizeColumn * (imageInfo.columnStart) + gridValues.gapColumn * Math.max(0, imageInfo.columnStart);
@@ -567,20 +669,40 @@ async function calcPosImage() {
         imageInfo.rowEnd = imageInfo.rowStart + imageInfo.nRows;
     }
 
-    if (mix_template.overflow) imageInfo.overflow = 0;
+    if(mix_template.composition.columns==2 && mix_template.image[0].shapes==2){
+        imageInfo.posX = imageInfo.originalWidth / 2 - imageInfo.width / 2 + canvasValues.posterWidth / 2;
+        imageInfo.columnStart = 0;
+        imageInfo.columnEnd = gridValues.nColumns - 1;
+        imageInfo.overflow = 0;
+    } else if(mix_template.composition.columns==2 && mix_template.image[0].shapes==3){
+        imageInfo.posX = imageInfo.originalWidth / 2 - imageInfo.width / 2 + canvasValues.posterWidth / 2;
+        imageInfo.columnStart = 0;
+        imageInfo.columnEnd = gridValues.nColumns - 1;
+        imageInfo.overflow = 0;
+    } else if(mix_template.composition.columns==6 && mix_template.image[0].shapes==3){
+        if (imageInfo.orientation == 1) {
+            imageInfo.columnStart = randInt(0, mix_template.composition.columns - mix_template.composition.columnsMinMaxHeightImage[0] + 1);
+        } else if (imageInfo.orientation == 0) {
+            imageInfo.columnStart = randInt(0, mix_template.composition.columns - mix_template.composition.columnsMinMaxWidthImage[0] + 1);
+        }
+    }
+
+    if (mix_template.overflow){
+        imageInfo.overflow = 0;
+    }
 }
 
 function getDuotoneVersion(baseImg, cDark, cBright) {
-    let newImg = createImage(baseImg.width, baseImg.height);
+    let newImg = s1Sketch.createImage(baseImg.width, baseImg.height);
     for (var y = 0; y < baseImg.height; y++) {
         for (var x = 0; x < baseImg.width; x++) {
             let p = baseImg.get(x, y);
             let bright = 0.2126 * p[0] + 0.7152 * p[1] + 0.0722 * p[2];
             //let newP = color(bright);
-            let r = map(bright, 0, 255, cDark[0], cBright[0]);
-            let g = map(bright, 0, 255, cDark[1], cBright[1]);
-            let b = map(bright, 0, 255, cDark[2], cBright[2]);
-            let newP = color(r, g, b);
+            let r = s1Sketch.map(bright, 0, 255, cDark[0], cBright[0]);
+            let g = s1Sketch.map(bright, 0, 255, cDark[1], cBright[1]);
+            let b = s1Sketch.map(bright, 0, 255, cDark[2], cBright[2]);
+            let newP = s1Sketch.color(r, g, b);
             newImg.set(x, y, newP);
         }
     }
@@ -589,13 +711,13 @@ function getDuotoneVersion(baseImg, cDark, cBright) {
 }
 
 function getBlackWhiteVersion(baseImg, contrast) {
-    let newImg = createImage(baseImg.width, baseImg.height);
+    let newImg = s1Sketch.createImage(baseImg.width, baseImg.height);
     for (let y = 0; y < baseImg.height; y++) {
         for (let x = 0; x < baseImg.width; x++) {
             let p = baseImg.get(x, y);
             let l = (p[0] + p[1] + p[2]) / 3;
             let d = (l - 128) * (contrast / 100) + 128;
-            let newP = color(d);
+            let newP = s1Sketch.color(d);
             newImg.set(x, y, newP);
         }
     }
@@ -626,7 +748,7 @@ function getEngravingVersion(baseImg, quadSize) {
 
             let weight = null;
             if (avgBrightness < 255 / 2) {
-                weight = map(avgBrightness, 0, 255, 0.01, 2);
+                weight = s1Sketch.map(avgBrightness, 0, 255, 0.01, 2);
             }
 
             info.quads[info.quads.length - 1].push(weight);
@@ -637,17 +759,17 @@ function getEngravingVersion(baseImg, quadSize) {
 }
 
 function drawEngravingVersion(info) {
-    strokeCap(SQUARE);
-    stroke(0);
+    s1Sketch.strokeCap(s1Sketch.SQUARE);
+    s1Sketch.stroke(0);
     for (let x = 0; x < info.quads.length; x++) {
         for (let y = 0; y < info.quads[x].length; y++) {
             if (info.quads[x][y] != null) {
-                push();
-                translate(x * info.quadSize, y * info.quadSize);
-                rotate(radians(45));
-                strokeWeight(info.quads[x][y]);
-                line(-info.quadSize, 0, info.quadSize, 0);
-                pop();
+                s1Sketch.push();
+                s1Sketch.translate(x * info.quadSize, y * info.quadSize);
+                s1Sketch.rotate(s1Sketch.radians(45));
+                s1Sketch.strokeWeight(info.quads[x][y]);
+                s1Sketch.line(-info.quadSize, 0, info.quadSize, 0);
+                s1Sketch.pop();
             }
         }
     }
@@ -664,101 +786,196 @@ const create2Darr = (rows, columns) => {
     return arr;
 };
 
-function createShape(sketch) {
+function createShape(recreate = false) {
     if (mix_template.image[0].shapes == 1) {
-        return classicShape(sketch);
+        return classicShape(recreate);
     } else if (mix_template.image[0].shapes == 2) {
-        return modernShape(sketch);
+        return modernShape(recreate);
     } else if (mix_template.image[0].shapes == 3) {
-        return postModernShape(sketch);
+        return postModernShape(recreate);
     }
 }
 
-function classicShape() {
+let p_classic = {
+    "shapeCanvasWidth": null,
+    "shapeCanvasHeight": null,
+    "type": null,
+    "TypeWidth": null,
+    "Type1Stroke": null,
+    "Type2Height": null,
+    "Type2_1Stroke": null,
+    "Type2_2Stroke": null
+};
 
-    imageInfo.nCollumns = mix_template.image[0].columnsMinMaxHeight[0];
+function classicShape(recreate = false) {
+    let TypeWidth, Type2Height, Type1Stroke, Type2_1Stroke, Type2_2Stroke, type;
+    let shapeCanvasWidth, shapeCanvasHeight;
 
-    let original_size_w = imageInfo.nCollumns * gridValues.sizeColumn + (imageInfo.nCollumns - 1) * gridValues.gapColumn;
-    // OVERFLOW
-    if (imageInfo.overflow != 0 && imageInfo.overflowBool) {
-        original_size_w += canvasValues.marginWidth;
+    if (recreate) {
+        shapeCanvasWidth = p_classic.shapeCanvasWidth;
+        shapeCanvasHeight = p_classic.shapeCanvasHeight;
+        type = p_classic.type;
+    } else {
+        imageInfo.nCollumns = mix_template.composition.columnsMinMaxHeightImage[0];
+
+        let original_size_w = imageInfo.nCollumns * gridValues.sizeColumn + (imageInfo.nCollumns - 1) * gridValues.gapColumn;
+        // OVERFLOW
+        if (imageInfo.overflow != 0 && imageInfo.overflowBool) {
+            original_size_w += canvasValues.marginWidth;
+        }
+        // ---
+
+        let image_size= original_size_w * mix_template.composition.imageHorizontalScale[0]
+
+        imageInfo.width = image_size;
+        imageInfo.height = image_size / 4;
+        imageInfo.nRows = Math.round(imageInfo.height / (gridValues.sizeRow + gridValues.gapRow));
+        effectImg = 0;
+        shapeCanvasWidth = imageInfo.width;
+        shapeCanvasHeight = imageInfo.height;
+        type = s1Sketch.int(s1Sketch.random(1, 3));
     }
-    // ---
-
-    let image_size = original_size_w * mix_template.image[0].horizontalScale[0];
-
-    imageInfo.width = image_size;
-    imageInfo.height = image_size / 4;
-
-    imageInfo.nRows = Math.round(imageInfo.height / (gridValues.sizeRow + gridValues.gapRow));
-
-    effectImg = 0;
-
-    let type = 2;
-    let shapeCanvasWidth = imageInfo.width;
-    let shapeCanvasHeight = imageInfo.height;
-
-    let TypeWidth, Type2Height, Type1Stroke, Type2_1Stroke, Type2_2Stroke;
 
     let pg;
+    pg = s1Sketch.createGraphics(shapeCanvasWidth, shapeCanvasHeight);
+    pg.strokeCap(s1Sketch.SQUARE);
+    pg.stroke(mix_template.palettes.image.one);
 
-    pg = createGraphics(shapeCanvasWidth, shapeCanvasHeight);
-    pg.strokeCap(SQUARE);
-    pg.stroke(0);
-
-    type = int(random(1, 3));
     if (type == 1) {
-        TypeWidth = int(random(20, shapeCanvasWidth));
-        Type1Stroke = int(random(1, 2));
-        pg.strokeWeight(Type1Stroke);
-        pg.line(shapeCanvasWidth / 2 - TypeWidth, shapeCanvasHeight / 2, shapeCanvasWidth / 2 + TypeWidth, shapeCanvasHeight / 2);
+        if (recreate) {
+            pg.strokeWeight(p_classic.Type1Stroke);
+            pg.line(p_classic.shapeCanvasWidth / 2 - p_classic.TypeWidth,
+                p_classic.shapeCanvasHeight / 2,
+                p_classic.shapeCanvasWidth / 2 + p_classic.TypeWidth,
+                p_classic.shapeCanvasHeight / 2);
+        } else {
+            TypeWidth = s1Sketch.int(s1Sketch.random(20, shapeCanvasWidth));
+            Type1Stroke = s1Sketch.int(s1Sketch.random(1, 2));
+            pg.strokeWeight(Type1Stroke);
+            pg.line(shapeCanvasWidth / 2 - TypeWidth, shapeCanvasHeight / 2, shapeCanvasWidth / 2 + TypeWidth, shapeCanvasHeight / 2);
+        }
     } else if (type == 2) {
-        TypeWidth = int(random(20, 60));
-        Type2Height = int(random(3, 6));
-        Type2_1Stroke = int(random(1, 3));
-        Type2_2Stroke = int(random(4, 6));
-        pg.strokeWeight(Type2_1Stroke);
-        pg.line(shapeCanvasWidth / 2 - TypeWidth, shapeCanvasHeight / 2 + Type2Height, shapeCanvasWidth / 2 + TypeWidth, shapeCanvasHeight / 2 + Type2Height);
-        pg.strokeWeight(Type2_2Stroke);
-        pg.line(shapeCanvasWidth / 2 - TypeWidth, shapeCanvasHeight / 2 - Type2Height, shapeCanvasWidth / 2 + TypeWidth, shapeCanvasHeight / 2 - Type2Height);
+        if (recreate) {
+            pg.strokeWeight(p_classic.Type2_1Stroke);
+            pg.line(p_classic.shapeCanvasWidth / 2 - p_classic.TypeWidth,
+                p_classic.shapeCanvasHeight / 2 + p_classic.Type2Height,
+                p_classic.shapeCanvasWidth / 2 + p_classic.TypeWidth,
+                p_classic.shapeCanvasHeight / 2 + p_classic.Type2Height);
+            pg.strokeWeight(p_classic.Type2_2Stroke);
+            pg.line(p_classic.shapeCanvasWidth / 2 - p_classic.TypeWidth,
+                p_classic.shapeCanvasHeight / 2 - p_classic.Type2Height,
+                p_classic.shapeCanvasWidth / 2 + p_classic.TypeWidth,
+                p_classic.shapeCanvasHeight / 2 - p_classic.Type2Height);
+        } else {
+            TypeWidth = s1Sketch.int(s1Sketch.random(20, 60));
+            Type2Height = s1Sketch.int(s1Sketch.random(3, 6));
+            Type2_1Stroke = s1Sketch.int(s1Sketch.random(1, 3));
+            Type2_2Stroke = s1Sketch.int(s1Sketch.random(4, 6));
+            pg.strokeWeight(Type2_1Stroke);
+            pg.line(shapeCanvasWidth / 2 - TypeWidth, shapeCanvasHeight / 2 + Type2Height, shapeCanvasWidth / 2 + TypeWidth, shapeCanvasHeight / 2 + Type2Height);
+            pg.strokeWeight(Type2_2Stroke);
+            pg.line(shapeCanvasWidth / 2 - TypeWidth, shapeCanvasHeight / 2 - Type2Height, shapeCanvasWidth / 2 + TypeWidth, shapeCanvasHeight / 2 - Type2Height);
+        }
     }
+
+    if (!recreate) {
+        p_classic.shapeCanvasWidth = shapeCanvasWidth;
+        p_classic.shapeCanvasHeight = shapeCanvasHeight;
+        p_classic.type = type;
+        p_classic.TypeWidth = TypeWidth;
+        p_classic.Type1Stroke = Type1Stroke;
+        p_classic.Type2Height = Type2Height;
+        p_classic.Type2_1Stroke = Type2_1Stroke;
+        p_classic.Type2_2Stroke = Type2_2Stroke;
+    }
+
     return pg;
 }
 
-function modernShape() {
-    imageInfo.nCollumns = mix_template.image[0].columnsMinMaxHeight[0];
+let p_modern = {
+    "shapeCanvasWidth": null,
+    "shapeCanvasHeight": null,
+    "type": null,
+    "Type1EllipseN":null,
+    "wEllipse1":null,
+    "hEllipse2":null,
+    "Type3RectN":null,
+    "space":null,
+    "wRect3":null,
+    "Type4RectN":null,
+    "Type4X1":null,
+    "Type4X2":null,
+    "Type4Y1":null,
+    "Type4Y2":null,
+    "Type4Stroke":null,
+    "Type4lineCoordinates": null,
+    "Type5RectN":null,
+    "spacing":null,
+    "rectCount":null,
+    "rectSize":null,
+    "offsetX":null,
+    "offsetY":null,
+    "vertex1":null,
+    "vertex2":null,
+    "vertex3":null,
+    "vertex1_2":null,
+    "vertex2_2":null,
+    "vertex3_2":null,
+};
 
-    let original_size_w = imageInfo.nCollumns * gridValues.sizeColumn + (imageInfo.nCollumns - 1) * gridValues.gapColumn;
-    // OVERFLOW
-    if (imageInfo.overflow != 0 && imageInfo.overflowBool) {
-        original_size_w += canvasValues.marginWidth;
-    }
-    // ---
-    let image_size = original_size_w * mix_template.image[0].horizontalScale[0];
-
-    imageInfo.width = image_size;
-    imageInfo.height = image_size;
-
-    imageInfo.nRows = Math.round(imageInfo.height / (gridValues.sizeRow + gridValues.gapRow));
-
-
-    effectImg = 1;
-
+function modernShape(recreate = false) {
+    let shapeCanvasWidth;
+    let shapeCanvasHeight;
     let type = 8;
-    let shapeCanvasWidth = imageInfo.width;
-    let shapeCanvasHeight = imageInfo.height;
     let Type1EllipseN, Type3RectN, Type4RectN, Type5RectN;
     let Type4lineCoordinates = [];
-    let pg = s1Sketch.createGraphics(shapeCanvasWidth, shapeCanvasHeight);
+    let wEllipse1, hEllipse2, space, wRect3, spacing, rectCount, rectSize, offsetX, offsetY, vertex1, vertex2, vertex3, vertex1_2, vertex2_2, vertex3_2;
 
+    if(recreate) {
+        shapeCanvasWidth = p_modern.shapeCanvasWidth;
+        shapeCanvasHeight = p_modern.shapeCanvasHeight;
+        type = p_modern.type;
+    } else {
+        imageInfo.nCollumns = mix_template.composition.columnsMinMaxHeightImage[0];
+
+        let original_size_w = imageInfo.nCollumns * gridValues.sizeColumn + (imageInfo.nCollumns - 1) * gridValues.gapColumn;
+        // OVERFLOW
+        if (imageInfo.overflow != 0 && imageInfo.overflowBool) {
+            original_size_w += canvasValues.marginWidth;
+        }
+        // ---
+
+        let image_size;
+
+        if (mix_template.composition.columns==2) {
+            image_size = original_size_w * 0.2;
+        } else{
+            image_size = original_size_w * mix_template.composition.imageHorizontalScale[0]
+        }
+
+        imageInfo.width = image_size;
+        imageInfo.height = image_size;
+
+        imageInfo.nRows = Math.round(imageInfo.height / (gridValues.sizeRow + gridValues.gapRow));
+
+        effectImg = 1;
+        shapeCanvasWidth = imageInfo.width;
+        shapeCanvasHeight = imageInfo.height;
+        type = s1Sketch.int(s1Sketch.random(1, 8));
+    }
+    let pg = s1Sketch.createGraphics(shapeCanvasWidth, shapeCanvasHeight);
     pg.fill(mix_template.palettes.image.one);
     pg.strokeCap(s1Sketch.SQUARE);
     pg.noStroke();
 
-    type = s1Sketch.int(s1Sketch.random(1, 8));
     if (type == 1) {
-        Type1EllipseN = s1Sketch.int(s1Sketch.random(3, 10));
-        let wEllipse1 = shapeCanvasWidth / Type1EllipseN;
+        if(recreate) {
+            Type1EllipseN = p_modern.Type1EllipseN;
+            wEllipse1 = p_modern.wEllipse1;
+        } else {
+            Type1EllipseN = s1Sketch.int(s1Sketch.random(3, 10));
+            wEllipse1 = shapeCanvasWidth / Type1EllipseN;
+        }
         for (let i = 0; i < Type1EllipseN; i++) {
             pg.ellipse(
                 wEllipse1 / 2 + wEllipse1 * i,
@@ -768,8 +985,13 @@ function modernShape() {
             );
         }
     } else if (type == 2) {
-        Type1EllipseN = s1Sketch.int(s1Sketch.random(3, 10));
-        let hEllipse2 = shapeCanvasHeight / Type1EllipseN;
+        if(recreate){
+            Type1EllipseN = p_modern.Type1EllipseN;
+            hEllipse2 = p_modern.hEllipse2;
+        } else {
+            Type1EllipseN = s1Sketch.int(s1Sketch.random(3, 10));
+            hEllipse2 = shapeCanvasHeight / Type1EllipseN;
+        }
         for (let i = 0; i < Type1EllipseN; i++) {
             pg.ellipse(
                 shapeCanvasWidth / 2,
@@ -779,10 +1001,15 @@ function modernShape() {
             );
         }
     } else if (type == 3) {
-        Type3RectN = s1Sketch.int(s1Sketch.random(6, 20));
-        let space = 0.5;
-
-        let wRect3 = shapeCanvasWidth / (Type3RectN - 1 + space);
+        if(recreate){
+            Type3RectN = p_modern.Type3RectN;
+            space = p_modern.space;
+            wRect3 = p_modern.wRect3;
+        } else {
+            Type3RectN = s1Sketch.int(s1Sketch.random(6, 20));
+            space = 0.5;
+            wRect3 = shapeCanvasWidth / (Type3RectN - 1 + space);
+        }
 
         for (let i = 0; i < Type3RectN; i++) {
             pg.rect(
@@ -793,13 +1020,19 @@ function modernShape() {
             );
         }
     } else if (type == 4) {
-        Type4RectN = s1Sketch.int(s1Sketch.random(3, 5));
+        if(recreate) {
+            Type4RectN = p_modern.Type4RectN;
+            Type4lineCoordinates = p_modern.Type4lineCoordinates;
+        }else {
+            Type4RectN = s1Sketch.int(s1Sketch.random(3, 5));
+        }
         for (let i = 0; i < Type4RectN; i++) {
-            Type4X1 = s1Sketch.random(shapeCanvasWidth);
-            Type4X2 = s1Sketch.random(shapeCanvasHeight);
-            Type4Y1 = s1Sketch.random(shapeCanvasWidth);
-            Type4Y2 = s1Sketch.random(shapeCanvasHeight);
-            Type4Stroke = s1Sketch.int(s1Sketch.random(3, 60));
+            let Type4X1 = s1Sketch.random(shapeCanvasWidth);
+            let Type4X2 = s1Sketch.random(shapeCanvasHeight);
+            let Type4Y1 = s1Sketch.random(shapeCanvasWidth);
+            let Type4Y2 = s1Sketch.random(shapeCanvasHeight);
+            let Type4Stroke = s1Sketch.int(s1Sketch.random(3, 60));
+
             Type4lineCoordinates.push([
                 Type4X1,
                 Type4Y1,
@@ -822,29 +1055,28 @@ function modernShape() {
             );
         }
     } else if (type == 5) {
-        Type5RectN = s1Sketch.int(s1Sketch.random(3, 10));
-        Type5Rot = 30;
-        Type5X1 = s1Sketch.random(shapeCanvasWidth);
-        Type5Y2 = s1Sketch.random(shapeCanvasHeight);
-        Type5X3 = s1Sketch.random(shapeCanvasWidth);
-        Type5_2X1 = s1Sketch.random(shapeCanvasWidth);
-        Type5_2Y2 = s1Sketch.random(shapeCanvasHeight);
-        Type5_2X3 = s1Sketch.random(shapeCanvasWidth);
-
-        let spacing = 10;
-        let rectCount = Type5RectN;
-        let rectSize = s1Sketch.min(
-            (shapeCanvasWidth - spacing * (rectCount - 1)) / rectCount,
-            (shapeCanvasHeight - spacing * (rectCount - 1)) / rectCount
-        );
-        let offsetX =
-            (shapeCanvasWidth - (rectCount * rectSize + (rectCount - 1) * spacing)) /
-            2;
-        let offsetY =
-            (shapeCanvasHeight - (rectCount * rectSize + (rectCount - 1) * spacing)) /
-            2;
-        let rotationAngle = s1Sketch.radians(Type5Rot); // Convert the rotation value to radians
-
+        if (recreate) {
+            Type5RectN = p_modern.Type5RectN;
+            spacing = p_modern.spacing;
+            rectCount = p_modern.rectCount;
+            rectSize = p_modern.rectSize;
+            offsetX = p_modern.offsetX;
+            offsetY = p_modern.offsetY;
+        }else {
+            Type5RectN = s1Sketch.int(s1Sketch.random(3, 10));
+            spacing = 10;
+            rectCount = Type5RectN;
+            rectSize = s1Sketch.min(
+                (shapeCanvasWidth - spacing * (rectCount - 1)) / rectCount,
+                (shapeCanvasHeight - spacing * (rectCount - 1)) / rectCount
+            );
+            offsetX =
+                (shapeCanvasWidth - (rectCount * rectSize + (rectCount - 1) * spacing)) /
+                2;
+            offsetY =
+                (shapeCanvasHeight - (rectCount * rectSize + (rectCount - 1) * spacing)) /
+                2;
+        }
         for (let i = 0; i < rectCount; i++) {
             for (let j = 0; j < rectCount; j++) {
                 let x = offsetX + j * (rectSize + spacing);
@@ -857,23 +1089,30 @@ function modernShape() {
             }
         }
     } else if (type == 6) {
-        Type5RectN = s1Sketch.int(s1Sketch.random(3, 10));
-        Type5Rot = 30;
-        Type5X1 = s1Sketch.random(shapeCanvasWidth);
-        Type5Y2 = s1Sketch.random(shapeCanvasHeight);
-        Type5X3 = s1Sketch.random(shapeCanvasWidth);
-        Type5_2X1 = s1Sketch.random(shapeCanvasWidth);
-        Type5_2Y2 = s1Sketch.random(shapeCanvasHeight);
-        Type5_2X3 = s1Sketch.random(shapeCanvasWidth);
+        if(recreate) {
+            vertex1 = p_modern.vertex1;
+            vertex2 = p_modern.vertex2;
+            vertex3 = p_modern.vertex3;
 
-        let vertex1 = s1Sketch.createVector(Type5X1, 0);
-        let vertex2 = s1Sketch.createVector(shapeCanvasWidth, Type5Y2);
-        let vertex3 = s1Sketch.createVector(Type5X3, shapeCanvasHeight);
+            vertex1_2 = p_modern.vertex1_2;
+            vertex2_2 = p_modern.vertex2_2;
+            vertex3_2 = p_modern.vertex3_2;
+        } else {
+            let Type6X1 = s1Sketch.random(shapeCanvasWidth);
+            let Type6Y2 = s1Sketch.random(shapeCanvasHeight);
+            let Type6X3 = s1Sketch.random(shapeCanvasWidth);
+            let Type6_2X1 = s1Sketch.random(shapeCanvasWidth);
+            let Type6_2Y2 = s1Sketch.random(shapeCanvasHeight);
+            let Type6_2X3 = s1Sketch.random(shapeCanvasWidth);
 
-        let vertex1_2 = s1Sketch.createVector(Type5_2X1, 0);
-        let vertex2_2 = s1Sketch.createVector(shapeCanvasWidth, Type5_2Y2);
-        let vertex3_2 = s1Sketch.createVector(Type5_2X3, shapeCanvasHeight);
+            vertex1 = s1Sketch.createVector(Type6X1, 0);
+            vertex2 = s1Sketch.createVector(shapeCanvasWidth, Type6Y2);
+            vertex3 = s1Sketch.createVector(Type6X3, shapeCanvasHeight);
 
+            vertex1_2 = s1Sketch.createVector(Type6_2X1, 0);
+            vertex2_2 = s1Sketch.createVector(shapeCanvasWidth, Type6_2Y2);
+            vertex3_2 = s1Sketch.createVector(Type6_2X3, shapeCanvasHeight);
+        }
         pg.blendMode(s1Sketch.HARD_LIGHT);
         pg.triangle(
             vertex1.x,
@@ -893,18 +1132,26 @@ function modernShape() {
             vertex3_2.y
         );
     } else if (type == 7) {
-        let spacing = 10;
-        let rectCount = s1Sketch.int(s1Sketch.random(3, 10));
-        let rectSize = s1Sketch.min(
-            (shapeCanvasWidth - spacing * (rectCount - 1)) / rectCount,
-            (shapeCanvasHeight - spacing * (rectCount - 1)) / rectCount
-        );
-        let offsetX =
-            (shapeCanvasWidth - (rectCount * rectSize + (rectCount - 1) * spacing)) /
-            2;
-        let offsetY =
-            (shapeCanvasHeight - (rectCount * rectSize + (rectCount - 1) * spacing)) /
-            2;
+        if(recreate) {
+            spacing = p_modern.spacing;
+            rectCount = p_modern.rectCount;
+            rectSize = p_modern.rectSize;
+            offsetX = p_modern.offsetX;
+            offsetY = p_modern.offsetY;
+        } else {
+            spacing = 10;
+            rectCount = s1Sketch.int(s1Sketch.random(3, 10));
+            rectSize = s1Sketch.min(
+                (shapeCanvasWidth - spacing * (rectCount - 1)) / rectCount,
+                (shapeCanvasHeight - spacing * (rectCount - 1)) / rectCount
+            );
+            offsetX =
+                (shapeCanvasWidth - (rectCount * rectSize + (rectCount - 1) * spacing)) /
+                2;
+            offsetY =
+                (shapeCanvasHeight - (rectCount * rectSize + (rectCount - 1) * spacing)) /
+                2;
+        }
         for (let i = 0; i < rectCount; i++) {
             for (let j = 0; j < rectCount; j++) {
                 let x = offsetX + j * (rectSize + spacing);
@@ -918,21 +1165,75 @@ function modernShape() {
         }
     }
 
+    if(!recreate) {
+        p_modern.shapeCanvasWidth = shapeCanvasWidth;
+        p_modern.shapeCanvasHeight = shapeCanvasHeight;
+        p_modern.type = type;
+        p_modern.Type1EllipseN = Type1EllipseN;
+        p_modern.wEllipse1 = wEllipse1;
+        p_modern.hEllipse2 = hEllipse2;
+        p_modern.Type3RectN = Type3RectN;
+        p_modern.space = space;
+        p_modern.wRect3 = wRect3;
+        p_modern.Type4RectN = Type4RectN;
+        p_modern.Type4lineCoordinates = Type4lineCoordinates;
+        p_modern.Type5RectN = Type5RectN;
+        p_modern.spacing = spacing;
+        p_modern.rectCount = rectCount;
+        p_modern.rectSize = rectSize;
+        p_modern.offsetX = offsetX;
+        p_modern.offsetY = offsetY;
+        p_modern.vertex1 = vertex1;
+        p_modern.vertex2 = vertex2;
+        p_modern.vertex3 = vertex3;
+        p_modern.vertex1_2 = vertex1_2;
+        p_modern.vertex2_2 = vertex2_2;
+        p_modern.vertex3_2 = vertex3_2;
+    }
+
     return pg;
 }
 
-function postModernShape() {
-    let type = 2;
-    let shapeCanvasWidth = canvasValues.posterWidth;
-    let shapeCanvasHeight = canvasValues.posterHeight;
+let p_post_modern = {
+    "type": null,
+    "shapeCanvasWidth": null,
+    "shapeCanvasHeight": null,
+    "Type1Vertex": null,
+    "Type1NSides": null,
+    "Type1NShapes": null,
+    "Type2Vertex": null,
+    "Type2NPoints": null,
+    "Type2NShapes": null
+};
 
-    let imageSize = calculateBoundingBox(shapeCanvasWidth, shapeCanvasHeight, 0)
+function postModernShape(recreate = false) {
+    let type;
+    let shapeCanvasWidth;
+    let shapeCanvasHeight;
+    if (recreate) {
+        type = p_post_modern.type;
+        shapeCanvasWidth = p_post_modern.shapeCanvasWidth;
+        shapeCanvasHeight = p_post_modern.shapeCanvasHeight;
+    } else {
+        type = s1Sketch.int(s1Sketch.random(1, 3));
+        shapeCanvasWidth = canvasValues.posterWidth;
+        shapeCanvasHeight = canvasValues.posterHeight;
 
-    imageInfo.width = imageSize.w;
-    imageInfo.height = imageSize.h;
+        let imageSize = calculateBoundingBox(shapeCanvasWidth, shapeCanvasHeight, 0)
 
-    let Type1NSides, Type1NShapes;
-    let Type2NPoints, Type2NShapes;
+        if (mix_template.composition.columns==2) {
+            imageSize = calculateBoundingBox(shapeCanvasWidth*.2, shapeCanvasHeight*.2, 0)
+        } else if (mix_template.composition.columns==6){
+            imageSize = calculateBoundingBox(shapeCanvasWidth*.4, shapeCanvasHeight*.4, 0)
+        }
+
+        imageInfo.width = imageSize.w;
+        imageInfo.height = imageSize.h;
+    }
+
+    let Type1Vertex, Type1NSides, Type1NShapes;
+    let Type2Vertex, Type2NPoints, Type2NShapes;
+    let x, y, cx1, cy1, cx2, cy2;
 
     let pg;
 
@@ -940,47 +1241,92 @@ function postModernShape() {
     pg.fill(mix_template.palettes.image.one);
     pg.noStroke();
 
-    type = s1Sketch.int(s1Sketch.random(1, 3));
     if (type == 1) {
-        Type1NSides = s1Sketch.int(s1Sketch.random(3, 5));
-        Type1NShapes = s1Sketch.int(s1Sketch.random(1, 3));
+        if(recreate){
+            Type1NSides = p_post_modern.Type1NSides;
+            Type1NShapes = p_post_modern.Type1NShapes;
+            Type1Vertex = p_post_modern.Type1Vertex;
+        } else {
+            Type1NSides = s1Sketch.int(s1Sketch.random(3, 5));
+            Type1NShapes = s1Sketch.int(s1Sketch.random(1, 3));
+            Type1Vertex = [];
+        }
 
         for (let shape = 0; shape < Type1NShapes; shape++) {
             pg.blendMode(s1Sketch.MULTIPLY);
             pg.beginShape();
-            for (let i = 0; i < Type1NSides; i++) {
-                let x = s1Sketch.random(shapeCanvasWidth);
-                let y = s1Sketch.random(shapeCanvasHeight);
-                pg.vertex(x, y);
+            if (recreate) {
+                for (let i = 0; i < Type1NSides; i++) {
+                    pg.vertex(Type1Vertex[shape][i].x, Type1Vertex[shape][i].y);
+                }
+            } else {
+                Type1Vertex[shape] = [];
+                for (let i = 0; i < Type1NSides; i++) {
+                    x = s1Sketch.random(shapeCanvasWidth);
+                    y = s1Sketch.random(shapeCanvasHeight);
+                    Type1Vertex[shape].push({'x': x, 'y': y});
+                    pg.vertex(x, y);
+                }
             }
             pg.endShape(s1Sketch.CLOSE);
             pg.blendMode(s1Sketch.BLEND);
         }
     } else if (type == 2) {
-        Type2NPoints = s1Sketch.int(s1Sketch.random(3, 5));
-        Type2NShapes = s1Sketch.int(s1Sketch.random(1, 3));
+        if (recreate) {
+            Type2NPoints = p_post_modern.Type2NPoints;
+            Type2NShapes = p_post_modern.Type2NShapes;
+            Type2Vertex = p_post_modern.Type2Vertex;
+        } else {
+            Type2NPoints = s1Sketch.int(s1Sketch.random(3, 5));
+            Type2NShapes = s1Sketch.int(s1Sketch.random(1, 3));
+            Type2Vertex = [];
+        }
 
         for (let shape = 0; shape < Type2NShapes; shape++) {
             pg.blendMode(s1Sketch.MULTIPLY);
             pg.beginShape();
-            let x = s1Sketch.random(shapeCanvasWidth);
-            let y = s1Sketch.random(shapeCanvasHeight);
-            pg.vertex(x, y); // Initial vertex for the curve
-            for (let i = 0; i < Type2NPoints; i++) {
-                let cx1 = s1Sketch.random(shapeCanvasWidth);
-                let cy1 = s1Sketch.random(shapeCanvasHeight);
-                let cx2 = s1Sketch.random(shapeCanvasWidth);
-                let cy2 = s1Sketch.random(shapeCanvasHeight);
+            if(recreate) {
+                x = Type2Vertex[shape][0].x;
+                y = Type2Vertex[shape][0].y;
+                pg.vertex(x, y); // Initial vertex for the curve
+                for (let i = 0; i < Type2NPoints; i++) {
+                    pg.bezierVertex(Type2Vertex[shape][i].cx1, Type2Vertex[shape][i].cy1, Type2Vertex[shape][i].cx2, Type2Vertex[shape][i].cy2, Type2Vertex[shape][i].x, Type2Vertex[shape][i].y);
+                }
+            } else {
                 x = s1Sketch.random(shapeCanvasWidth);
                 y = s1Sketch.random(shapeCanvasHeight);
-                pg.bezierVertex(cx1, cy1, cx2, cy2, x, y);
+                pg.vertex(x, y); // Initial vertex for the curve
+                Type2Vertex[shape] = [];
+                for (let i = 0; i < Type2NPoints; i++) {
+                    cx1 = s1Sketch.random(shapeCanvasWidth);
+                    cy1 = s1Sketch.random(shapeCanvasHeight);
+                    cx2 = s1Sketch.random(shapeCanvasWidth);
+                    cy2 = s1Sketch.random(shapeCanvasHeight);
+                    x = s1Sketch.random(shapeCanvasWidth);
+                    y = s1Sketch.random(shapeCanvasHeight);
+                    Type2Vertex[shape].push({'x': x, 'y': y, 'cx1': cx1, 'cy1': cy1, 'cx2': cx2, 'cy2': cy2});
+                    pg.bezierVertex(cx1, cy1, cx2, cy2, x, y);
+                }
             }
             pg.endShape(s1Sketch.CLOSE);
             pg.blendMode(s1Sketch.BLEND);
         }
     }
+    if(!recreate) {
+        p_post_modern.type = type;
+        p_post_modern.shapeCanvasWidth = shapeCanvasWidth;
+        p_post_modern.shapeCanvasHeight = shapeCanvasHeight;
+        p_post_modern.Type1Vertex = Type1Vertex;
+        p_post_modern.Type1NSides = Type1NSides;
+        p_post_modern.Type1NShapes = Type1NShapes;
+        p_post_modern.Type2Vertex = Type2Vertex;
+        p_post_modern.Type2NPoints = Type2NPoints;
+        p_post_modern.Type2NShapes = Type2NShapes;
+    }
     return pg;
 }
+
+
 
 function calculateBoundingBox(w, h, rotation) {
     let center = s1Sketch.createVector(w / 2, h / 2);
@@ -1025,4 +1371,12 @@ function calculateBoundingBox(w, h, rotation) {
         w: newWidth,
         h: newHeight,
     };
+}
+
+var buttonSavePDF= document.getElementById("savePDF");
+buttonSavePDF.addEventListener("click", savePDF);
+
+function savePDF() {
+    pdfSave=true;
+    pdf.beginRecord();
 }

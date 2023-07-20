@@ -4,9 +4,10 @@ var s2Sketch;
 var points = [];
 var active_point = null;
 var offset;
+var hovered_point = null;
 
 var triangle_points = [];
-var triangle_size = 300; // Size of the equilateral triangle
+var triangle_size = 350; // Size of the equilateral triangle
 var triangle_ratio;
 
 s2 = function (sketch) {
@@ -25,17 +26,60 @@ s2 = function (sketch) {
     s2Sketch.draw = function () {
         s2Sketch.background(211, 211, 211);
 
-        s2Sketch.fill(200);
+        s2Sketch.fill(211);
+        s2Sketch.stroke(0);
         s2Sketch.triangle(triangle_points[0].x, triangle_points[0].y,
             triangle_points[1].x, triangle_points[1].y,
             triangle_points[2].x, triangle_points[2].y);
+        s2Sketch.noStroke();
+
+        s2Sketch.textFont('Sora');
+        s2Sketch.textSize(18);
+        s2Sketch.fill(29, 29, 29);
+        s2Sketch.push();
+        s2Sketch.translate(triangle_points[0].x + 10, triangle_points[0].y);
+        s2Sketch.rotate(s2Sketch.atan2(triangle_points[1].y + triangle_points[0].y, triangle_points[1].x + triangle_points[0].x));
+        s2Sketch.text('Pre-Modern'.toUpperCase(), 0, 0);
+        s2Sketch.pop();
+
+        s2Sketch.push();
+        s2Sketch.translate(triangle_points[1].x - 10, triangle_points[1].y);
+        s2Sketch.rotate(s2Sketch.atan2(triangle_points[0].y - triangle_points[1].y, triangle_points[0].x - triangle_points[1].x));
+        s2Sketch.text('Post-Modern'.toUpperCase(), 0, 0);
+        s2Sketch.pop();
+
+        s2Sketch.push();
+        s2Sketch.translate(triangle_points[2].x - s2Sketch.textWidth('MODERN'), triangle_points[2].y + 20);
+        s2Sketch.rotate(s2Sketch.atan2(triangle_points[2].y - triangle_points[1].y, triangle_points[2].x - triangle_points[1].x));
+        s2Sketch.text('Modern'.toUpperCase(), 0, 0);
+        s2Sketch.pop();
+
 
         for (let i = 0; i < points.length; i++) {
-            s2Sketch.fill(points[i].color);
-            s2Sketch.ellipse(points[i].position.x, points[i].position.y, 20);
-        }
+            if (points[i].active || points[i].hover) {
+                if(points[i].hover) {
+                    points[i].opacity = s2Sketch.lerp(points[i].opacity, 255, 0.1);
+                } else {
+                    points[i].opacity = s2Sketch.lerp(points[i].opacity, 0, 0.1);
+                }
+                points[i].transition = s2Sketch.lerp(points[i].transition, 255, 0.1);
+            } else {
+                points[i].transition = s2Sketch.lerp(points[i].transition, 70, 0.1);
+                points[i].opacity = s2Sketch.lerp(points[i].opacity, 0, 0.1);
+            }
+            s2Sketch.tint(255, points[i].transition);
+            s2Sketch.image(points[i].image, points[i].position.x - 10, points[i].position.y - 10, 30, 30);
+            s2Sketch.noTint();
 
-        drawDistance();
+
+
+            s2Sketch.fill(211, points[i].opacity);
+            s2Sketch.stroke(29, points[i].opacity);
+            s2Sketch.rect(points[i].position.x + 25, points[i].position.y - 10, s2Sketch.textWidth(points[i].text) + 20, 30);
+            s2Sketch.fill(29, points[i].opacity);
+            s2Sketch.noStroke();
+            s2Sketch.text(points[i].text, points[i].position.x + 35, points[i].position.y + 10);
+        }
     }
 
     s2Sketch.mousePressed = function () {
@@ -48,6 +92,16 @@ s2 = function (sketch) {
                 points.push(clickedPoint);
 
                 active_point = points.length - 1;
+
+                for (let j = points.length - 1; j >= 0; j--) {
+                    if (j==active_point) {
+                        points[j].active = true;
+                        points[j].button.classList.add("active");
+                    } else {
+                        points[j].active = false;
+                        points[j].button.classList.remove("active");
+                    }
+                }
                 offset = s2Sketch.createVector(s2Sketch.mouseX - points[active_point].position.x, s2Sketch.mouseY - points[active_point].position.y);
                 break;
             }
@@ -74,10 +128,22 @@ s2 = function (sketch) {
     }
 
     s2Sketch.mouseReleased = function () {
-        if(active_point!=null) {
-            // Reset the active_point to null when the mouse is released
+        if (active_point != null) {
+            triangleTemplate(points[active_point]);
             active_point = null;
-            triangleTemplate();
+        }
+    }
+
+    s2Sketch.mouseMoved = function () {
+        hovered_point = null;
+        // Check if the mouse is within the range of any point
+        for (let i = points.length - 1; i >= 0; i--) {
+            let d = s2Sketch.dist(s2Sketch.mouseX, s2Sketch.mouseY, points[i].position.x, points[i].position.y);
+            if (d < 10) {
+                points[i].hover = true;
+            } else {
+                points[i].hover = false;
+            }
         }
     }
 }
@@ -97,54 +163,86 @@ function definePoints() {
 
     points.push({
         "id": 0,
-        "color": s2Sketch.color(255, 0, 0),
         "position": s2Sketch.createVector(s2Sketch.width / 2, s2Sketch.height / 2),
-        "distance1": 0,
-        "distance2": 0,
-        "distance3": 0
+        "distance": [0, 0, 0],
+        "image": s2Sketch.loadImage("../data/triangle/2.png"),
+        "opacity": 70,
+        "button": document.getElementById("triangleFigure"),
+        "active": false,
+        "hover": false,
+        "transition": 0,
+        "opacity": 0,
+        "text": "Figure"
     });
     points.push({
         "id": 1,
-        "color": s2Sketch.color(0, 255, 0),
         "position": s2Sketch.createVector(s2Sketch.width / 2, s2Sketch.height / 2),
-        "distance1": 0,
-        "distance2": 0,
-        "distance3": 0
+        "distance": [0, 0, 0],
+        "image": s2Sketch.loadImage("../data/triangle/1.png"),
+        "opacity": 70,
+        "button": document.getElementById("triangleColor"),
+        "active": false,
+        "hover": false,
+        "transition": 0,
+        "opacity": 0,
+        "text": "Color"
     });
     points.push({
         "id": 2,
-        "color": s2Sketch.color(0, 0, 255),
         "position": s2Sketch.createVector(s2Sketch.width / 2, s2Sketch.height / 2),
-        "distance1": 0,
-        "distance2": 0,
-        "distance3": 0
+        "distance": [0, 0, 0],
+        "image": s2Sketch.loadImage("../data/triangle/3.png"),
+        "opacity": 70,
+        "button": document.getElementById("triangleTypography"),
+        "active": false,
+        "hover": false,
+        "transition": 0,
+        "opacity": 0,
+        "text": "Typography"
     });
     points.push({
         "id": 3,
-        "color": s2Sketch.color(255, 255, 0),
         "position": s2Sketch.createVector(s2Sketch.width / 2, s2Sketch.height / 2),
-        "distance1": 0,
-        "distance2": 0,
-        "distance3": 0
+        "distance": [0, 0, 0],
+        "image": s2Sketch.loadImage("../data/triangle/4.png"),
+        "opacity": 70,
+        "button": document.getElementById("triangleLayout"),
+        "active": false,
+        "hover": false,
+        "transition": 0,
+        "opacity": 0,
+        "text": "Layout"
     });
 
-    /*console.log(points[0].position);
-    console.log(
-        reversePerpendicularDistance(triangle_points[0], triangle_points[1], calculatePerpendicularDistance(triangle_points[0], triangle_points[1], points[0].position)
-        ));*/
+    for (let i = 0; i < points.length; i++) {
+        points[i].button.id = points[i].id
+        points[i].button.addEventListener("click", setActive);
+    }
 }
 
 function updateDistance() {
     for (let i = 0; i < points.length; i++) {
-        points[i].distance1 =
-            s2Sketch.map(calculatePerpendicularDistance(triangle_points[0], triangle_points[1], points[i].position),
-                0, triangle_ratio, 0, 1).toFixed(1);
-        points[i].distance2 =
-            s2Sketch.map(calculatePerpendicularDistance(triangle_points[1], triangle_points[2], points[i].position),
-                0, triangle_ratio, 0, 1).toFixed(1);
-        points[i].distance3 =
-            s2Sketch.map(calculatePerpendicularDistance(triangle_points[2], triangle_points[0], points[i].position),
-                0, triangle_ratio, 0, 1).toFixed(1);
+        points[i].distance[0] =
+            parseFloat(s2Sketch.map(calculatePerpendicularDistance(triangle_points[0], triangle_points[1], points[i].position),
+                0, triangle_ratio, 0, 1).toFixed(1));
+        points[i].distance[1] =
+            parseFloat(s2Sketch.map(calculatePerpendicularDistance(triangle_points[1], triangle_points[2], points[i].position),
+                0, triangle_ratio, 0, 1).toFixed(1));
+        points[i].distance[2] =
+            parseFloat(s2Sketch.map(calculatePerpendicularDistance(triangle_points[2], triangle_points[0], points[i].position),
+                0, triangle_ratio, 0, 1).toFixed(1));
+    }
+}
+
+function setActive() {
+    for (let i = 0; i < points.length; i++) {
+        if(points[i].id==this.id) {
+            points[i].active = true;
+            points[i].button.classList.add("active");
+        } else {
+            points[i].active = false;
+            points[i].button.classList.remove("active");
+        }
     }
 }
 
@@ -160,14 +258,6 @@ function calculatePerpendicularDistance(linePoint1, linePoint2, point) {
     var denominator = Math.sqrt(Math.pow(y2 - y1, 2) + Math.pow(x2 - x1, 2));
 
     return numerator / denominator;
-}
-
-function drawDistance() {
-    updateDistance();
-    for (let i = 0; i < points.length; i++) {
-        s2Sketch.fill(points[i].color);
-        s2Sketch.text(points[i].distance1 + ", " + points[i].distance2 + ", " + points[i].distance3, 10, 30 * (i + 1));
-    }
 }
 
 function getJsonObjectById(jsonArray, id) {

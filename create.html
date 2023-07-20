@@ -14,14 +14,14 @@
 <body>
 <div class="main_row createMain_row1">
     <div class="row createColumn1">
-        <a href="index.html"> <img src="data/pageElements/arrow.png"></a>
+        <a href="index.html"> <img src="data/pageElements/circles@2x.png"></a>
     </div>
     <div class="row createColumn2 logo">
-        <span class="logoSpan"><a href="index.html">Graphic Ground</a></span>
+        <span class="logoSpan"><a href="index.html">Graphic<br>Ground</a></span>
         <img id="openMenu" class="menuMobileIcon" src="data/index/menu.png">
     </div>
-    <div class="row createColumn3 mobileColumn"></div>
-    <div class="row header createColumn4 mobileColumn">
+    <div class="row createColumn3 mobileColumn noBorder"></div>
+    <div class="row header createColumn4 mobileColumn noBorder">
         <span><a href="about.html">About</a></span>
         <span class="pagAtual"><a href="create.html">Create</a></span>
         <span><a href="gallery.html">Gallery</a></span>
@@ -32,93 +32,89 @@
     </div>
     <div class="row createColumn2">
         <div id="inputUpper">
-            <div class="content_poster">
+            <div class="content_poster hide" id="mainPoster">
                 <div id="content" class="contentStyle">
                     <h2>Content</h2>
-                    <img src="data/pageElements/arrow2.png">
+                    <img class="downArrow" src="data/pageElements/arrowDown.png">
+                    <img class="upArrow" src="data/pageElements/arrowUP.png">
                 </div>
-                <div id="inputPoster" class="inputs_poster hide">
-                    <form action="/url" method="GET">
-                        <div class="input">
-                            <h3>Text 1</h3>
-                            <input type="text" name="text1" id="title" value="This is a title.">
-                        </div>
-                        <div class="input">
-                            <h3>Text 2</h3>
-                            <input type="text" name="text2" id="subtitle" value="This can be used as a subtitle.">
-                        </div>
-
-                        <div class="input">
-                            <h3><label for="add_info">Additional Information</label></h3>
-                            <textarea placeholder="You can add some additional information here!" name="add_info"
-                                      id="aditionalInfo">And here you can add some additional information.</textarea>
-                        </div>
-
-
-                        <div class="image_input">
-                            <h3>Add image</h3>
-                            <div class="imageIcons">
-                                <img id="addImage" src="data/pageElements/plusCreate.png">
-                                <img id="deleteImage" src="data/pageElements/trashCreate.png">
+                <div id="inputPoster" class="inputs_poster">
+                    <div class="marginInputs">
+                        <form action="/url" method="GET">
+                            <div class="input">
+                                <h3>Text 1</h3>
+                                <input type="text" name="text1" id="title" value="This is a title.">
                             </div>
-                            <div class="image_container">
-                                <label id="add-img-label" for="add-single-img">+</label>
-                                <input type="file" id="add-single-img" accept="image/jpeg"/>
+                            <div class="input">
+                                <h3>Text 2</h3>
+                                <input type="text" name="text2" id="subtitle" value="This can be used as a subtitle.">
                             </div>
-                        </div>
-                        <button type="submit"></button>
-                    </form>
+
+                            <div class="input">
+                                <h3><label for="add_info">Additional Information</label></h3>
+                                <textarea placeholder="You can add some additional information here!" name="add_info"
+                                          id="aditionalInfo">And here you can add some additional information.</textarea>
+                            </div>
+
+
+                            <div class="image_input">
+                                <h3>Add image</h3>
+                                <div class="imageIcons">
+                                    <img id="addImage" src="data/pageElements/plusCreate.png">
+                                    <img id="deleteImage" src="data/pageElements/trashCreate.png">
+                                </div>
+                                <div class="image_container">
+                                    <label id="add-img-label" for="add-single-img">+</label>
+                                    <input type="file" id="add-single-img" accept="image/jpeg"/>
+                                </div>
+                            </div>
+                            <button type="submit"></button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
-            <div class="randomizer">
-                <div class="contentStyle" id="randomizer">
-                    <h2> Randomize</h2>
-                    <img src="data/pageElements/arrow2.png">
-                </div>
-                <div class="buttons hide" id="inputButtons">
-                    <button class="botao" id="buttonLayout" type="button">Layout</button>
-                    <button class="botao" id="buttonShape" type="button">Figure</button>
-                    <button class="botao" id="buttonColors" type="button">Colors</button>
-                    <button class="botao" id="buttonFont" type="button">Font</button>
-
-                </div>
-            </div>
-
-            <div class="equalizer">
+            <div class="equalizer hide" id="mainEqualizer">
                 <div class="contentStyle" id="equalizer">
                     <h2> Equalize</h2>
-                    <img src="data/pageElements/arrow2.png">
+                    <img class="downArrow" src="data/pageElements/arrowDown.png">
+                    <img class="upArrow" src="data/pageElements/arrowUP.png">
                 </div>
 
-                <div class="equalizerInputs hide" id="equalizerInputs">
+                <div class="equalizerInputs" id="equalizerInputs">
                     <div id="canvasTriangle"></div>
                     <div class="equalizerButtons">
-
-                        <div class="roudButtons">
-                            <button id="round1" class="buttonRound"><img src=data/triangle/1.png></button>
-                            <button id="round2" class="buttonRound"><img src=data/triangle/2.png></button>
-                            <button id="round3" class="buttonRound"><img src=data/triangle/3.png></button>
-                            <button id="round4" class="buttonRound"><img src=data/triangle/4.png></button>
-                        </div>
-                    <div class="triangleLegenda">
-                        <div>
-                        <img src="data/triangle/1.png">
-                        <span class="legendaTipos">Color</span>
-                        </div>
-                        <div>
-                            <img src="data/triangle/2.png">
-                            <span class="legendaTipos">Figure</span>
-                        </div>
-                        <div>
-                            <img src="data/triangle/3.png">
-                            <span class="legendaTipos">Typography</span>
-                        </div>
-                        <div>
-                            <img src="data/triangle/4.png">
-                            <span class="legendaTipos">Composition</span>
+                        <div class="marginInputs">
+                            <button class="botao botaoEqualizer" id="triangleColor" type="button"><img
+                                    src="data/triangle/1.png">Color
+                            </button>
+                            <button class="botao botaoEqualizer" id="triangleTypography" type="button"><img
+                                    src="data/triangle/3.png">Typography
+                            </button>
+                            <button class="botao botaoEqualizer" id="triangleFigure" type="button"><img
+                                    src="data/triangle/2.png">Figure
+                            </button>
+                            <button class="botao botaoEqualizer" id="triangleLayout" type="button"><img
+                                    src="data/triangle/4.png">Layout
+                            </button>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="randomizer hide" id="mainRandomizer">
+                <div class="contentStyle" id="randomizer">
+                    <h2> Randomize</h2>
+                    <img class="downArrow" src="data/pageElements/arrowDown.png">
+                    <img class="upArrow" src="data/pageElements/arrowUP.png">
+                </div>
+                <div class="buttons" id="inputButtons">
+                    <div class="marginInputs">
+                        <button class="botao" id="buttonLayout" type="button">Layout</button>
+                        <button class="botao" id="buttonShape" type="button">Figure</button>
+                        <button class="botao" id="buttonColors" type="button">Color</button>
+                        <button class="botao" id="buttonFont" type="button">Typography</button>
+                        <button class="botao" id="buttonAll" type="button">Surprise Me</button>
                     </div>
                 </div>
             </div>
@@ -126,40 +122,52 @@
     </div>
     <div class="row createColumn3" id="canvas_parent">
         <div class="creationBox">
-
+            <div class="buttonsCreation">
+                <div class="checkbox">
+                    <input id="checkboxGrid" type="checkbox" name="showGrids" value="show">
+                    <label for="showGrids"><h3>Show Grids</h3></label><br>
+                </div>
+            </div>
             <div id="canvas_poster"></div>
-<div class="buttonsCreation">
-            <div class="checkbox">
-                <input id="checkboxGrid" type="checkbox" name="showGrids" value="show">
-                <label for="showGrids"><h3>Show Grids</h3></label><br>
-            </div>
-            <div class="buttonsCanvas">
-                <select name="stylePoster" id="stylePoster">
-                    <option value="classic">Classic</option>
-                    <option value="modern">Modern</option>
-                    <option value="postmodern">Post-Modern</option>
-                </select>
-            </div>
+            <div class="buttonsCreation">
                 <div class="buttonsCanvas">
-                <select name="style" id="format">
-                    <option value="contained">A4 Poster</option>
-                    <option value="balanced">A3 Poster</option>
-                </select>
+                    <div id="divCheckVer" class="checkbox">
+                        <input type="checkbox" name="vertical" value="show">
+                        <label for="vertical"><h3>Vertical</h3></label><br>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" name="horizontal" value="show">
+                        <label for="horizontal"><h3>Horizontal</h3></label><br>
+                    </div>
+                </div>
             </div>
-</div>
         </div>
     </div>
     <div class="row createColumn4 row_outputs">
         <div class="exportSection">
-            <div class="exportOptions">
+            <div class="exportOptions hide" id="mainExport">
                 <div class="contentStyle" id="exportTitle">
                     <h2>Export</h2>
-                    <img src="data/pageElements/arrow2.png">
+                    <img class="downArrow" src="data/pageElements/arrowDown.png">
+                    <img class="upArrow" src="data/pageElements/arrowUP.png">
                 </div>
-                <div id="exportContent" class="hide">
-                    <button class="botao" type="button">Exhibit</button>
-                    <button id="savePDF" class="botao" type="button">Export .PDF</button>
-                    <button id="savePNG" class="botao" type="button">Export .PNG</button>
+                <div id="exportContent">
+                    <div class="marginInputs">
+                        <div class="buttonsCanvas">
+                            <select name="formatPoster" id="formatPoster">
+                                <option value="cartazp">Cartaz Pequeno [A3]</option>
+                                <option value="autocolante">Autocolante [A7]</option>
+                                <option value="postal">Postal [A6]</option>
+                                <option value="carta">Carta [A5]</option>
+                                <option value="carta">Carta [A4]</option>
+                                <option value="cartazm">Cartaz Médio [A2]</option>
+                                <option value="cartazg">Cartaz Grande [A1]</option>
+                            </select>
+                        </div>
+                        <button class="botao" type="button">Exhibit in Gallery</button>
+                        <button id="savePDF" class="botao" type="button">Export .PDF</button>
+                        <button id="savePNG" class="botao" type="button">Export .PNG</button>
+                    </div>
                 </div>
             </div>
         </div>

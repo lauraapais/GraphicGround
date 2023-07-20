@@ -11,7 +11,10 @@ function loadTemplates() {
             "columns": 2,
             "overlay": 0,
             "fillRows": [1, 11, 10, 12],
-            "type": "Classic",
+            "columnsMinMaxWidthImage": [2],
+            "columnsMinMaxHeightImage": [2],
+            "imageHorizontalScale": [0.5],
+            "imageVerticalScale": [0.3],
         },
 
         "palettes": [{
@@ -19,39 +22,51 @@ function loadTemplates() {
             "additionalInformation": [26, 26, 26],
             "background": [232, 232, 230],
             "image": {
-                "one": [160, 93, 160],
-                "two": [135, 198, 98]
+                "one": [26, 26, 26],
+                "two": [26, 26, 26]
             }
         },{
             "text": [26, 26, 26],
             "additionalInformation": [26, 26, 26],
             "background": [255, 255, 255],
             "image": {
-                "one": [160, 93, 160],
-                "two": [135, 198, 98]
+                "one": [26, 26, 26],
+                "two": [26, 26, 26]
             }
         }
         ],
 
         "text": {
             "font": [{
-                "fontTitle": "PlayfairDisplay-Bold",
-                "fontOthers": "PlayfairDisplay-Regular"
-            }, {
                 "fontTitle": "BodoniModa_18pt-Bold",
                 "fontOthers": "BodoniModa_18pt-Regular"
             }, {
-                "fontTitle": "Oranienbaum-Regular",
-                "fontOthers": "Oranienbaum-Regular"
+                "fontTitle": "CormorantInfant-Bold",
+                "fontOthers": "CormorantInfant-Regular"
             }, {
-                "fontTitle": "Oranienbaum-Regular",
-                "fontOthers": "Oranienbaum-Regular"
+                "fontTitle": "EBGaramond-Bold",
+                "fontOthers": "EBGaramond-Regular"
             }, {
-                    "fontTitle": "Brygada1918-Bold",
-                    "fontOthers": "Brygada1918-Regular"
+                    "fontTitle": "Gloock-Regular",
+                    "fontOthers": "Gloock-Regular"
             }, {
-                    "fontTitle": "Melodrama-Bold",
-                    "fontOthers": "Melodrama-Regular"
+                    "fontTitle": "KaiseiHarunoUmi-Bold",
+                    "fontOthers": "KaiseiHarunoUmi-Regular"
+            }, {
+                "fontTitle": "NanumMyeongjo-Bold",
+                "fontOthers": "NanumMyeongjo-Regular"
+            }, {
+                "fontTitle": "NotoSerifDisplay-Bold",
+                "fontOthers": "NotoSerifDisplay-Regular"
+            }, {
+                "fontTitle": "PlayfairDisplay-Bold",
+                "fontOthers": "PlayfairDisplay-Regular"
+            }, {
+                "fontTitle": "Prata-Regular",
+                "fontOthers": "Prata-Regular"
+            }, {
+                "fontTitle": "Rosarivo-Regular",
+                "fontOthers": "Rosarivo-Regular"
             }],
 
             "marginText": 0.8,
@@ -72,12 +87,9 @@ function loadTemplates() {
             "effect": "engraving",
             "texture": 0,
             "rotation": [0],
-            "columnsMinMaxWidth": [2],
-            "columnsMinMaxHeight": [2],
-            "horizontalScale": [0.5],
-            "verticalScale": [0.3],
             "alignment": 1,
             "shapes": 1,
+            "frame":1,
             "overflow": false
         }]
     };
@@ -87,7 +99,10 @@ function loadTemplates() {
             "columns": 6,
             "overlay": 0,
             "fillRows": [],
-            "type": "Modern",
+            "columnsMinMaxWidthImage": [4],
+            "columnsMinMaxHeightImage": [3],
+            "imageHorizontalScale": [1],
+            "imageVerticalScale": [1],
         },
 
         "palettes": [{
@@ -96,7 +111,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [8, 8, 8],
-                "two": [8, 8, 8]
+                "two": [255,0,0]
             }
         }, {
             "text": [225, 223, 224],
@@ -104,7 +119,7 @@ function loadTemplates() {
             "background": [0, 0, 0],
             "image": {
                 "one": [225, 223, 224],
-                "two": [225, 223, 224]
+                "two": [255,0,0]
             }
         }, {
             "text": [225, 223, 224],
@@ -112,7 +127,7 @@ function loadTemplates() {
             "background": [0, 0, 0],
             "image": {
                 "one": [254, 240, 47],
-                "two": [254, 240, 47]
+                "two": [255,0,0]
             }
         }, {
             "text": [225, 223, 224],
@@ -120,7 +135,7 @@ function loadTemplates() {
             "background": [0, 0, 0],
             "image": {
                 "one": [221, 61, 73],
-                "two": [221, 61, 73]
+                "two": [255,0,0]
             }
         }, {
             "text": [225, 223, 224],
@@ -128,7 +143,7 @@ function loadTemplates() {
             "background": [0, 0, 0],
             "image": {
                 "one": [1, 152, 199],
-                "two": [1, 152, 199]
+                "two": [255,0,0]
             }
         }, {
             "text": [225, 223, 224],
@@ -136,7 +151,7 @@ function loadTemplates() {
             "background": [0, 0, 0],
             "image": {
                 "one": [203, 1, 113],
-                "two": [203, 1, 113]
+                "two": [255,0,0]
             }
         }, {
             "text": [225, 223, 224],
@@ -144,7 +159,7 @@ function loadTemplates() {
             "background": [0, 0, 0],
             "image": {
                 "one": [17, 7, 172],
-                "two": [17, 7, 172]
+                "two": [255,0,0]
             }
         }, {
             "text": [8, 8, 8],
@@ -152,7 +167,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [254, 240, 47],
-                "two": [254, 240, 47]
+                "two": [255,0,0]
             }
         }, {
             "text": [8, 8, 8],
@@ -160,7 +175,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [221, 61, 73],
-                "two": [221, 61, 73]
+                "two": [255,0,0]
             }
         }, {
             "text": [8, 8, 8],
@@ -168,7 +183,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [1, 152, 199],
-                "two": [1, 152, 199]
+                "two": [255,0,0]
             }
         }, {
             "text": [8, 8, 8],
@@ -176,7 +191,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [203, 1, 113],
-                "two": [203, 1, 113]
+                "two": [255,0,0]
             }
         }, {
             "text": [8, 8, 8],
@@ -184,7 +199,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [17, 7, 172],
-                "two": [17, 7, 172]
+                "two": [255,0,0]
             }
         }, {
             "text": [221, 61, 73],
@@ -192,7 +207,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [221, 61, 73],
-                "two": [221, 61, 73]
+                "two": [255,0,0]
             }
         }, {
             "text": [1, 152, 199],
@@ -200,7 +215,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [1, 152, 199],
-                "two": [1, 152, 199]
+                "two": [255,0,0]
             }
         }, {
             "text": [203, 1, 113],
@@ -208,7 +223,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [203, 1, 113],
-                "two": [203, 1, 113]
+                "two": [255,0,0]
             }
         }, {
             "text": [17, 7, 172],
@@ -216,7 +231,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [17, 7, 172],
-                "two": [17, 7, 172]
+                "two": [255,0,0]
             }
         }, {
             "text": [8, 8, 8],
@@ -224,7 +239,7 @@ function loadTemplates() {
             "background": [254, 240, 47],
             "image": {
                 "one": [8, 8, 8],
-                "two": [8, 8, 8]
+                "two": [255,0,0]
             }
         }, {
             "text": [8, 8, 8],
@@ -232,7 +247,7 @@ function loadTemplates() {
             "background": [221, 61, 73],
             "image": {
                 "one": [8, 8, 8],
-                "two": [8, 8, 8]
+                "two": [255,0,0]
             }
         }, {
             "text": [8, 8, 8],
@@ -240,7 +255,7 @@ function loadTemplates() {
             "background": [203, 1, 113],
             "image": {
                 "one": [8, 8, 8],
-                "two": [8, 8, 8]
+                "two": [255,0,0]
             }
         }, {
             "text": [8, 8, 8],
@@ -248,7 +263,7 @@ function loadTemplates() {
             "background": [1, 152, 199],
             "image": {
                 "one": [8, 8, 8],
-                "two": [8, 8, 8]
+                "two": [255,0,0]
             }
         }, {
             "text": [255, 255, 255],
@@ -256,7 +271,7 @@ function loadTemplates() {
             "background": [221, 61, 73],
             "image": {
                 "one": [255, 255, 255],
-                "two": [255, 255, 255]
+                "two": [255,0,0]
             }
         }, {
             "text": [255, 255, 255],
@@ -264,7 +279,7 @@ function loadTemplates() {
             "background": [203, 1, 113],
             "image": {
                 "one": [255, 255, 255],
-                "two": [255, 255, 255]
+                "two": [255,0,0]
             }
         }, {
             "text": [255, 255, 255],
@@ -272,7 +287,7 @@ function loadTemplates() {
             "background": [1, 152, 199],
             "image": {
                 "one": [255, 255, 255],
-                "two": [255, 255, 255]
+                "two": [255,0,0]
             }
         }, {
             "text": [255, 255, 255],
@@ -280,7 +295,7 @@ function loadTemplates() {
             "background": [17, 7, 172],
             "image": {
                 "one": [255, 255, 255],
-                "two": [255, 255, 255]
+                "two": [255,0,0]
             }
         }
         ],
@@ -301,6 +316,33 @@ function loadTemplates() {
             }, {
                 "fontTitle": "Switzer-Black",
                 "fontOthers": "Switzer-Medium"
+            }, {
+                "fontTitle": "Alata-Regular",
+                "fontOthers": "Alata-Regular"
+            }, {
+                "fontTitle": "CabinCondensed-Bold",
+                "fontOthers": "CabinCondensed-Medium"
+            }, {
+                "fontTitle": "IBMPlexSans-Bold",
+                "fontOthers": "IBMPlexSans-Regular"
+            }, {
+                "fontTitle": "KumbhSans-Bold",
+                "fontOthers": "KumbhSans-Regular"
+            }, {
+                "fontTitle": "LexendDeca-Bold",
+                "fontOthers": "LexendDeca-Medium"
+            }, {
+                "fontTitle": "LibreFranklin-Bold",
+                "fontOthers": "LibreFranklin-Regular"
+            }, {
+                "fontTitle": "Manrope-Bold",
+                "fontOthers": "Manrope-SemiBold"
+            }, {
+                "fontTitle": "Outfit-Bold",
+                "fontOthers": "Outfit-SemiBold"
+            }, {
+                "fontTitle": "Poppins-Black",
+                "fontOthers": "Poppins-Black"
             }
             ],
             "marginText": 1,
@@ -308,11 +350,11 @@ function loadTemplates() {
             "alignment": [0],
             "rotation": [0],
 
-            "titleScale": 12.3,
-            "subTitleScale": 4.5,
-            "additionalScale": 3.4,
+            "titleScale": 10.5,
+            "subTitleScale": 5,
+            "additionalScale": 5,
 
-            "titleCollumns": [4],
+            "titleCollumns": [5],
             "subTitleCollumns": [3],
             "additionalCollumns": [2]
         },
@@ -321,12 +363,9 @@ function loadTemplates() {
             "effect": "blackWhite",
             "texture": 0,
             "rotation": [0],
-            "columnsMinMaxWidth": [4],
-            "columnsMinMaxHeight": [3],
-            "horizontalScale": [1],
-            "verticalScale": [1],
             "alignment": 0,
             "shapes": 2,
+            "frame":0,
             "overflow": true
         }]
     };
@@ -336,7 +375,10 @@ function loadTemplates() {
             "columns": 1,
             "overlay": 1,
             "fillRows": [],
-            "type": "PostModern",
+            "columnsMinMaxWidthImage": [1],
+            "columnsMinMaxHeightImage": [1],
+            "imageHorizontalScale": [1],
+            "imageVerticalScale": [1],
         },
 
         "palettes": [{
@@ -473,6 +515,78 @@ function loadTemplates() {
             }, {
                 "fontTitle": "davidcarson-Regular",
                 "fontOthers": "davidcarson-Regular"
+            }, {
+                "fontTitle": "Righteous-Regular",
+                "fontOthers": "Righteous-Regular"
+            }, {
+                "fontTitle": "SpecialElite-Regular",
+                "fontOthers": "SpecialElite-Regular"
+            }, {
+                "fontTitle": "Comfortaa-Bold",
+                "fontOthers": "Comfortaa-Bold"
+            }, {
+                "fontTitle": "NovaCut-Regular",
+                "fontOthers": "NovaCut-Regular"
+            }, {
+                "fontTitle": "BrunoAce-Regular",
+                "fontOthers": "BrunoAce-Regular"
+            }, {
+                "fontTitle": "BrunoAceSC-Regular",
+                "fontOthers": "BrunoAceSC-Regular"
+            }, {
+                "fontTitle": "UnicaOne-Regular",
+                "fontOthers": "UnicaOne-Regular"
+            }, {
+                "fontTitle": "Lalezar-Regular",
+                "fontOthers": "Lalezar-Regular"
+            }, {
+                "fontTitle": "BlackOpsOne-Regular",
+                "fontOthers": "BlackOpsOne-Regular"
+            }, {
+                "fontTitle": "Wallpoet-Regular",
+                "fontOthers": "Wallpoet-Regular"
+            }, {
+                "fontTitle": "Graduate-Regular",
+                "fontOthers": "Graduate-Regular"
+            }, {
+                "fontTitle": "KellySlab-Regular",
+                "fontOthers": "KellySlab-Regular"
+            }, {
+                "fontTitle": "Silkscreen-Regular",
+                "fontOthers": "Silkscreen-Regular"
+            }, {
+                "fontTitle": "Goldman-Regular",
+                "fontOthers": "Goldman-Regular"
+            }, {
+                "fontTitle": "Codystar-Regular",
+                "fontOthers": "Codystar-Regular"
+            }, {
+                "fontTitle": "Iceland-Regular",
+                "fontOthers": "Iceland-Regular"
+            }, {
+                "fontTitle": "ZillaSlabHighlight-Regular",
+                "fontOthers": "ZillaSlabHighlight-Regular"
+            }, {
+                "fontTitle": "Plaster-Regular",
+                "fontOthers": "Plaster-Regular"
+            }, {
+                "fontTitle": "Wellfleet-Regular",
+                "fontOthers": "Wellfleet-Regular"
+            }, {
+                "fontTitle": "ZenDots-Regular",
+                "fontOthers": "ZenDots-Regular"
+            }, {
+                "fontTitle": "NovaSlim-Regular",
+                "fontOthers": "NovaSlim-Regular"
+            }, {
+                "fontTitle": "BigShouldersInlineText-Black",
+                "fontOthers": "BigShouldersInlineText-Black"
+            }, {
+                "fontTitle": "BigShouldersDisplay-Black",
+                "fontOthers": "BigShouldersDisplay-Black"
+            }, {
+                "fontTitle": "LibreBarcode39-Regular",
+                "fontOthers": "LibreBarcode39-Regular"
             }
             ],
             "marginText": 1,
@@ -497,12 +611,9 @@ function loadTemplates() {
             "effect": "duotone",
             "texture": 1,
             "rotation": [20, 45, 90, 0, -45, -90, 20],
-            "columnsMinMaxWidth": [1],
-            "columnsMinMaxHeight": [1],
-            "horizontalScale": [1],
-            "verticalScale": [1],
             "alignment": 2,
             "shapes": 3,
+            "frame":0,
             "overflow": false
         }]
     };
@@ -512,7 +623,10 @@ function loadTemplates() {
             "columns": null,
             "overlay": null,
             "fillRows": null,
-            "type": null,
+            "columnsMinMaxWidthImage": null,
+            "columnsMinMaxHeightImage": null,
+            "imageHorizontalScale": null,
+            "imageVerticalScale": null,
         },
 
         "palettes": null,
@@ -538,12 +652,9 @@ function loadTemplates() {
             "effect": null,
             "texture": null,
             "rotation": null,
-            "columnsMinMaxWidth": null,
-            "columnsMinMaxHeight": null,
-            "horizontalScale": null,
-            "verticalScale": null,
             "alignment": null,
             "shapes": null,
+            "frame":null,
             "overflow": null
         }
     };
@@ -579,36 +690,14 @@ function generateTemplate(figura, cor, tipografia, composicao) {
     setTemplateFigure(randTemplate(figura));
 }
 
-function setTemplate(temp) {
-    mix_template.composition.columns = temp.composition.columns;
-    mix_template.composition.overlay = temp.composition.overlay;
-    mix_template.composition.fillRows = temp.composition.fillRows;
-    mix_template.composition.type = temp.composition.type;
-
-    setTemplateColors(temp);
-
-    setTemplateFont(temp);
-
-    mix_template.text.marginText = temp.text.marginText;
-    mix_template.text.alignment = temp.text.alignment;
-    mix_template.text.rotation = temp.text.rotation;
-    mix_template.text.titleScale = temp.text.titleScale;
-    mix_template.text.subTitleScale = temp.text.subTitleScale;
-    mix_template.text.additionalScale = temp.text.additionalScale;
-    mix_template.text.titleCollumns = temp.text.titleCollumns;
-    mix_template.text.subTitleCollumns = temp.text.subTitleCollumns;
-    mix_template.text.additionalCollumns = temp.text.additionalCollumns;
-    mix_template.text.rotation = temp.text.rotation;
-
-    mix_template.image = temp.image;
-    imageInfo.overflowBool = mix_template.image[0].overflow;
-}
-
 function setTemplateComposition(temp) {
     mix_template.composition.columns = temp.composition.columns;
     mix_template.composition.overlay = temp.composition.overlay;
     mix_template.composition.fillRows = temp.composition.fillRows;
-    mix_template.composition.type = temp.composition.type;
+    mix_template.composition.columnsMinMaxHeightImage = temp.composition.columnsMinMaxHeightImage;
+    mix_template.composition.columnsMinMaxWidthImage = temp.composition.columnsMinMaxWidthImage;
+    mix_template.composition.imageHorizontalScale = temp.composition.imageHorizontalScale;
+    mix_template.composition.imageVerticalScale = temp.composition.imageVerticalScale;
     mix_template.text.marginText = temp.text.marginText;
     mix_template.text.alignment = temp.text.alignment;
     mix_template.text.rotation = temp.text.rotation;
@@ -625,7 +714,7 @@ function randTemplate(values) {
     let rand = Math.random()
     if(rand<values[0]) { // MODERNO
         return modern_template;
-    } else if(rand<values[0]+values[1]) { // CLASSICO
+    } else if(rand<(values[0]+values[1])) { // CLASSICO
         return classic_template;
     } else { // POS-MODERNO
         return postModern_template;
@@ -635,6 +724,11 @@ function randTemplate(values) {
 function setTemplateFigure(temp) {
     mix_template.image = temp.image;
     imageInfo.overflowBool = mix_template.image[0].overflow;
+    if (mix_template.composition.columns == 1 && mix_template.image[0].shapes != 3) {
+        imageInfo.rotation = mix_template.text.rotation[randInt(0, mix_template.text.rotation.length)];
+    } else {
+        imageInfo.rotation = 0;
+    }
 }
 
 function setTemplateFont(temp) {
@@ -647,6 +741,7 @@ function setTemplateFont(temp) {
     } else {
         fontPalette = randInt(0, temp.text.font.length);
     }
+
     mix_template.text.fontTitle = temp.text.font[fontPalette].fontTitle;
     mix_template.text.fontOthers = temp.text.font[fontPalette].fontOthers;
 }
