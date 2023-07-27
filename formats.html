@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <title>Graphic Ground — Formats</title>
+</head>
+<body>
+
+<div class="main_row createMain_row1">
+    <div class="row createColumn1">
+        <a href="index.html"> <img src="data/pageElements/circles@2x.png"></a>
+    </div>
+    <div class="row othersColumn2 headerColumn2 noBorderRight">
+        <span class="logoSpan"><a href="index.html">Graphic<br>Ground</a></span>
+        <img id="openMenu" class="menuMobileIcon" src="data/index/menu.png">
+    </div>
+    <div class="row header indexColumn3 mobileColumn noBorder">
+        <span><a href="about.html">About</a></span>
+        <span><a href="create.html">Create</a></span>
+        <span class="pagAtual"><a href="gallery.html">Gallery</a></span>
+    </div>
+</div>
+<div class="main_row createMain_row2">
+    <div class="row othersColumn1">
+    </div>
+    <div class="row othersColumn2 mainFormats">
+        <form action="create.html" method="get">
+            <div id="posterImg">
+                <input type="radio" id="shipadd1" value=1 name="format" class="input-hidden" required/>
+                <label for="shipadd1">
+                    <svg data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 421 595">
+                        <g data-name="Layer 2">
+                            <rect class="iconFormat" x="-86.5" y="87.5" width="594" height="420"
+                                  transform="translate(508 87) rotate(90)"/>
+                        </g>
+                    </svg>
+                    <p>Poster<br>A3</p>
+                </label>
+            </div>
+            <div id="postcardImg">
+                <input type="radio" id="shipadd2" value=2 name="format" class="input-hidden"/>
+                <label for="shipadd2">
+                    <svg data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 209.15 150.77">
+                        <g data-name="Layer 2">
+                            <rect class="iconFormat" x=".5" y=".5" width="208.15" height="149.77"/>
+                        </g>
+                    </svg>
+                    <p>Postcard<br>A5</p>
+                </label>
+            </div>
+            <div id="instagramImg">
+                <input type="radio" id="shipadd3" value=3 name="format" class="input-hidden"/>
+                <label for="shipadd3">
+                    <svg data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 253.53 253.96">
+                        <g data-name="Layer 2">
+                            <rect class="iconFormat" x=".5" y=".5" width="252.53" height="252.96"/>
+                        </g>
+                    </svg>
+                    <p>Instagram</p>
+                </label>
+            </div>
+            <div id="stickerImg">
+                <input type="radio" id="shipadd4" value=4 name="format" class="input-hidden"/>
+                <label for="shipadd4">
+                    <svg data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 106 149.5">
+                        <g data-name="Layer 2">
+                            <rect class="iconFormat" x="-21.25" y="22.25" width="148.5" height="105"
+                                  transform="translate(127.75 21.75) rotate(90)"/>
+                        </g>
+                    </svg>
+                    <p>Sticker<br>A6</p>
+                </label>
+            </div>
+            <div id="totebagImg">
+                <input type="radio" id="shipadd5" value=5 name="format" class="input-hidden"/>
+                <label for="shipadd5">
+                    <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 232.07 360.1">
+                        <g id="Layer_2-2" data-name="Layer 2">
+                            <rect class="iconFormat" x=".5" y="78.18" width="231.07" height="281.42"/>
+                            <path class="iconNormal"
+                                  d="M48.13,78.18C43.64,36.55,76.83,.84,115.68,.5c39.29-.34,73.32,35.57,68.79,77.68H48.13Z"/>
+                        </g>
+                    </svg>
+                    <p>ToteBag<br>A4</p>
+                </label>
+            </div>
+
+            <div class="downFormats">
+                <span class="description">Choose the format you want to use</span>
+                <input type="submit" value="Submit" id="submit_button" class="input-hidden">
+                <label for="submit_button">
+                    <svg id="goCreate" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 164.25 146.91">
+                        <g data-name="Layer 2">
+                            <polygon class="arrowIndex"
+                                     points=".5 63.04 .5 83.61 124.41 83.61 76.12 131.91 90.41 146.21 163.54 73.07 91.18 .71 76.88 15 125.79 63.92 .5 63.04"/>
+                        </g>
+                    </svg>
+                </label>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="menu" class="menu">
+    <div class="menuHeader">
+        <div class="row createColumn1 row1MenuMobile">
+            <a href="index.html"> <img src="data/pageElements/circles@2x.png"></a>
+        </div>
+        <div class="row othersColumn2 headerColumn2 noBorderRight">
+            <span class="logoSpan"><a href="index.html">Graphic<br>Ground</a></span>
+            <img id="closeMenu" class="menuMobileIcon" src="data/index/closeMenu.png">
+        </div>
+    </div>
+
+    <div class="menuSpan">
+        <span><a href="about.html">About</a></span>
+        <span><a href="create.html">Create</a></span>
+        <span class="pagAtual"><a href="gallery.html">Gallery</a></span>
+    </div>
+</div>
+</div>
+
+<script src="js/interactIndex.js"></script>
+
+</body>
+</html>

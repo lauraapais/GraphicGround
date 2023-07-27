@@ -90,7 +90,7 @@ s1 = function (sketch) {
         fonts["NanumMyeongjo-Regular"] = s1Sketch.loadFont('data/fonts/classic/NanumMyeongjo-Regular.ttf');
         fonts["NotoSerifDisplay-Bold"] = s1Sketch.loadFont('data/fonts/classic/NotoSerifDisplay-Bold.ttf');
         fonts["NotoSerifDisplay-Regular"] = s1Sketch.loadFont('data/fonts/classic/NotoSerifDisplay-Regular.ttf');
-       fonts["PlayfairDisplay-Bold"] = s1Sketch.loadFont('data/fonts/classic/PlayfairDisplay-Bold.ttf');
+        fonts["PlayfairDisplay-Bold"] = s1Sketch.loadFont('data/fonts/classic/PlayfairDisplay-Bold.ttf');
         fonts["PlayfairDisplay-Regular"] = s1Sketch.loadFont('data/fonts/classic/PlayfairDisplay-Regular.ttf');
         fonts["Prata-Regular"] = s1Sketch.loadFont('data/fonts/classic/Prata-Regular.ttf');
         fonts["Rosarivo-Regular"] = s1Sketch.loadFont('data/fonts/classic/Rosarivo-Regular.ttf');
@@ -123,9 +123,8 @@ s1 = function (sketch) {
         fonts["Outfit-Bold"] = s1Sketch.loadFont('data/fonts/modern/Outfit-Bold.ttf');
         fonts["Outfit-SemiBold"] = s1Sketch.loadFont('data/fonts/modern/Outfit-SemiBold.ttf');
         fonts["Poppins-Black"] = s1Sketch.loadFont('data/fonts/modern/Poppins-Black.ttf');
-
-
-
+        fonts["Inconsolata"] = s1Sketch.loadFont('data/fonts/modern/Inconsolata.otf');
+        fonts["LeagueSpartan"] = s1Sketch.loadFont('data/fonts/modern/LeagueSpartan-Bold.ttf');
 
 
         //Pós Moderno
@@ -152,98 +151,103 @@ s1 = function (sketch) {
         fonts["Iceland-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Iceland-Regular.ttf');
         fonts["ZillaSlabHighlight-Regular"] = s1Sketch.loadFont('data/fonts/postModern/ZillaSlabHighlight-Regular.ttf');
         fonts["Plaster-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Plaster-Regular.ttf');
-        fonts["Wellfleet-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Wellfleet-Regular.ttf');
         fonts["ZenDots-Regular"] = s1Sketch.loadFont('data/fonts/postModern/ZenDots-Regular.ttf');
         fonts["NovaSlim-Regular"] = s1Sketch.loadFont('data/fonts/postModern/NovaSlim-Regular.ttf');
         fonts["BigShouldersInlineText-Black"] = s1Sketch.loadFont('data/fonts/postModern/BigShouldersInlineText-Black.ttf');
         fonts["BigShouldersDisplay-Black"] = s1Sketch.loadFont('data/fonts/postModern/BigShouldersDisplay-Black.ttf');
         fonts["LibreBarcode39-Regular"] = s1Sketch.loadFont('data/fonts/postModern/LibreBarcode39-Regular.ttf');
-
+        fonts["Pilowlava-Regular"] = s1Sketch.loadFont('data/fonts/postModern/Pilowlava-Regular.ttf');
+        fonts["le-murmure"] = s1Sketch.loadFont('data/fonts/postModern/le-murmure.ttf');
 
         texturePosModern.push(s1Sketch.loadImage('data/textures/texture1.png'));
         texturePosModern.push(s1Sketch.loadImage('data/textures/texture2.png'));
     }
 
-    s1Sketch.setup = function () {
-        triangleTemplate(-1);
+    s1Sketch.setup = async function () {
+        await triangleTemplate(-1);
 
         let panel = document.getElementById("canvas_poster");
 
         poster = s1Sketch.createCanvas(0, 0);
         poster.parent(panel);
 
-        onResize(sketch);
-        layoutChange();
+        await setURLFormat();
 
-        pdf=s1Sketch.createPDF();
+        await layoutChange();
+
+        pdf = s1Sketch.createPDF();
+
+        loadComplete();
     }
 
     s1Sketch.draw = function () {
-        s1Sketch.background(mix_template.palettes.background[0], mix_template.palettes.background[1], mix_template.palettes.background[2]);
+        if (loaded) {
+            s1Sketch.background(mix_template.palettes.background[0], mix_template.palettes.background[1], mix_template.palettes.background[2]);
 
-        s1Sketch.push();
-        s1Sketch.translate(canvasValues.marginWidth, canvasValues.marginHeight);
-
-        //frame
-        if (mix_template.image.frame == 1 && randomFrame == 0) {
-            s1Sketch.noFill();
-            s1Sketch.rect(0, 0, canvasValues.posterWidth, canvasValues.posterHeight);
-        }
-
-        //image
-        if (effectImg) {
             s1Sketch.push();
-            if (imageInfo.overflow == -1) {
-                s1Sketch.translate(-canvasValues.marginWidth, 0)
+            s1Sketch.translate(canvasValues.marginWidth, canvasValues.marginHeight);
+
+            //frame
+            if (mix_template.image.frame == 1 && randomFrame == 0) {
+                s1Sketch.noFill();
+                s1Sketch.rect(0, 0, canvasValues.posterWidth, canvasValues.posterHeight);
             }
 
-            if (effectImg instanceof p5.Image || effectImg instanceof p5.Graphics) {
+            //image
+            if (effectImg) {
                 s1Sketch.push();
-                s1Sketch.translate(imageInfo.posX, imageInfo.posY);
-                s1Sketch.translate(imageInfo.width / 2, imageInfo.height / 2);
-                //if (effectImg instanceof p5.Image) {
+                if (imageInfo.overflow == -1) {
+                    s1Sketch.translate(-canvasValues.marginWidth, 0)
+                }
+
+                if (effectImg instanceof p5.Image || effectImg instanceof p5.Graphics) {
+                    s1Sketch.push();
+                    s1Sketch.translate(imageInfo.posX, imageInfo.posY);
+                    s1Sketch.translate(imageInfo.width / 2, imageInfo.height / 2);
                     s1Sketch.rotate(imageInfo.rotation);
-                //}
-                s1Sketch.translate(-imageInfo.width / 2, -imageInfo.height / 2);
-                s1Sketch.image(effectImg, 0, 0, imageInfo.width, imageInfo.height);
-                s1Sketch.pop();
-            } else {
-                s1Sketch.push();
-                s1Sketch.translate(imageInfo.posX - canvasValues.posterWidth / 2, imageInfo.posY);
-                drawEngravingVersion(effectImg);
+                    s1Sketch.translate(-imageInfo.width / 2, -imageInfo.height / 2);
+                    s1Sketch.image(effectImg, 0, 0, imageInfo.width, imageInfo.height);
+                    s1Sketch.pop();
+                } else {
+                    s1Sketch.push();
+                    s1Sketch.translate(imageInfo.posX - canvasValues.posterWidth / 2, imageInfo.posY);
+                    drawEngravingVersion(effectImg);
+                    s1Sketch.pop();
+                }
                 s1Sketch.pop();
             }
+
+            //text
+
+            drawText(textInputs, gridValues, sketch);
+
+            //show grids
+            if (showGridsButton.checked == true) {
+                drawGrid(sketch);
+            }
+
             s1Sketch.pop();
-        }
 
-        //text
+            /* if (mix_template.image[0].texture) {
+                 s1Sketch.blendMode(s1Sketch.LIGHTEST);
+                 s1Sketch.image(texturePosModern[randomTexture], 0, 0, canvasValues.canvasWidth, canvasValues.canvasHeight);
+                 s1Sketch.blendMode(s1Sketch.BLEND);
+             }*/
 
-        drawText(textInputs, gridValues, sketch);
-
-        //show grids
-        if (showGridsButton.checked == true) {
-            drawGrid(sketch);
-        }
-
-        s1Sketch.pop();
-
-       /* if (mix_template.image[0].texture) {
-            s1Sketch.blendMode(s1Sketch.LIGHTEST);
-            s1Sketch.image(texturePosModern[randomTexture], 0, 0, canvasValues.canvasWidth, canvasValues.canvasHeight);
-            s1Sketch.blendMode(s1Sketch.BLEND);
-        }*/
-
-        if(pdfSave) {
-            pdfSave=false;
-            pdf.endRecord();
-            pdf.save();
+            if (pdfSave) {
+                pdfSave = false;
+                console.log(s1Sketch.width, s1Sketch.height)
+                pdf.endRecord();
+                pdf.save();
+                toLocalScale();
+            }
         }
     }
 }
 
 new p5(s1);
 
-function triangleTemplate(changed) {
+async function triangleTemplate(changed) {
     updateDistance();
     att_template.figura = getJsonObjectById(points, 0).distance;
     att_template.cor = getJsonObjectById(points, 1).distance;
@@ -260,7 +264,10 @@ function triangleTemplate(changed) {
         // --- FIGURA ---
         setTemplateFigure(randTemplate(att_template.figura));
         shapeChange();
-        imageChange();
+        setTextAvailability();
+        clearAvailability();
+        await imageChange();
+        calcPosImage(false)
     } else if (changed.id == 1) {
         // ---- COR ----
         setTemplateColors(randTemplate(att_template.cor));
@@ -272,7 +279,7 @@ function triangleTemplate(changed) {
         // ---- COMPOSIÇÃO ----
         setTemplateComposition(randTemplate(att_template.composicao));
 
-        loadPosterStyles();
+        await loadPosterStyles();
         layoutChange();
     }
 }
@@ -318,33 +325,101 @@ function calcPoster(canvasWidth, canvasHeight, marginXScale, marginYScale) {
     }
 }
 
-function onResize() {
-    var v = windowSize();
+async function onResize(scaling = true) {
+    var v = windowSize(scaling);
 
-    s1Sketch.resizeCanvas(v.x, v.y);
-
-    loadPosterStyles();
+    await s1Sketch.resizeCanvas(v.x, v.y);
+    await loadPosterStyles();
 }
 
-function loadPosterStyles() {
+async function loadPosterStyles() {
     canvasValues = calcPoster(s1Sketch.width, s1Sketch.height, 0.12, 0.12);
     gridValues = calcGrid(mix_template.composition.columns, 0.12, canvasValues.posterWidth, nLinhastmp, 0.17, canvasValues.posterHeight);
     // LOAD IMAGE EFFECT
     if (originalImg) {
         effectImg = imageEffect(originalImg);
     } else {
-        effectImg = createShape();
+        effectImg = createShape()
     }
+
+
+    setTitleSize();
+    setSubtitleSize();
+    setAditionalInfoSize();
 }
 
-function windowSize() {
-    var scale = 0.45;
+var wPoster;
+var hPoster;
+
+async function setURLFormat() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let value = urlParams.get("format");
+    await setFormat(value);
+    formatPoster.value = value;
+    await layoutChange();
+}
+
+let posterOrientation = 0;
+
+let currentFormat = 0;
+let posterFormats = {
+    "A4": {"w": 595, "h": 842},
+    "Postcard": {"w": 420, "h": 297},
+    "Instagram": {"w": 500, "h": 500},
+};
+
+async function setFormat(format) {
+    if (format == 2) {
+        wPoster = posterFormats.Postcard.w;
+        hPoster = posterFormats.Postcard.h;
+    } else if (format == 3) {
+        wPoster = posterFormats.Instagram.w;
+        hPoster = posterFormats.Instagram.w;
+    } else {
+        wPoster = posterFormats.A4.w;
+        hPoster = posterFormats.A4.h;
+    }
+
+    if (posterOrientation == 0 && wPoster > hPoster) {
+        posterOrientation = 1;
+        setActiveOrientationButton(posterOrientation);
+    }
+    if (posterOrientation == 1 && hPoster > wPoster) {
+        posterOrientation = 0;
+        setActiveOrientationButton(posterOrientation);
+    }
+
+    await onResize();
+    await layoutChange();
+}
+
+async function changeOrientation(value) {
+    posterOrientation = value;
+    const temp = wPoster;
+    wPoster = hPoster;
+    hPoster = temp;
+
+    await onResize();
+    await layoutChange();
+}
+
+function windowSize(scaling = true) {
+    let scale;
+    if(scaling) scale = 0.45;
+    else scale = 1;
+
     var wDiv = canvas_parent.clientWidth;
-    var wPoster = 297;
-    var hPoster = 420;
 
-    return s1Sketch.createVector(wDiv * scale, hPoster * wDiv * scale / wPoster);
+    let vector;
+    if (posterOrientation == 0) {
+        vector = s1Sketch.createVector(wDiv * scale, hPoster * wDiv * scale / wPoster);
+    } else if (posterOrientation == 1) {
+        vector = s1Sketch.createVector(wPoster * wDiv * scale / hPoster, wDiv * scale);
+    }
+
+    return vector;
 }
+
 
 function formatText(txt, boxWidth, txtSize, nCollumns, currentFont, rot) {
     s1Sketch.textFont(fonts[currentFont]);
@@ -449,7 +524,7 @@ function gridAvailability(inputInfo) {
     return true;
 }
 
-function setGridAvailability(inputInfo) {
+async function setGridAvailability(inputInfo) {
     for (let y = inputInfo.columnStart; y <= inputInfo.columnEnd; y++) {
         for (let x = inputInfo.rowStart; x <= inputInfo.rowEnd; x++) {
             gridArray[x][y] = 1;
@@ -457,11 +532,12 @@ function setGridAvailability(inputInfo) {
     }
 }
 
-function titleLayout(calls = 0) {
+async function titleLayout(calls = 0) {
     var text = titleText.value;
 
     var nColumns = mix_template.text.titleCollumns[0];
-    textInputs.title.size = nColumns * mix_template.text.titleScale;
+    setTitleSize();
+
     textInputs.title.columnStart = randInt(0, mix_template.composition.columns - nColumns + 1);
     textInputs.title.columnEnd = textInputs.title.columnStart + nColumns;
 
@@ -476,26 +552,30 @@ function titleLayout(calls = 0) {
     textInputs.title.rowStart = randInt(0, nLinhastmp - nRows);
     textInputs.title.rowEnd = textInputs.title.rowStart + nRows;
 
-    if (mix_template.composition.overlay == 0) {
-        if (!gridAvailability(textInputs.title) && calls <= maxCalls) {
-            return titleLayout(calls + 1);
-        } else {
-            setGridAvailability(textInputs.title);
-        }
-    }
-
     textInputs.title.xRotate = Math.random() * (canvasValues.posterWidth - textInputs.title.content.boundingRotateBox.w);
     textInputs.title.yRotate = Math.random() * (canvasValues.posterHeight - textInputs.title.content.boundingRotateBox.h);
 
-    if (calls == maxCalls) return true
-    else return false
+    if (mix_template.composition.overlay == 0) {
+        if (calls > maxCalls) {
+            return true;
+        } else if (!gridAvailability(textInputs.title)) {
+            return await titleLayout(calls + 1);
+        } else {
+            await setGridAvailability(textInputs.title);
+            return false;
+        }
+    } else {
+        return false;
+    }
 }
 
-function subtitleLayout(calls = 1) {
+async function subtitleLayout(calls = 1) {
     var text = subtitleText.value;
 
     var nColumns = mix_template.text.subTitleCollumns[0];
-    textInputs.subtitle.size = nColumns * mix_template.text.subTitleScale;
+
+    setSubtitleSize();
+
     textInputs.subtitle.columnStart = randInt(0, mix_template.composition.columns - nColumns + 1);
     textInputs.subtitle.columnEnd = textInputs.subtitle.columnStart + nColumns;
 
@@ -511,26 +591,30 @@ function subtitleLayout(calls = 1) {
     textInputs.subtitle.rowStart = randInt(0, nLinhastmp - nRows);
     textInputs.subtitle.rowEnd = textInputs.subtitle.rowStart + nRows;
 
-    if (mix_template.composition.overlay == 0) {
-        if (!gridAvailability(textInputs.subtitle) && calls <= maxCalls) {
-            return subtitleLayout(calls + 1);
-        } else {
-            setGridAvailability(textInputs.subtitle);
-        }
-    }
-
     textInputs.subtitle.xRotate = Math.random() * (canvasValues.posterWidth - textInputs.subtitle.content.boundingRotateBox.w);
     textInputs.subtitle.yRotate = Math.random() * (canvasValues.posterHeight - textInputs.subtitle.content.boundingRotateBox.h);
 
-    if (calls == maxCalls) return true
-    else return false
+    if (mix_template.composition.overlay == 0) {
+        if (calls > maxCalls) {
+            return true;
+        } else if (!gridAvailability(textInputs.subtitle)) {
+            return await subtitleLayout(calls + 1);
+        } else {
+            await setGridAvailability(textInputs.subtitle);
+            return false;
+        }
+    } else {
+        return false;
+    }
 }
 
-function aditionalInfoLayout(calls = 0) {
+async function aditionalInfoLayout(calls = 0) {
     var text = aditionalInfoText.value;
 
     var nColumns = mix_template.text.additionalCollumns[0];
-    textInputs.aditionalInfo.size = nColumns * mix_template.text.additionalScale;
+
+    setAditionalInfoSize();
+
     textInputs.aditionalInfo.columnStart = randInt(0, mix_template.composition.columns - nColumns + 1);
     textInputs.aditionalInfo.columnEnd = textInputs.aditionalInfo.columnStart + nColumns;
 
@@ -545,19 +629,21 @@ function aditionalInfoLayout(calls = 0) {
     textInputs.aditionalInfo.rowStart = randInt(0, nLinhastmp - nRows);
     textInputs.aditionalInfo.rowEnd = textInputs.aditionalInfo.rowStart + nRows;
 
-    if (mix_template.composition.overlay == 0) {
-        if (!gridAvailability(textInputs.aditionalInfo) && calls <= maxCalls) {
-            return aditionalInfoLayout(calls + 1);
-        } else {
-            setGridAvailability(textInputs.aditionalInfo);
-        }
-    }
-
     textInputs.aditionalInfo.xRotate = Math.random() * (canvasValues.posterWidth - textInputs.aditionalInfo.content.boundingRotateBox.w);
     textInputs.aditionalInfo.yRotate = Math.random() * (canvasValues.posterHeight - textInputs.aditionalInfo.content.boundingRotateBox.h);
 
-    if (calls == maxCalls) return true
-    else return false
+    if (mix_template.composition.overlay == 0) {
+        if (calls > maxCalls) {
+            return true;
+        } else if (!gridAvailability(textInputs.aditionalInfo)) {
+            return await aditionalInfoLayout(calls + 1);
+        } else {
+            await setGridAvailability(textInputs.aditionalInfo);
+            return false;
+        }
+    } else {
+        return false;
+    }
 }
 
 function randInt(min, max) {
@@ -594,13 +680,11 @@ function imageEffect(original) {
         // ---
 
         let image_size;
-        if(mix_template.composition.columns==2 && mix_template.image[0].shapes==2){
+        if (mix_template.composition.columns == 2 && mix_template.image[0].shapes == 2) {
             image_size = original_size_w * 0.2;
-        }
-        else if(mix_template.composition.columns==2 && mix_template.image[0].shapes==3){
+        } else if (mix_template.composition.columns == 2 && mix_template.image[0].shapes == 3) {
             image_size = original_size_w * 0.05;
-        }
-        else{
+        } else {
             image_size = original_size_w * mix_template.composition.imageHorizontalScale[0]
         }
 
@@ -627,15 +711,14 @@ function imageEffect(original) {
     }
 }
 
-async function calcPosImage() {
-    if (mix_template.image[0].alignment == 1) { // CENTER
+async function calcPosImage(recreate = true) {
+    if (mix_template.composition.imageAlignment == 1) { // CENTER
         imageInfo.posX = imageInfo.originalWidth / 2 - imageInfo.width / 2 + canvasValues.posterWidth / 2;
         imageInfo.columnStart = 0;
         imageInfo.columnEnd = gridValues.nColumns - 1;
         imageInfo.overflow = 0;
 
-    }
-    else if (mix_template.image[0].alignment == 0) { // IN GRID
+    } else if (mix_template.composition.imageAlignment == 0) { // IN GRID
         if (imageInfo.orientation == 1) {
             imageInfo.columnStart = randInt(0, mix_template.composition.columns - mix_template.composition.columnsMinMaxHeightImage[0] + 1);
         } else if (imageInfo.orientation == 0) {
@@ -643,7 +726,7 @@ async function calcPosImage() {
         }
 
         // OVERFLOW
-        if (mix_template.composition.columns==1) {
+        if (mix_template.composition.columns == 1) {
             imageInfo.overflow = 0;
         } else if (imageInfo.columnStart == 0) {
             imageInfo.overflow = -1;
@@ -658,37 +741,39 @@ async function calcPosImage() {
         imageInfo.posX = gridValues.sizeColumn * (imageInfo.columnStart) + gridValues.gapColumn * Math.max(0, imageInfo.columnStart);
 
         imageInfo.columnEnd = imageInfo.columnStart + imageInfo.nCollumns - 1;
-    } else if (mix_template.image[0].alignment == 2) { // RANDOM
+    } else if (mix_template.composition.imageAlignment == 2) { // RANDOM
         imageInfo.posX = Math.random() * (canvasValues.posterWidth - imageInfo.width);
         imageInfo.posY = Math.random() * (canvasValues.posterHeight - imageInfo.height);
     }
 
-    if (mix_template.image[0].alignment == 0 || mix_template.image[0].alignment == 1) {
-        imageInfo.rowStart = randInt(0, gridValues.nRows - imageInfo.nRows);
-        imageInfo.posY = imageInfo.rowStart * gridValues.sizeRow + imageInfo.rowStart * gridValues.gapRow;
-        imageInfo.rowEnd = imageInfo.rowStart + imageInfo.nRows;
-    }
-
-    if(mix_template.composition.columns==2 && mix_template.image[0].shapes==2){
-        imageInfo.posX = imageInfo.originalWidth / 2 - imageInfo.width / 2 + canvasValues.posterWidth / 2;
-        imageInfo.columnStart = 0;
-        imageInfo.columnEnd = gridValues.nColumns - 1;
-        imageInfo.overflow = 0;
-    } else if(mix_template.composition.columns==2 && mix_template.image[0].shapes==3){
-        imageInfo.posX = imageInfo.originalWidth / 2 - imageInfo.width / 2 + canvasValues.posterWidth / 2;
-        imageInfo.columnStart = 0;
-        imageInfo.columnEnd = gridValues.nColumns - 1;
-        imageInfo.overflow = 0;
-    } else if(mix_template.composition.columns==6 && mix_template.image[0].shapes==3){
-        if (imageInfo.orientation == 1) {
-            imageInfo.columnStart = randInt(0, mix_template.composition.columns - mix_template.composition.columnsMinMaxHeightImage[0] + 1);
-        } else if (imageInfo.orientation == 0) {
-            imageInfo.columnStart = randInt(0, mix_template.composition.columns - mix_template.composition.columnsMinMaxWidthImage[0] + 1);
+    if (recreate) {
+        if (mix_template.composition.imageAlignment == 0 || mix_template.composition.imageAlignment == 1) {
+            imageInfo.rowStart = randInt(0, gridValues.nRows - imageInfo.nRows);
+            imageInfo.posY = imageInfo.rowStart * gridValues.sizeRow + imageInfo.rowStart * gridValues.gapRow;
+            imageInfo.rowEnd = imageInfo.rowStart + imageInfo.nRows;
         }
-    }
 
-    if (mix_template.overflow){
-        imageInfo.overflow = 0;
+        if (mix_template.composition.columns == 2 && mix_template.image[0].shapes == 2) {
+            imageInfo.posX = imageInfo.originalWidth / 2 - imageInfo.width / 2 + canvasValues.posterWidth / 2;
+            imageInfo.columnStart = 0;
+            imageInfo.columnEnd = gridValues.nColumns - 1;
+            imageInfo.overflow = 0;
+        } else if (mix_template.composition.columns == 2 && mix_template.image[0].shapes == 3) {
+            imageInfo.posX = imageInfo.originalWidth / 2 - imageInfo.width / 2 + canvasValues.posterWidth / 2;
+            imageInfo.columnStart = 0;
+            imageInfo.columnEnd = gridValues.nColumns - 1;
+            imageInfo.overflow = 0;
+        } else if (mix_template.composition.columns == 6 && mix_template.image[0].shapes == 3) {
+            if (imageInfo.orientation == 1) {
+                imageInfo.columnStart = randInt(0, mix_template.composition.columns - mix_template.composition.columnsMinMaxHeightImage[0] + 1);
+            } else if (imageInfo.orientation == 0) {
+                imageInfo.columnStart = randInt(0, mix_template.composition.columns - mix_template.composition.columnsMinMaxWidthImage[0] + 1);
+            }
+        }
+
+        if (mix_template.overflow) {
+            imageInfo.overflow = 0;
+        }
     }
 }
 
@@ -825,7 +910,7 @@ function classicShape(recreate = false) {
         }
         // ---
 
-        let image_size= original_size_w * mix_template.composition.imageHorizontalScale[0]
+        let image_size = original_size_w * mix_template.composition.imageHorizontalScale[0]
 
         imageInfo.width = image_size;
         imageInfo.height = image_size / 4;
@@ -839,7 +924,11 @@ function classicShape(recreate = false) {
     let pg;
     pg = s1Sketch.createGraphics(shapeCanvasWidth, shapeCanvasHeight);
     pg.strokeCap(s1Sketch.SQUARE);
-    pg.stroke(mix_template.palettes.image.one);
+    if (mix_template.composition.columns == 1) {
+        pg.stroke(mix_template.palettes.image.two);
+    } else {
+        pg.stroke(mix_template.palettes.image.one);
+    }
 
     if (type == 1) {
         if (recreate) {
@@ -896,31 +985,31 @@ let p_modern = {
     "shapeCanvasWidth": null,
     "shapeCanvasHeight": null,
     "type": null,
-    "Type1EllipseN":null,
-    "wEllipse1":null,
-    "hEllipse2":null,
-    "Type3RectN":null,
-    "space":null,
-    "wRect3":null,
-    "Type4RectN":null,
-    "Type4X1":null,
-    "Type4X2":null,
-    "Type4Y1":null,
-    "Type4Y2":null,
-    "Type4Stroke":null,
+    "Type1EllipseN": null,
+    "wEllipse1": null,
+    "hEllipse2": null,
+    "Type3RectN": null,
+    "space": null,
+    "wRect3": null,
+    "Type4RectN": null,
+    "Type4X1": null,
+    "Type4X2": null,
+    "Type4Y1": null,
+    "Type4Y2": null,
+    "Type4Stroke": null,
     "Type4lineCoordinates": null,
-    "Type5RectN":null,
-    "spacing":null,
-    "rectCount":null,
-    "rectSize":null,
-    "offsetX":null,
-    "offsetY":null,
-    "vertex1":null,
-    "vertex2":null,
-    "vertex3":null,
-    "vertex1_2":null,
-    "vertex2_2":null,
-    "vertex3_2":null,
+    "Type5RectN": null,
+    "spacing": null,
+    "rectCount": null,
+    "rectSize": null,
+    "offsetX": null,
+    "offsetY": null,
+    "vertex1": null,
+    "vertex2": null,
+    "vertex3": null,
+    "vertex1_2": null,
+    "vertex2_2": null,
+    "vertex3_2": null,
 };
 
 function modernShape(recreate = false) {
@@ -929,9 +1018,10 @@ function modernShape(recreate = false) {
     let type = 8;
     let Type1EllipseN, Type3RectN, Type4RectN, Type5RectN;
     let Type4lineCoordinates = [];
-    let wEllipse1, hEllipse2, space, wRect3, spacing, rectCount, rectSize, offsetX, offsetY, vertex1, vertex2, vertex3, vertex1_2, vertex2_2, vertex3_2;
+    let wEllipse1, hEllipse2, space, wRect3, spacing, rectCount, rectSize, offsetX, offsetY, vertex1, vertex2, vertex3,
+        vertex1_2, vertex2_2, vertex3_2;
 
-    if(recreate) {
+    if (recreate) {
         shapeCanvasWidth = p_modern.shapeCanvasWidth;
         shapeCanvasHeight = p_modern.shapeCanvasHeight;
         type = p_modern.type;
@@ -947,9 +1037,9 @@ function modernShape(recreate = false) {
 
         let image_size;
 
-        if (mix_template.composition.columns==2) {
+        if (mix_template.composition.columns == 2) {
             image_size = original_size_w * 0.2;
-        } else{
+        } else {
             image_size = original_size_w * mix_template.composition.imageHorizontalScale[0]
         }
 
@@ -964,12 +1054,16 @@ function modernShape(recreate = false) {
         type = s1Sketch.int(s1Sketch.random(1, 8));
     }
     let pg = s1Sketch.createGraphics(shapeCanvasWidth, shapeCanvasHeight);
-    pg.fill(mix_template.palettes.image.one);
+    if (mix_template.composition.columns == 1) {
+        pg.fill(mix_template.palettes.image.two);
+    } else {
+        pg.fill(mix_template.palettes.image.one);
+    }
     pg.strokeCap(s1Sketch.SQUARE);
     pg.noStroke();
 
     if (type == 1) {
-        if(recreate) {
+        if (recreate) {
             Type1EllipseN = p_modern.Type1EllipseN;
             wEllipse1 = p_modern.wEllipse1;
         } else {
@@ -985,7 +1079,7 @@ function modernShape(recreate = false) {
             );
         }
     } else if (type == 2) {
-        if(recreate){
+        if (recreate) {
             Type1EllipseN = p_modern.Type1EllipseN;
             hEllipse2 = p_modern.hEllipse2;
         } else {
@@ -1001,7 +1095,7 @@ function modernShape(recreate = false) {
             );
         }
     } else if (type == 3) {
-        if(recreate){
+        if (recreate) {
             Type3RectN = p_modern.Type3RectN;
             space = p_modern.space;
             wRect3 = p_modern.wRect3;
@@ -1020,10 +1114,10 @@ function modernShape(recreate = false) {
             );
         }
     } else if (type == 4) {
-        if(recreate) {
+        if (recreate) {
             Type4RectN = p_modern.Type4RectN;
             Type4lineCoordinates = p_modern.Type4lineCoordinates;
-        }else {
+        } else {
             Type4RectN = s1Sketch.int(s1Sketch.random(3, 5));
         }
         for (let i = 0; i < Type4RectN; i++) {
@@ -1042,7 +1136,11 @@ function modernShape(recreate = false) {
             ]);
         }
 
-        pg.stroke(mix_template.palettes.image.one);
+        if (mix_template.composition.columns == 1) {
+            pg.stroke(mix_template.palettes.image.two);
+        } else {
+            pg.stroke(mix_template.palettes.image.one);
+        }
 
         for (let i = 0; i < Type4RectN; i++) {
             pg.strokeWeight(Type4lineCoordinates[i][4]);
@@ -1062,7 +1160,7 @@ function modernShape(recreate = false) {
             rectSize = p_modern.rectSize;
             offsetX = p_modern.offsetX;
             offsetY = p_modern.offsetY;
-        }else {
+        } else {
             Type5RectN = s1Sketch.int(s1Sketch.random(3, 10));
             spacing = 10;
             rectCount = Type5RectN;
@@ -1089,7 +1187,7 @@ function modernShape(recreate = false) {
             }
         }
     } else if (type == 6) {
-        if(recreate) {
+        if (recreate) {
             vertex1 = p_modern.vertex1;
             vertex2 = p_modern.vertex2;
             vertex3 = p_modern.vertex3;
@@ -1132,7 +1230,7 @@ function modernShape(recreate = false) {
             vertex3_2.y
         );
     } else if (type == 7) {
-        if(recreate) {
+        if (recreate) {
             spacing = p_modern.spacing;
             rectCount = p_modern.rectCount;
             rectSize = p_modern.rectSize;
@@ -1165,7 +1263,7 @@ function modernShape(recreate = false) {
         }
     }
 
-    if(!recreate) {
+    if (!recreate) {
         p_modern.shapeCanvasWidth = shapeCanvasWidth;
         p_modern.shapeCanvasHeight = shapeCanvasHeight;
         p_modern.type = type;
@@ -1221,10 +1319,10 @@ function postModernShape(recreate = false) {
 
         let imageSize = calculateBoundingBox(shapeCanvasWidth, shapeCanvasHeight, 0)
 
-        if (mix_template.composition.columns==2) {
-            imageSize = calculateBoundingBox(shapeCanvasWidth*.2, shapeCanvasHeight*.2, 0)
-        } else if (mix_template.composition.columns==6){
-            imageSize = calculateBoundingBox(shapeCanvasWidth*.4, shapeCanvasHeight*.4, 0)
+        if (mix_template.composition.columns == 2) {
+            imageSize = calculateBoundingBox(shapeCanvasWidth * .2, shapeCanvasHeight * .2, 0)
+        } else if (mix_template.composition.columns == 6) {
+            imageSize = calculateBoundingBox(shapeCanvasWidth * .4, shapeCanvasHeight * .4, 0)
         }
 
         imageInfo.width = imageSize.w;
@@ -1238,11 +1336,18 @@ function postModernShape(recreate = false) {
     let pg;
 
     pg = s1Sketch.createGraphics(shapeCanvasWidth, shapeCanvasHeight);
-    pg.fill(mix_template.palettes.image.one);
+
+
+    if (mix_template.composition.columns == 1) {
+        pg.fill(mix_template.palettes.image.two);
+    } else {
+        pg.fill(mix_template.palettes.image.one);
+    }
+
     pg.noStroke();
 
     if (type == 1) {
-        if(recreate){
+        if (recreate) {
             Type1NSides = p_post_modern.Type1NSides;
             Type1NShapes = p_post_modern.Type1NShapes;
             Type1Vertex = p_post_modern.Type1Vertex;
@@ -1285,7 +1390,7 @@ function postModernShape(recreate = false) {
         for (let shape = 0; shape < Type2NShapes; shape++) {
             pg.blendMode(s1Sketch.MULTIPLY);
             pg.beginShape();
-            if(recreate) {
+            if (recreate) {
                 x = Type2Vertex[shape][0].x;
                 y = Type2Vertex[shape][0].y;
                 pg.vertex(x, y); // Initial vertex for the curve
@@ -1312,7 +1417,7 @@ function postModernShape(recreate = false) {
             pg.blendMode(s1Sketch.BLEND);
         }
     }
-    if(!recreate) {
+    if (!recreate) {
         p_post_modern.type = type;
         p_post_modern.shapeCanvasWidth = shapeCanvasWidth;
         p_post_modern.shapeCanvasHeight = shapeCanvasHeight;
@@ -1325,7 +1430,6 @@ function postModernShape(recreate = false) {
     }
     return pg;
 }
-
 
 
 function calculateBoundingBox(w, h, rotation) {
@@ -1373,10 +1477,45 @@ function calculateBoundingBox(w, h, rotation) {
     };
 }
 
-var buttonSavePDF= document.getElementById("savePDF");
+var buttonSavePDF = document.getElementById("savePDF");
 buttonSavePDF.addEventListener("click", savePDF);
 
-function savePDF() {
-    pdfSave=true;
+async function savePDF() {
+    s1Sketch.noLoop();
+    await toGlobalScale();
+    pdfSave = true;
     pdf.beginRecord();
+    s1Sketch.loop()
+}
+
+async function toGlobalScale() {
+    await onResize(false);
+}
+
+async function toLocalScale() {
+    await onResize(true);
+}
+
+function setTitleSize() {
+    if (wPoster < hPoster) {
+        textInputs.title.size = canvasValues.posterWidth * mix_template.text.titleScale;
+    } else {
+        textInputs.title.size = canvasValues.posterHeight * mix_template.text.titleScale;
+    }
+}
+
+function setSubtitleSize() {
+    if (wPoster < hPoster) {
+        textInputs.subtitle.size = canvasValues.posterWidth * mix_template.text.subTitleScale;
+    } else {
+        textInputs.subtitle.size = canvasValues.posterHeight * mix_template.text.subTitleScale;
+    }
+}
+
+function setAditionalInfoSize() {
+    if (wPoster < hPoster) {
+        textInputs.aditionalInfo.size = canvasValues.posterWidth * mix_template.text.additionalScale;
+    } else {
+        textInputs.aditionalInfo.size = canvasValues.posterHeight * mix_template.text.additionalScale;
+    }
 }

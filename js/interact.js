@@ -67,16 +67,6 @@ function savePNG() {
 //buttonStyle.addEventListener("change", styleChange);
 
 function styleChange() {
-    /*if (this.value == "classic") {
-        //template=classic_template;
-        setTemplate(classic_template);
-    } else if (this.value == "modern") {
-        //template=modern_template;
-        setTemplate(modern_template);
-    } else if (this.value == "postmodern") {
-        //template=postModern_template;
-        setTemplate(postModern_template);
-    }*/
     generateTemplate(
         att_template.figura,
         att_template.cor,
@@ -94,11 +84,10 @@ buttonLayout.addEventListener("click", function () {
 });
 
 var gridArray;
-var layoutError = false;
 
-function layoutChange(calls = 0) {
-    layoutError = false;
-    gridArray = create2Darr(12, mix_template.composition.columns);
+async function layoutChange(calls = 0) {
+    clearAvailability();
+
     randomTexture = randInt(0, texturePosModern.length);
     randomFrame = s1Sketch.int(s1Sketch.random(0, 2));
 
@@ -107,30 +96,51 @@ function layoutChange(calls = 0) {
             gridArray[mix_template.composition.fillRows[i] - 1][x] = 1;
         }
     }
-    //imageInfo.rotation = mix_template.image[0].rotation[randInt(0, mix_template.image[0].rotation.length)];
-
-    imageChange();
+    imageInfo.rotation = mix_template.image[0].rotation[randInt(0, mix_template.image[0].rotation.length)];
+    if (effectImg) {
+        await imageChange(true);
+        await imagePosition();
+    }
 
     let error = false;
     if (calls < maxCalls) {
-        error = titleLayout(0);
+        error = await titleLayout(0);
         if (!error)
-            error = subtitleLayout(0);
+            error = await subtitleLayout(0);
         if (!error)
-            error = aditionalInfoLayout(0);
-        if (error) layoutChange(calls + 1);
+            error = await aditionalInfoLayout(0);
+        if (error) await layoutChange(calls + 1);
     }
 }
 
-function imageChange(recreate = false) {
+function clearAvailability() {
+    gridArray = create2Darr(12, mix_template.composition.columns);
+}
+
+async function setTextAvailability() {
+    await setGridAvailability(textInputs.title);
+    await setGridAvailability(textInputs.subtitle);
+    await setGridAvailability(textInputs.aditionalInfo);
+}
+
+async function imagePosition() {
+    await calcPosImage();
+    await setGridAvailability(imageInfo);
+}
+
+async function imageChange(recreate = false) {
     if (effectImg) {
         let pOverflow = imageInfo.overflow;
-        calcPosImage();
-        if (imageInfo.overflow != pOverflow) {
-            if(effectImg instanceof p5.Image) effectImg = imageEffect(originalImg);
-            else if(effectImg instanceof p5.Graphics) effectImg = createShape(recreate);
+
+        if (originalImg) {
+            effectImg = imageEffect(originalImg);
+        } else {
+            effectImg = createShape(recreate);
         }
-        setGridAvailability(imageInfo);
+        /*if (imageInfo.overflow != pOverflow) {
+            if(effectImg instanceof p5.Image || effectImg instanceof Object) effectImg = imageEffect(originalImg);
+            else if(effectImg instanceof p5.Graphics) effectImg = createShape(recreate);
+        }*/
     }
 }
 
@@ -170,4 +180,37 @@ buttonShape.addEventListener("click", shapeChange);
 
 function shapeChange(recreate = false) {
     if (effectImg instanceof p5.Graphics) effectImg = createShape(recreate);
+}
+
+var formatPoster = document.getElementById("formatPoster");
+formatPoster.addEventListener("change", changeFormat);
+
+async function changeFormat(){
+    await setFormat(this.value);
+}
+
+// Function to handle the radio button change event
+async function orientationChange(event) {
+    await changeOrientation(event.target.value);
+}
+
+// Add event listeners to the radio buttons
+const orientationButtons = document.querySelectorAll('input[type="radio"][name="orientation"]');
+orientationButtons.forEach(orientationButton => {
+    orientationButton.addEventListener('change', orientationChange);
+});
+
+function setActiveOrientationButton(value) {
+    orientationButtons.forEach(orientationButton => {
+        if (orientationButton.value == value) {
+            orientationButton.checked = true;
+        }
+    });
+}
+
+var loadCanvas = document.getElementById("loadCanvas");
+var loaded = false;
+function loadComplete() {
+    loaded = true;
+    loadCanvas.classList.add("hide");
 }

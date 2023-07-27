@@ -83,27 +83,43 @@ s2 = function (sketch) {
     }
 
     s2Sketch.mousePressed = function () {
-        // Check if the mouse is within the range of any point
-        for (let i = points.length - 1; i >= 0; i--) {
-            let d = s2Sketch.dist(s2Sketch.mouseX, s2Sketch.mouseY, points[i].position.x, points[i].position.y);
-            if (d < 10) {
-                // Reorder the points array based on the last clicked point
-                let clickedPoint = points.splice(i, 1)[0];
-                points.push(clickedPoint);
+        if (s2Sketch.mouseX > 0 && s2Sketch.mouseX < s2Sketch.width && s2Sketch.mouseY > 0 && s2Sketch.mouseY < s2Sketch.height) {
+            let hover = false;
+            // Check if the mouse is within the range of any point
+            for (let i = points.length - 1; i >= 0; i--) {
+                let d = s2Sketch.dist(s2Sketch.mouseX, s2Sketch.mouseY, points[i].position.x, points[i].position.y);
+                if (d < 15) {
+                    // Reorder the points array based on the last clicked point
+                    let clickedPoint = points.splice(i, 1)[0];
+                    points.push(clickedPoint);
 
-                active_point = points.length - 1;
+                    active_point = points.length - 1;
 
-                for (let j = points.length - 1; j >= 0; j--) {
-                    if (j==active_point) {
-                        points[j].active = true;
-                        points[j].button.classList.add("active");
-                    } else {
-                        points[j].active = false;
-                        points[j].button.classList.remove("active");
+                    for (let j = points.length - 1; j >= 0; j--) {
+                        if (j == active_point) {
+                            points[j].active = true;
+                            points[j].button.classList.add("active");
+                        } else {
+                            points[j].active = false;
+                            points[j].button.classList.remove("active");
+                        }
+                    }
+                    offset = s2Sketch.createVector(s2Sketch.mouseX - points[active_point].position.x, s2Sketch.mouseY - points[active_point].position.y);
+                    hover = true;
+                    break;
+                }
+            }
+
+            if (!hover) {
+                let point = {x: s2Sketch.mouseX, y: s2Sketch.mouseY};
+                if (isPointInsideTriangle(point, triangle_points[0], triangle_points[1], triangle_points[2])) {
+                    for (let i = points.length - 1; i >= 0; i--) {
+                        if(points[i].active) {
+                            points[i].position = point;
+                            triangleTemplate(points[i]);
+                        }
                     }
                 }
-                offset = s2Sketch.createVector(s2Sketch.mouseX - points[active_point].position.x, s2Sketch.mouseY - points[active_point].position.y);
-                break;
             }
         }
     }
@@ -163,7 +179,7 @@ function definePoints() {
 
     points.push({
         "id": 0,
-        "position": s2Sketch.createVector(s2Sketch.width / 2, s2Sketch.height / 2),
+        "position": randomPointInsideTriangle(triangle_points[0], triangle_points[1], triangle_points[2]),
         "distance": [0, 0, 0],
         "image": s2Sketch.loadImage("../data/triangle/2.png"),
         "opacity": 70,
@@ -176,12 +192,12 @@ function definePoints() {
     });
     points.push({
         "id": 1,
-        "position": s2Sketch.createVector(s2Sketch.width / 2, s2Sketch.height / 2),
+        "position": randomPointInsideTriangle(triangle_points[0], triangle_points[1], triangle_points[2]),
         "distance": [0, 0, 0],
         "image": s2Sketch.loadImage("../data/triangle/1.png"),
         "opacity": 70,
         "button": document.getElementById("triangleColor"),
-        "active": false,
+        "active": true,
         "hover": false,
         "transition": 0,
         "opacity": 0,
@@ -189,7 +205,7 @@ function definePoints() {
     });
     points.push({
         "id": 2,
-        "position": s2Sketch.createVector(s2Sketch.width / 2, s2Sketch.height / 2),
+        "position": randomPointInsideTriangle(triangle_points[0], triangle_points[1], triangle_points[2]),
         "distance": [0, 0, 0],
         "image": s2Sketch.loadImage("../data/triangle/3.png"),
         "opacity": 70,
@@ -202,7 +218,7 @@ function definePoints() {
     });
     points.push({
         "id": 3,
-        "position": s2Sketch.createVector(s2Sketch.width / 2, s2Sketch.height / 2),
+        "position": randomPointInsideTriangle(triangle_points[0], triangle_points[1], triangle_points[2]),
         "distance": [0, 0, 0],
         "image": s2Sketch.loadImage("../data/triangle/4.png"),
         "opacity": 70,
@@ -232,6 +248,49 @@ function updateDistance() {
             parseFloat(s2Sketch.map(calculatePerpendicularDistance(triangle_points[2], triangle_points[0], points[i].position),
                 0, triangle_ratio, 0, 1).toFixed(1));
     }
+}
+
+function randomPointInsideTriangle(p1, p2, p3) {
+    // Generate two random numbers between 0 and 1
+    const rand1 = Math.random();
+    const rand2 = Math.random();
+
+    // Make sure the sum of the random numbers is less than or equal to 1
+    const r1 = rand1 <= 1 - rand2 ? rand1 : 1 - rand1;
+    const r2 = rand2 <= 1 - rand1 ? rand2 : 1 - rand2;
+
+    // Calculate the barycentric coordinates for the random point
+    const baryX = 1 - r1 - r2;
+    const baryY = r1;
+    const baryZ = r2;
+
+    // Calculate the random point inside the triangle
+    const x = baryX * p1.x + baryY * p2.x + baryZ * p3.x;
+    const y = baryX * p1.y + baryY * p2.y + baryZ * p3.y;
+
+    return s2Sketch.createVector(x, y);
+}
+
+function isPointInsideTriangle(point, p1, p2, p3) {
+    // Calculate vectors for the three edges of the triangle
+    const v0 = { x: p3.x - p1.x, y: p3.y - p1.y };
+    const v1 = { x: p2.x - p1.x, y: p2.y - p1.y };
+    const v2 = { x: point.x - p1.x, y: point.y - p1.y };
+
+    // Calculate dot products
+    const dot00 = v0.x * v0.x + v0.y * v0.y;
+    const dot01 = v0.x * v1.x + v0.y * v1.y;
+    const dot02 = v0.x * v2.x + v0.y * v2.y;
+    const dot11 = v1.x * v1.x + v1.y * v1.y;
+    const dot12 = v1.x * v2.x + v1.y * v2.y;
+
+    // Calculate barycentric coordinates
+    const invDenom = 1 / (dot00 * dot11 - dot01 * dot01);
+    const u = (dot11 * dot02 - dot01 * dot12) * invDenom;
+    const v = (dot00 * dot12 - dot01 * dot02) * invDenom;
+
+    // Check if the point is inside the triangle
+    return u >= 0 && v >= 0 && u + v <= 1;
 }
 
 function setActive() {

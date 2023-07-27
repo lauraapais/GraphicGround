@@ -9,7 +9,7 @@
     <script src="js/p5.js"></script>
     <script src="js/p5.pdf.js"></script>
 
-    <title>Graphic Ground</title>
+    <title>Graphic Ground — Create</title>
 </head>
 <body>
 <div class="main_row createMain_row1">
@@ -30,13 +30,13 @@
 <div class="main_row createMain_row2">
     <div class="row createColumn1 mobileColumn">
     </div>
-    <div class="row createColumn2">
+    <div class="row createColumn2 noBorderBot">
         <div id="inputUpper">
             <div class="content_poster hide" id="mainPoster">
                 <div id="content" class="contentStyle">
-                    <h2>Content</h2>
+                    <h2>Content + Format</h2>
                     <img class="downArrow" src="data/pageElements/arrowDown.png">
-                    <img class="upArrow" src="data/pageElements/arrowUP.png">
+                    <img class="upArrow" src="data/pageElements/arrowUp.png">
                 </div>
                 <div id="inputPoster" class="inputs_poster">
                     <div class="marginInputs">
@@ -49,7 +49,6 @@
                                 <h3>Text 2</h3>
                                 <input type="text" name="text2" id="subtitle" value="This can be used as a subtitle.">
                             </div>
-
                             <div class="input">
                                 <h3><label for="add_info">Additional Information</label></h3>
                                 <textarea placeholder="You can add some additional information here!" name="add_info"
@@ -68,6 +67,18 @@
                                     <input type="file" id="add-single-img" accept="image/jpeg"/>
                                 </div>
                             </div>
+
+                            <div class="input">
+                                <h3>Select a format</h3>
+                            <select name="formatPoster" id="formatPoster">
+                                <option value="1">Poster [A3]</option>
+                                <option value="5">Totebag [A4]</option>
+                                <option value="2">Postcard [A5]</option>
+                                <option value="4">Sticker [A7]</option>
+                                <option value="3">Instagram</option>
+                            </select>
+                            </div>
+
                             <button type="submit"></button>
                         </form>
                     </div>
@@ -78,25 +89,29 @@
                 <div class="contentStyle" id="equalizer">
                     <h2> Equalize</h2>
                     <img class="downArrow" src="data/pageElements/arrowDown.png">
-                    <img class="upArrow" src="data/pageElements/arrowUP.png">
+                    <img class="upArrow" src="data/pageElements/arrowUp.png">
                 </div>
 
                 <div class="equalizerInputs" id="equalizerInputs">
                     <div id="canvasTriangle"></div>
                     <div class="equalizerButtons">
                         <div class="marginInputs">
-                            <button class="botao botaoEqualizer" id="triangleColor" type="button"><img
+                            <div class="selectEqualizer">
+                            <button class="botao botaoEqualizer active" id="triangleColor" type="button"><img
                                     src="data/triangle/1.png">Color
                             </button>
                             <button class="botao botaoEqualizer" id="triangleTypography" type="button"><img
                                     src="data/triangle/3.png">Typography
                             </button>
+                            </div>
+                            <div class="selectEqualizer">
                             <button class="botao botaoEqualizer" id="triangleFigure" type="button"><img
                                     src="data/triangle/2.png">Figure
                             </button>
                             <button class="botao botaoEqualizer" id="triangleLayout" type="button"><img
                                     src="data/triangle/4.png">Layout
                             </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -106,7 +121,7 @@
                 <div class="contentStyle" id="randomizer">
                     <h2> Randomize</h2>
                     <img class="downArrow" src="data/pageElements/arrowDown.png">
-                    <img class="upArrow" src="data/pageElements/arrowUP.png">
+                    <img class="upArrow" src="data/pageElements/arrowUp.png">
                 </div>
                 <div class="buttons" id="inputButtons">
                     <div class="marginInputs">
@@ -128,16 +143,18 @@
                     <label for="showGrids"><h3>Show Grids</h3></label><br>
                 </div>
             </div>
-            <div id="canvas_poster"></div>
+            <div id="canvas_poster">
+                <span id="loadCanvas">Loading...</span>
+            </div>
             <div class="buttonsCreation">
-                <div class="buttonsCanvas">
+                <div class="buttonsCanvas selectHV">
                     <div id="divCheckVer" class="checkbox">
-                        <input type="checkbox" name="vertical" value="show">
-                        <label for="vertical"><h3>Vertical</h3></label><br>
+                        <input type="radio" id="v-orientation" name="orientation" value="0" checked>
+                        <label for="v-orientation"><h3>Vertical</h3></label><br>
                     </div>
                     <div class="checkbox">
-                        <input type="checkbox" name="horizontal" value="show">
-                        <label for="horizontal"><h3>Horizontal</h3></label><br>
+                        <input type="radio" id="h-orientation" name="orientation" value="1">
+                        <label for="h-orientation"><h3>Horizontal</h3></label><br>
                     </div>
                 </div>
             </div>
@@ -149,24 +166,15 @@
                 <div class="contentStyle" id="exportTitle">
                     <h2>Export</h2>
                     <img class="downArrow" src="data/pageElements/arrowDown.png">
-                    <img class="upArrow" src="data/pageElements/arrowUP.png">
+                    <img class="upArrow" src="data/pageElements/arrowUp.png">
                 </div>
                 <div id="exportContent">
                     <div class="marginInputs">
                         <div class="buttonsCanvas">
-                            <select name="formatPoster" id="formatPoster">
-                                <option value="cartazp">Cartaz Pequeno [A3]</option>
-                                <option value="autocolante">Autocolante [A7]</option>
-                                <option value="postal">Postal [A6]</option>
-                                <option value="carta">Carta [A5]</option>
-                                <option value="carta">Carta [A4]</option>
-                                <option value="cartazm">Cartaz Médio [A2]</option>
-                                <option value="cartazg">Cartaz Grande [A1]</option>
-                            </select>
-                        </div>
                         <button class="botao" type="button">Exhibit in Gallery</button>
                         <button id="savePDF" class="botao" type="button">Export .PDF</button>
                         <button id="savePNG" class="botao" type="button">Export .PNG</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -175,10 +183,16 @@
 </div>
 
 <div id="menu" class="menu">
-    <div class="indexMain_row1 row1MenuMobile">
-        <span class="mobileTitle">Graphic Ground</span>
+    <div class="menuHeader">
+    <div class="row createColumn1 row1MenuMobile">
+        <a href="index.html"> <img src="data/pageElements/circles@2x.png"></a>
+    </div>
+    <div class="row othersColumn2 headerColumn2 noBorderRight">
+        <span class="logoSpan"><a href="index.html">Graphic<br>Ground</a></span>
         <img id="closeMenu" class="menuMobileIcon" src="data/index/closeMenu.png">
     </div>
+    </div>
+
     <div class="menuSpan">
         <span><a href="about.html">About</a></span>
         <span class="pagAtual"><a href="create.html">Create</a></span>

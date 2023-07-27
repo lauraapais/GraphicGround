@@ -13,8 +13,10 @@ function loadTemplates() {
             "fillRows": [1, 11, 10, 12],
             "columnsMinMaxWidthImage": [2],
             "columnsMinMaxHeightImage": [2],
+            "columnsHorWidthImage": [2],
             "imageHorizontalScale": [0.5],
             "imageVerticalScale": [0.3],
+            "imageAlignment": 1,
         },
 
         "palettes": [{
@@ -74,9 +76,9 @@ function loadTemplates() {
             "alignment": [1],
             "rotation": [0],
 
-            "titleScale": 16,
-            "subTitleScale": 10,
-            "additionalScale": 6,
+            "titleScale": 0.1,
+            "subTitleScale": 0.047,
+            "additionalScale": 0.035,
 
             "titleCollumns": [2],
             "subTitleCollumns": [2],
@@ -87,7 +89,6 @@ function loadTemplates() {
             "effect": "engraving",
             "texture": 0,
             "rotation": [0],
-            "alignment": 1,
             "shapes": 1,
             "frame":1,
             "overflow": false
@@ -101,8 +102,10 @@ function loadTemplates() {
             "fillRows": [],
             "columnsMinMaxWidthImage": [4],
             "columnsMinMaxHeightImage": [3],
+            "columnsHorWidthImage": [1],
             "imageHorizontalScale": [1],
             "imageVerticalScale": [1],
+            "imageAlignment": 0,
         },
 
         "palettes": [{
@@ -343,6 +346,12 @@ function loadTemplates() {
             }, {
                 "fontTitle": "Poppins-Black",
                 "fontOthers": "Poppins-Black"
+            }, {
+                "fontTitle": "Inconsolata",
+                "fontOthers": "Inconsolata"
+            }, {
+                "fontTitle": "LeagueSpartan-Bold",
+                "fontOthers": "LeagueSpartan-Bold"
             }
             ],
             "marginText": 1,
@@ -350,9 +359,9 @@ function loadTemplates() {
             "alignment": [0],
             "rotation": [0],
 
-            "titleScale": 10.5,
-            "subTitleScale": 5,
-            "additionalScale": 5,
+            "titleScale": 0.175,
+            "subTitleScale": 0.05,
+            "additionalScale": 0.025,
 
             "titleCollumns": [5],
             "subTitleCollumns": [3],
@@ -363,7 +372,6 @@ function loadTemplates() {
             "effect": "blackWhite",
             "texture": 0,
             "rotation": [0],
-            "alignment": 0,
             "shapes": 2,
             "frame":0,
             "overflow": true
@@ -377,8 +385,10 @@ function loadTemplates() {
             "fillRows": [],
             "columnsMinMaxWidthImage": [1],
             "columnsMinMaxHeightImage": [1],
+            "columnsHorWidthImage": [1],
             "imageHorizontalScale": [1],
             "imageVerticalScale": [1],
+            "imageAlignment": 2,
         },
 
         "palettes": [{
@@ -570,9 +580,6 @@ function loadTemplates() {
                 "fontTitle": "Plaster-Regular",
                 "fontOthers": "Plaster-Regular"
             }, {
-                "fontTitle": "Wellfleet-Regular",
-                "fontOthers": "Wellfleet-Regular"
-            }, {
                 "fontTitle": "ZenDots-Regular",
                 "fontOthers": "ZenDots-Regular"
             }, {
@@ -587,6 +594,12 @@ function loadTemplates() {
             }, {
                 "fontTitle": "LibreBarcode39-Regular",
                 "fontOthers": "LibreBarcode39-Regular"
+            }, {
+                "fontTitle": "Pilowlava-Regular",
+                "fontOthers": "Pilowlava-Regular"
+            }, {
+                "fontTitle": "le-murmure",
+                "fontOthers": "le-murmure"
             }
             ],
             "marginText": 1,
@@ -594,9 +607,9 @@ function loadTemplates() {
             "alignment": [2],
             "rotation": [20, 45, 90, 0, -45, -90, 20],
 
-            "titleScale": 50,
-            "subTitleScale": 17,
-            "additionalScale": 10,
+            "titleScale": 0.15,
+            "subTitleScale": 0.075,
+            "additionalScale": 0.05,
 
             "titleCollumns": [1],
             "subTitleCollumns": [1],
@@ -611,7 +624,6 @@ function loadTemplates() {
             "effect": "duotone",
             "texture": 1,
             "rotation": [20, 45, 90, 0, -45, -90, 20],
-            "alignment": 2,
             "shapes": 3,
             "frame":0,
             "overflow": false
@@ -625,8 +637,10 @@ function loadTemplates() {
             "fillRows": null,
             "columnsMinMaxWidthImage": null,
             "columnsMinMaxHeightImage": null,
+            "columnsHorWidthImage": null,
             "imageHorizontalScale": null,
             "imageVerticalScale": null,
+            "imageAlignment": null,
         },
 
         "palettes": null,
@@ -652,7 +666,6 @@ function loadTemplates() {
             "effect": null,
             "texture": null,
             "rotation": null,
-            "alignment": null,
             "shapes": null,
             "frame":null,
             "overflow": null
@@ -696,8 +709,10 @@ function setTemplateComposition(temp) {
     mix_template.composition.fillRows = temp.composition.fillRows;
     mix_template.composition.columnsMinMaxHeightImage = temp.composition.columnsMinMaxHeightImage;
     mix_template.composition.columnsMinMaxWidthImage = temp.composition.columnsMinMaxWidthImage;
+    mix_template.composition.columnsHorWidthImage = temp.composition.columnsHorWidthImage;
     mix_template.composition.imageHorizontalScale = temp.composition.imageHorizontalScale;
     mix_template.composition.imageVerticalScale = temp.composition.imageVerticalScale;
+    mix_template.composition.imageAlignment = temp.composition.imageAlignment;
     mix_template.text.marginText = temp.text.marginText;
     mix_template.text.alignment = temp.text.alignment;
     mix_template.text.rotation = temp.text.rotation;

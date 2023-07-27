@@ -24,9 +24,12 @@
 
 <div class="main_row indexMain_row2">
     <div class="row indexColumn1"></div>
-    <div class="row indexColumn2 row_title noBorderRight">
-        <span> <span class="title">Graphic</span> <span class="title">Ground</span></span>
-    </div>
+        <div class="row indexColumn2 row_title noBorderRight">
+            <div class="mainIndex">
+            <span> <span class="title">Graphic</span>
+            <span class="title" id="groundIndex">Ground</span></span>
+            </div>
+        </div>
     <div class="row indexColumn3 noBorder"></div>
 </div>
 <div class="main_row indexMain_row3">
@@ -42,10 +45,14 @@
     <div class="row indexColumn2 indexColumn2Dif"></div>
 
     <div class="row indexColumn3 createMaterials indexColumn3Dif">
-        <a href="create.html">
+        <a href="formats.html">
             <div class="rowContent">
                 <span>Create <br> Your <br> Materials</span>
-                <img src="data/index/arrow_2.png">
+                <svg data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164.25 146.91">
+                    <g data-name="Layer 2">
+                        <polygon class="arrowIndex" points=".5 63.04 .5 83.61 124.41 83.61 76.12 131.91 90.41 146.21 163.54 73.07 91.18 .71 76.88 15 125.79 63.92 .5 63.04"/>
+                    </g>
+                </svg>
             </div>
         </a>
     </div>
@@ -53,10 +60,16 @@
 </div>
 
 <div id="menu" class="menu">
-    <div class="indexMain_row1 row1MenuMobile">
-        <span class="mobileTitle">Graphic Ground</span>
-        <img id="closeMenu" class="menuMobileIcon" src="data/index/closeMenu.png">
+    <div class="menuHeader">
+        <div class="row createColumn1 row1MenuMobile">
+            <a href="index.html"> <img src="data/pageElements/circles@2x.png"></a>
+        </div>
+        <div class="row othersColumn2 headerColumn2 noBorderRight">
+            <span class="logoSpan"><a href="index.html">Graphic<br>Ground</a></span>
+            <img id="closeMenu" class="menuMobileIcon" src="data/index/closeMenu.png">
+        </div>
     </div>
+
     <div class="menuSpan">
         <span><a href="about.html">About</a></span>
         <span><a href="create.html">Create</a></span>
