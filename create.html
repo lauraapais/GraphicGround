@@ -40,7 +40,6 @@
                 </div>
                 <div id="inputPoster" class="inputs_poster">
                     <div class="marginInputs">
-                        <form action="/url" method="GET">
                             <div class="input">
                                 <h3>Text 1</h3>
                                 <input type="text" name="text1" id="title" value="This is a title.">
@@ -70,17 +69,16 @@
 
                             <div class="input">
                                 <h3>Select a format</h3>
-                            <select name="formatPoster" id="formatPoster">
-                                <option value="1">Poster [A3]</option>
-                                <option value="5">Totebag [A4]</option>
-                                <option value="2">Postcard [A5]</option>
-                                <option value="4">Sticker [A7]</option>
-                                <option value="3">Instagram</option>
-                            </select>
+                                <select name="formatPoster" id="formatPoster">
+                                    <option value="1">Poster [A3]</option>
+                                    <option value="5">Totebag [A4]</option>
+                                    <option value="2">Postcard [A5]</option>
+                                    <option value="4">Sticker [A7]</option>
+                                    <option value="3">Instagram</option>
+                                </select>
                             </div>
 
-                            <button type="submit"></button>
-                        </form>
+
                     </div>
                 </div>
             </div>
@@ -97,20 +95,23 @@
                     <div class="equalizerButtons">
                         <div class="marginInputs">
                             <div class="selectEqualizer">
-                            <button class="botao botaoEqualizer active" id="triangleColor" type="button"><img
-                                    src="data/triangle/1.png">Color
-                            </button>
-                            <button class="botao botaoEqualizer" id="triangleTypography" type="button"><img
-                                    src="data/triangle/3.png">Typography
-                            </button>
+                                <button class="botao botaoEqualizer active" id="triangleColor" type="button"><img
+                                        src="data/triangle/1.png">Color
+                                </button>
+                                <button class="botao botaoEqualizer" id="triangleTypography" type="button"><img
+                                        src="data/triangle/3.png">Typography
+                                </button>
                             </div>
                             <div class="selectEqualizer">
-                            <button class="botao botaoEqualizer" id="triangleFigure" type="button"><img
-                                    src="data/triangle/2.png">Figure
-                            </button>
-                            <button class="botao botaoEqualizer" id="triangleLayout" type="button"><img
-                                    src="data/triangle/4.png">Layout
-                            </button>
+                                <button class="botao botaoEqualizer" id="triangleFigure" type="button"><img
+                                        src="data/triangle/2.png">Figure
+                                </button>
+                                <button class="botao botaoEqualizer" id="triangleLayout" type="button"><img
+                                        src="data/triangle/4.png">Layout
+                                </button>
+                            </div>
+                            <div class="selectEqualizer">
+                                <button class="botao" id="surpriseMe" type="button">Surprise Me</button>
                             </div>
                         </div>
                     </div>
@@ -129,7 +130,6 @@
                         <button class="botao" id="buttonShape" type="button">Figure</button>
                         <button class="botao" id="buttonColors" type="button">Color</button>
                         <button class="botao" id="buttonFont" type="button">Typography</button>
-                        <button class="botao" id="buttonAll" type="button">Surprise Me</button>
                     </div>
                 </div>
             </div>
@@ -171,9 +171,9 @@
                 <div id="exportContent">
                     <div class="marginInputs">
                         <div class="buttonsCanvas">
-                        <button class="botao" type="button">Exhibit in Gallery</button>
-                        <button id="savePDF" class="botao" type="button">Export .PDF</button>
-                        <button id="savePNG" class="botao" type="button">Export .PNG</button>
+                            <button class="botao" type="button">Exhibit in Gallery</button>
+                            <button id="savePDF" class="botao" type="button">Export .PDF</button>
+                            <button id="savePNG" class="botao" type="button">Export .PNG</button>
                         </div>
                     </div>
                 </div>
@@ -184,13 +184,13 @@
 
 <div id="menu" class="menu">
     <div class="menuHeader">
-    <div class="row createColumn1 row1MenuMobile">
-        <a href="index.html"> <img src="data/pageElements/circles@2x.png"></a>
-    </div>
-    <div class="row othersColumn2 headerColumn2 noBorderRight">
-        <span class="logoSpan"><a href="index.html">Graphic<br>Ground</a></span>
-        <img id="closeMenu" class="menuMobileIcon" src="data/index/closeMenu.png">
-    </div>
+        <div class="row createColumn1 row1MenuMobile">
+            <a href="index.html"> <img src="data/pageElements/circles@2x.png"></a>
+        </div>
+        <div class="row othersColumn2 headerColumn2 noBorderRight">
+            <span class="logoSpan"><a href="index.html">Graphic<br>Ground</a></span>
+            <img id="closeMenu" class="menuMobileIcon" src="data/index/closeMenu.png">
+        </div>
     </div>
 
     <div class="menuSpan">

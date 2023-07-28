@@ -22,8 +22,10 @@ equalizerText.onclick = function () {
         mainEqualize.classList.remove("hide");
         mainPoster.classList.add("hide");
         mainRandomizer.classList.add("hide");
+        triangle_active = true;
     } else {
         mainEqualize.classList.add("hide");
+        triangle_active = false;
     }
 }
 
@@ -66,21 +68,21 @@ function savePNG() {
 //var buttonStyle = document.getElementById("stylePoster");
 //buttonStyle.addEventListener("change", styleChange);
 
-function styleChange() {
+async function styleChange() {
     generateTemplate(
         att_template.figura,
         att_template.cor,
         att_template.tipografia,
         att_template.composicao
     );
-    loadPosterStyles();
-    layoutChange();
+    await loadPosterStyles();
+    await layoutChange();
 }
 
 //RANDOMIZE LAYOUT
 var buttonLayout = document.getElementById("buttonLayout");
-buttonLayout.addEventListener("click", function () {
-    layoutChange();
+buttonLayout.addEventListener("click", async function (){
+    await triangleTemplate(3);
 });
 
 var gridArray;
@@ -96,7 +98,9 @@ async function layoutChange(calls = 0) {
             gridArray[mix_template.composition.fillRows[i] - 1][x] = 1;
         }
     }
-    imageInfo.rotation = mix_template.image[0].rotation[randInt(0, mix_template.image[0].rotation.length)];
+
+    //imageInfo.rotation = mix_template.image[0].rotation[randInt(0, mix_template.image[0].rotation.length)];
+
     if (effectImg) {
         await imageChange(true);
         await imagePosition();
@@ -147,7 +151,9 @@ async function imageChange(recreate = false) {
 
 //RANDOMIZE FONT
 var buttonFont = document.getElementById("buttonFont");
-buttonFont.addEventListener("click", fontChange);
+buttonFont.addEventListener("click", async function (){
+    await triangleTemplate(2);
+});
 
 function fontChange() {
     setTemplateFont(randTemplate(att_template.tipografia));
@@ -159,7 +165,9 @@ function fontChange() {
 
 //RANDOMIZE COLOR
 var buttonColors = document.getElementById("buttonColors");
-buttonColors.addEventListener("click", colorsChange);
+buttonColors.addEventListener("click", async function (){
+    await triangleTemplate(1);
+});
 
 function colorsChange() {
     setTemplateColors(randTemplate(att_template.cor));
@@ -176,10 +184,12 @@ function colorsChange() {
 
 //RANDOMIZE SHAPE
 var buttonShape = document.getElementById("buttonShape");
-buttonShape.addEventListener("click", shapeChange);
+buttonShape.addEventListener("click", async function (){
+    await triangleTemplate(0);
+});
 
 function shapeChange(recreate = false) {
-    if (effectImg instanceof p5.Graphics) effectImg = createShape(recreate);
+    if (effectImg instanceof p5.Graphics || effectImg == null) effectImg = createShape(recreate);
 }
 
 var formatPoster = document.getElementById("formatPoster");
@@ -195,7 +205,7 @@ async function orientationChange(event) {
 }
 
 // Add event listeners to the radio buttons
-const orientationButtons = document.querySelectorAll('input[type="radio"][name="orientation"]');
+var orientationButtons = document.querySelectorAll('input[type="radio"][name="orientation"]');
 orientationButtons.forEach(orientationButton => {
     orientationButton.addEventListener('change', orientationChange);
 });
@@ -214,3 +224,6 @@ function loadComplete() {
     loaded = true;
     loadCanvas.classList.add("hide");
 }
+
+var surpriseButton = document.getElementById("surpriseMe");
+surpriseButton.addEventListener("click", surpriseMe);

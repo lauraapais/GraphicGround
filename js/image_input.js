@@ -60,5 +60,6 @@ deleteImage.addEventListener("click", () => {
         originalImg = null;
         effectImg = null;
     }
+    triangleTemplate(0);
 });
 

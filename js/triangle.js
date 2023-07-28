@@ -10,6 +10,8 @@ var triangle_points = [];
 var triangle_size = 350; // Size of the equilateral triangle
 var triangle_ratio;
 
+var triangle_active = false;
+
 s2 = function (sketch) {
     s2Sketch = sketch;
 
@@ -57,7 +59,7 @@ s2 = function (sketch) {
 
         for (let i = 0; i < points.length; i++) {
             if (points[i].active || points[i].hover) {
-                if(points[i].hover) {
+                if (points[i].hover) {
                     points[i].opacity = s2Sketch.lerp(points[i].opacity, 255, 0.1);
                 } else {
                     points[i].opacity = s2Sketch.lerp(points[i].opacity, 0, 0.1);
@@ -72,7 +74,6 @@ s2 = function (sketch) {
             s2Sketch.noTint();
 
 
-
             s2Sketch.fill(211, points[i].opacity);
             s2Sketch.stroke(29, points[i].opacity);
             s2Sketch.rect(points[i].position.x + 25, points[i].position.y - 10, s2Sketch.textWidth(points[i].text) + 20, 30);
@@ -82,41 +83,43 @@ s2 = function (sketch) {
         }
     }
 
-    s2Sketch.mousePressed = function () {
-        if (s2Sketch.mouseX > 0 && s2Sketch.mouseX < s2Sketch.width && s2Sketch.mouseY > 0 && s2Sketch.mouseY < s2Sketch.height) {
-            let hover = false;
-            // Check if the mouse is within the range of any point
-            for (let i = points.length - 1; i >= 0; i--) {
-                let d = s2Sketch.dist(s2Sketch.mouseX, s2Sketch.mouseY, points[i].position.x, points[i].position.y);
-                if (d < 15) {
-                    // Reorder the points array based on the last clicked point
-                    let clickedPoint = points.splice(i, 1)[0];
-                    points.push(clickedPoint);
+    s2Sketch.mousePressed = async function () {
+        if (triangle_active) {
+            if (s2Sketch.mouseX > 0 && s2Sketch.mouseX < s2Sketch.width && s2Sketch.mouseY > 0 && s2Sketch.mouseY < s2Sketch.height) {
+                let hover = false;
+                // Check if the mouse is within the range of any point
+                for (let i = points.length - 1; i >= 0; i--) {
+                    let d = s2Sketch.dist(s2Sketch.mouseX, s2Sketch.mouseY, points[i].position.x, points[i].position.y);
+                    if (d < 15) {
+                        // Reorder the points array based on the last clicked point
+                        let clickedPoint = points.splice(i, 1)[0];
+                        points.push(clickedPoint);
 
-                    active_point = points.length - 1;
+                        active_point = points.length - 1;
 
-                    for (let j = points.length - 1; j >= 0; j--) {
-                        if (j == active_point) {
-                            points[j].active = true;
-                            points[j].button.classList.add("active");
-                        } else {
-                            points[j].active = false;
-                            points[j].button.classList.remove("active");
+                        for (let j = points.length - 1; j >= 0; j--) {
+                            if (j == active_point) {
+                                points[j].active = true;
+                                points[j].button.classList.add("active");
+                            } else {
+                                points[j].active = false;
+                                points[j].button.classList.remove("active");
+                            }
                         }
+                        offset = s2Sketch.createVector(s2Sketch.mouseX - points[active_point].position.x, s2Sketch.mouseY - points[active_point].position.y);
+                        hover = true;
+                        break;
                     }
-                    offset = s2Sketch.createVector(s2Sketch.mouseX - points[active_point].position.x, s2Sketch.mouseY - points[active_point].position.y);
-                    hover = true;
-                    break;
                 }
-            }
 
-            if (!hover) {
-                let point = {x: s2Sketch.mouseX, y: s2Sketch.mouseY};
-                if (isPointInsideTriangle(point, triangle_points[0], triangle_points[1], triangle_points[2])) {
-                    for (let i = points.length - 1; i >= 0; i--) {
-                        if(points[i].active) {
-                            points[i].position = point;
-                            triangleTemplate(points[i]);
+                if (!hover) {
+                    let point = {x: s2Sketch.mouseX, y: s2Sketch.mouseY};
+                    if (isPointInsideTriangle(point, triangle_points[0], triangle_points[1], triangle_points[2])) {
+                        for (let i = points.length - 1; i >= 0; i--) {
+                            if (points[i].active) {
+                                points[i].position = point;
+                                await triangleTemplate(points[i].id);
+                            }
                         }
                     }
                 }
@@ -125,40 +128,46 @@ s2 = function (sketch) {
     }
 
     s2Sketch.mouseDragged = function () {
-        if (active_point !== null) {
-            // Calculate the boundaries of the equilateral triangle
-            let centerX = s2Sketch.width / 2;
-            let centerY = s2Sketch.height / 2;
-            let topY = centerY - triangle_ratio / 2;
-            let bottomY = centerY + triangle_ratio / 2;
+        if (triangle_active) {
+            if (active_point !== null) {
+                // Calculate the boundaries of the equilateral triangle
+                let centerX = s2Sketch.width / 2;
+                let centerY = s2Sketch.height / 2;
+                let topY = centerY - triangle_ratio / 2;
+                let bottomY = centerY + triangle_ratio / 2;
 
-            // Calculate the X constraints based on the Y position within the triangle
-            let yRatio = (s2Sketch.constrain(s2Sketch.mouseY, topY, bottomY) - topY) / triangle_ratio;
-            let leftX = centerX - triangle_size / 2 * yRatio;
-            let rightX = centerX + triangle_size / 2 * yRatio;
+                // Calculate the X constraints based on the Y position within the triangle
+                let yRatio = (s2Sketch.constrain(s2Sketch.mouseY, topY, bottomY) - topY) / triangle_ratio;
+                let leftX = centerX - triangle_size / 2 * yRatio;
+                let rightX = centerX + triangle_size / 2 * yRatio;
 
-            // Update the position of the active point within the triangle bounds
-            points[active_point].position.x = s2Sketch.constrain(s2Sketch.mouseX - offset.x, leftX, rightX);
-            points[active_point].position.y = s2Sketch.constrain(s2Sketch.mouseY - offset.y, topY, bottomY);
+                // Update the position of the active point within the triangle bounds
+                points[active_point].position.x = s2Sketch.constrain(s2Sketch.mouseX - offset.x, leftX, rightX);
+                points[active_point].position.y = s2Sketch.constrain(s2Sketch.mouseY - offset.y, topY, bottomY);
+            }
         }
     }
 
-    s2Sketch.mouseReleased = function () {
-        if (active_point != null) {
-            triangleTemplate(points[active_point]);
-            active_point = null;
+    s2Sketch.mouseReleased = async function () {
+        if (triangle_active) {
+            if (active_point != null) {
+                await triangleTemplate(points[active_point].id);
+                active_point = null;
+            }
         }
     }
 
     s2Sketch.mouseMoved = function () {
-        hovered_point = null;
-        // Check if the mouse is within the range of any point
-        for (let i = points.length - 1; i >= 0; i--) {
-            let d = s2Sketch.dist(s2Sketch.mouseX, s2Sketch.mouseY, points[i].position.x, points[i].position.y);
-            if (d < 10) {
-                points[i].hover = true;
-            } else {
-                points[i].hover = false;
+        if (triangle_active) {
+            hovered_point = null;
+            // Check if the mouse is within the range of any point
+            for (let i = points.length - 1; i >= 0; i--) {
+                let d = s2Sketch.dist(s2Sketch.mouseX, s2Sketch.mouseY, points[i].position.x, points[i].position.y);
+                if (d < 10) {
+                    points[i].hover = true;
+                } else {
+                    points[i].hover = false;
+                }
             }
         }
     }
@@ -236,6 +245,13 @@ function definePoints() {
     }
 }
 
+async function surpriseMe() {
+    for (let i = 0; i < points.length; i++) {
+        points[i].position = randomPointInsideTriangle(triangle_points[0], triangle_points[1], triangle_points[2]);
+    }
+    await styleChange();
+}
+
 function updateDistance() {
     for (let i = 0; i < points.length; i++) {
         points[i].distance[0] =
@@ -273,9 +289,9 @@ function randomPointInsideTriangle(p1, p2, p3) {
 
 function isPointInsideTriangle(point, p1, p2, p3) {
     // Calculate vectors for the three edges of the triangle
-    const v0 = { x: p3.x - p1.x, y: p3.y - p1.y };
-    const v1 = { x: p2.x - p1.x, y: p2.y - p1.y };
-    const v2 = { x: point.x - p1.x, y: point.y - p1.y };
+    const v0 = {x: p3.x - p1.x, y: p3.y - p1.y};
+    const v1 = {x: p2.x - p1.x, y: p2.y - p1.y};
+    const v2 = {x: point.x - p1.x, y: point.y - p1.y};
 
     // Calculate dot products
     const dot00 = v0.x * v0.x + v0.y * v0.y;
@@ -295,7 +311,7 @@ function isPointInsideTriangle(point, p1, p2, p3) {
 
 function setActive() {
     for (let i = 0; i < points.length; i++) {
-        if(points[i].id==this.id) {
+        if (points[i].id == this.id) {
             points[i].active = true;
             points[i].button.classList.add("active");
         } else {

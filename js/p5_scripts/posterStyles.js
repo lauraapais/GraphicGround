@@ -25,7 +25,7 @@ function loadTemplates() {
             "background": [232, 232, 230],
             "image": {
                 "one": [26, 26, 26],
-                "two": [26, 26, 26]
+                "two": [157, 0, 0]
             }
         },{
             "text": [26, 26, 26],
@@ -33,7 +33,7 @@ function loadTemplates() {
             "background": [255, 255, 255],
             "image": {
                 "one": [26, 26, 26],
-                "two": [26, 26, 26]
+                "two": [150, 150, 150]
             }
         }
         ],
@@ -71,14 +71,14 @@ function loadTemplates() {
                 "fontOthers": "Rosarivo-Regular"
             }],
 
-            "marginText": 0.8,
+            "marginText": 0.9,
 
             "alignment": [1],
             "rotation": [0],
 
-            "titleScale": 0.1,
-            "subTitleScale": 0.047,
-            "additionalScale": 0.035,
+            "titleScale": 0.142,
+            "subTitleScale": 0.05,
+            "additionalScale": 0.04,
 
             "titleCollumns": [2],
             "subTitleCollumns": [2],
@@ -114,7 +114,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [8, 8, 8],
-                "two": [255,0,0]
+                "two": [48,52,146]
             }
         }, {
             "text": [225, 223, 224],
@@ -122,7 +122,7 @@ function loadTemplates() {
             "background": [0, 0, 0],
             "image": {
                 "one": [225, 223, 224],
-                "two": [255,0,0]
+                "two": [251,238,52]
             }
         }, {
             "text": [225, 223, 224],
@@ -130,7 +130,7 @@ function loadTemplates() {
             "background": [0, 0, 0],
             "image": {
                 "one": [254, 240, 47],
-                "two": [255,0,0]
+                "two": [203,1,113]
             }
         }, {
             "text": [225, 223, 224],
@@ -138,7 +138,7 @@ function loadTemplates() {
             "background": [0, 0, 0],
             "image": {
                 "one": [221, 61, 73],
-                "two": [255,0,0]
+                "two": [203,1,113]
             }
         }, {
             "text": [225, 223, 224],
@@ -146,7 +146,7 @@ function loadTemplates() {
             "background": [0, 0, 0],
             "image": {
                 "one": [1, 152, 199],
-                "two": [255,0,0]
+                "two": [221, 61, 73]
             }
         }, {
             "text": [225, 223, 224],
@@ -154,15 +154,15 @@ function loadTemplates() {
             "background": [0, 0, 0],
             "image": {
                 "one": [203, 1, 113],
-                "two": [255,0,0]
+                "two": [0, 1, 242]
             }
         }, {
             "text": [225, 223, 224],
             "additionalInformation": [225, 223, 224],
             "background": [0, 0, 0],
             "image": {
-                "one": [17, 7, 172],
-                "two": [255,0,0]
+                "one": [0, 1, 242],
+                "two": [1, 152, 199]
             }
         }, {
             "text": [8, 8, 8],
@@ -170,7 +170,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [254, 240, 47],
-                "two": [255,0,0]
+                "two": [203, 1, 113]
             }
         }, {
             "text": [8, 8, 8],
@@ -178,7 +178,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [221, 61, 73],
-                "two": [255,0,0]
+                "two": [203, 1, 113]
             }
         }, {
             "text": [8, 8, 8],
@@ -186,7 +186,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [1, 152, 199],
-                "two": [255,0,0]
+                "two": [254, 240, 47]
             }
         }, {
             "text": [8, 8, 8],
@@ -194,15 +194,15 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [203, 1, 113],
-                "two": [255,0,0]
+                "two": [0, 1, 242]
             }
         }, {
             "text": [8, 8, 8],
             "additionalInformation": [8, 8, 8],
             "background": [225, 223, 224],
             "image": {
-                "one": [17, 7, 172],
-                "two": [255,0,0]
+                "one": [0, 1, 242],
+                "two": [1, 152, 199]
             }
         }, {
             "text": [221, 61, 73],
@@ -210,7 +210,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [221, 61, 73],
-                "two": [255,0,0]
+                "two": [203, 1, 113]
             }
         }, {
             "text": [1, 152, 199],
@@ -218,7 +218,7 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [1, 152, 199],
-                "two": [255,0,0]
+                "two": [0, 1, 242]
             }
         }, {
             "text": [203, 1, 113],
@@ -226,15 +226,15 @@ function loadTemplates() {
             "background": [225, 223, 224],
             "image": {
                 "one": [203, 1, 113],
-                "two": [255,0,0]
+                "two": [0, 1, 242]
             }
         }, {
-            "text": [17, 7, 172],
-            "additionalInformation": [17, 7, 172],
+            "text": [0, 1, 242],
+            "additionalInformation": [0, 1, 242],
             "background": [225, 223, 224],
             "image": {
-                "one": [17, 7, 172],
-                "two": [255,0,0]
+                "one": [0, 1, 242],
+                "two": [203, 1, 113]
             }
         }, {
             "text": [8, 8, 8],
@@ -242,7 +242,7 @@ function loadTemplates() {
             "background": [254, 240, 47],
             "image": {
                 "one": [8, 8, 8],
-                "two": [255,0,0]
+                "two": [203, 1, 113]
             }
         }, {
             "text": [8, 8, 8],
@@ -250,7 +250,7 @@ function loadTemplates() {
             "background": [221, 61, 73],
             "image": {
                 "one": [8, 8, 8],
-                "two": [255,0,0]
+                "two": [0, 1, 242]
             }
         }, {
             "text": [8, 8, 8],
@@ -258,7 +258,7 @@ function loadTemplates() {
             "background": [203, 1, 113],
             "image": {
                 "one": [8, 8, 8],
-                "two": [255,0,0]
+                "two": [254, 240, 47]
             }
         }, {
             "text": [8, 8, 8],
@@ -266,7 +266,7 @@ function loadTemplates() {
             "background": [1, 152, 199],
             "image": {
                 "one": [8, 8, 8],
-                "two": [255,0,0]
+                "two": [221, 61, 73]
             }
         }, {
             "text": [255, 255, 255],
@@ -274,7 +274,7 @@ function loadTemplates() {
             "background": [221, 61, 73],
             "image": {
                 "one": [255, 255, 255],
-                "two": [255,0,0]
+                "two": [0, 1, 242]
             }
         }, {
             "text": [255, 255, 255],
@@ -282,7 +282,7 @@ function loadTemplates() {
             "background": [203, 1, 113],
             "image": {
                 "one": [255, 255, 255],
-                "two": [255,0,0]
+                "two": [254, 240, 47]
             }
         }, {
             "text": [255, 255, 255],
@@ -290,15 +290,15 @@ function loadTemplates() {
             "background": [1, 152, 199],
             "image": {
                 "one": [255, 255, 255],
-                "two": [255,0,0]
+                "two": [221, 61, 73]
             }
         }, {
             "text": [255, 255, 255],
             "additionalInformation": [255, 255, 255],
-            "background": [17, 7, 172],
+            "background": [0, 1, 242],
             "image": {
                 "one": [255, 255, 255],
-                "two": [255,0,0]
+                "two": [1, 152, 199]
             }
         }
         ],
@@ -350,8 +350,8 @@ function loadTemplates() {
                 "fontTitle": "Inconsolata",
                 "fontOthers": "Inconsolata"
             }, {
-                "fontTitle": "LeagueSpartan-Bold",
-                "fontOthers": "LeagueSpartan-Bold"
+                "fontTitle": "LeagueSpartan",
+                "fontOthers": "LeagueSpartan"
             }
             ],
             "marginText": 1,
@@ -359,9 +359,9 @@ function loadTemplates() {
             "alignment": [0],
             "rotation": [0],
 
-            "titleScale": 0.175,
-            "subTitleScale": 0.05,
-            "additionalScale": 0.025,
+            "titleScale": 0.17,
+            "subTitleScale": 0.06,
+            "additionalScale": 0.034,
 
             "titleCollumns": [5],
             "subTitleCollumns": [3],
@@ -392,118 +392,150 @@ function loadTemplates() {
         },
 
         "palettes": [{
+            "text": [169, 232, 3],
+            "additionalInformation": [169, 232, 3],
+            "background": [152, 95, 245],
+            "image": {
+                "one": [169, 232, 3],
+                "two": [224, 71, 37]
+            }
+        },{
+            "text": [24, 217, 128],
+            "additionalInformation": [24, 217, 128],
+            "background": [152, 95, 245],
+            "image": {
+                "one": [24, 217, 128],
+                "two": [53, 25, 142]
+            }
+        },{
+            "text": [53, 25, 142],
+            "additionalInformation": [53, 25, 142],
+            "background": [152, 95, 245],
+            "image": {
+                "one": [53, 25, 142],
+                "two": [24, 217, 128]
+            }
+        },{
+            "text": [169, 232, 3],
+            "additionalInformation": [169, 232, 3],
+            "background": [152, 95, 245],
+            "image": {
+                "one": [169, 232, 3],
+                "two": [183, 166, 246]
+            }
+        },{
+            "text": [169, 232, 3],
+            "additionalInformation": [169, 232, 3],
+            "background": [183, 166, 246],
+            "image": {
+                "one": [169, 232, 3],
+                "two": [224, 71, 37]
+            }
+        },{
             "text": [254, 89, 0],
             "additionalInformation": [254, 89, 0],
-            "background": [102, 83, 149],
+            "background": [183, 166, 246],
             "image": {
-                "one": [77, 57, 142],
+                "one": [254, 89, 0],
+                "two": [169, 232, 3]
+            }
+        },{
+            "text": [53, 25, 142],
+            "additionalInformation": [53, 25, 142],
+            "background": [183, 166, 246],
+            "image": {
+                "one": [152, 95, 245],
                 "two": [254, 89, 0]
             }
-        }, {
-            "text": [32, 32, 32],
-            "additionalInformation": [32, 32, 32],
+        },{
+            "text": [53, 25, 142],
+            "additionalInformation": [53, 25, 142],
             "background": [254, 89, 0],
             "image": {
-                "one": [209, 59, 0],
-                "two": [221, 217, 227]
+                "one": [53, 25, 142],
+                "two": [169,  232, 3]
             }
-        }, {
-            "text": [32, 32, 32],
-            "additionalInformation": [32, 32, 32],
-            "background": [146, 207, 107],
+        },{
+            "text": [169,  232, 3],
+            "additionalInformation": [169,  232, 3],
+            "background": [254, 89, 0],
             "image": {
-                "one": [113, 173, 3275],
-                "two": [221, 217, 227]
+                "one": [169,  232, 3],
+                "two": [53, 25, 142]
             }
-        }, {
-            "text": [186, 164, 255],
-            "additionalInformation": [186, 164, 255],
-            "background": [32, 32, 32],
+        },{
+            "text": [169,  232, 3],
+            "additionalInformation": [169,  232, 3],
+            "background": [86, 187, 169],
             "image": {
-                "one": [186, 164, 255],
-                "two": [255, 255, 255]
+                "one": [152,  95, 245],
+                "two": [53, 25, 142]
             }
-        }, {
+        },{
+            "text": [224, 71, 37],
+            "additionalInformation": [224, 71, 37],
+            "background": [24, 217, 128],
+            "image": {
+                "one": [152,  95, 245],
+                "two": [53, 25, 142]
+            }
+        },{
+            "text": [53, 25, 142],
+            "additionalInformation": [53, 25, 142],
+            "background": [24, 217, 128],
+            "image": {
+                "one": [53, 25, 142],
+                "two": [152,  95, 245]
+            }
+        },{
             "text": [254, 89, 0],
             "additionalInformation": [254, 89, 0],
-            "background": [32, 32, 32],
-            "image": {
-                "one": [255, 255, 255],
-                "two": [254, 89, 0]
-            }
-        }, {
-            "text": [255, 255, 255],
-            "additionalInformation": [255, 255, 255],
-            "background": [32, 32, 32],
-            "image": {
-                "one": [255, 255, 255],
-                "two": [32, 32, 32]
-            }
-        }, {
-            "text": [159, 159, 159],
-            "additionalInformation": [159, 159, 159],
-            "background": [32, 32, 32],
-            "image": {
-                "one": [102, 83, 149],
-                "two": [159, 159, 159]
-            }
-        }, {
-            "text": [32, 32, 32],
-            "additionalInformation": [32, 32, 32],
-            "background": [186, 184, 178],
+            "background": [197, 197, 197],
             "image": {
                 "one": [254, 89, 0],
-                "two": [32, 32, 32]
+                "two": [152,  95, 245]
             }
-        }, {
-            "text": [32, 32, 32],
-            "additionalInformation": [32, 32, 32],
-            "background": [186, 184, 178],
+        },{
+            "text": [86, 187, 169],
+            "additionalInformation": [86, 187, 169],
+            "background": [197, 197, 197],
             "image": {
-                "one": [102, 83, 149],
-                "two": [32, 32, 32]
+                "one": [86, 187, 169],
+                "two": [183,  166, 246]
             }
-        }, {
-            "text": [32, 32, 32],
-            "additionalInformation": [32, 32, 32],
-            "background": [186, 184, 178],
+        },{
+            "text": [152, 95, 245],
+            "additionalInformation": [152, 95, 245],
+            "background": [197, 197, 197],
             "image": {
-                "one": [146, 207, 107],
-                "two": [32, 32, 32]
+                "one": [24, 217, 128],
+                "two": [169,  232, 3]
             }
-        }, {
-            "text": [146, 207, 107],
-            "additionalInformation": [146, 207, 107],
-            "background": [254, 89, 0],
+        },{
+            "text": [53, 25, 142],
+            "additionalInformation": [53, 25, 142],
+            "background": [197, 197, 197],
             "image": {
-                "one": [146, 207, 107],
-                "two": [254, 89, 0]
+                "one": [216, 124, 73],
+                "two": [254,  89, 0]
             }
-        }, {
-            "text": [102, 83, 149],
-            "additionalInformation": [102, 83, 149],
-            "background": [146, 207, 107],
+        },{
+            "text": [53, 25, 142],
+            "additionalInformation": [53, 25, 142],
+            "background": [197, 197, 197],
             "image": {
-                "one": [186, 184, 178],
-                "two": [102, 83, 149]
+                "one": [169, 232, 3],
+                "two": [24,  217, 128]
             }
-        }, {
-            "text": [146, 207, 107],
-            "additionalInformation": [146, 207, 107],
-            "background": [102, 83, 149],
+        },{
+            "text": [53, 25, 142],
+            "additionalInformation": [53, 25, 142],
+            "background": [197, 197, 197],
             "image": {
-                "one": [254, 89, 0],
-                "two": [146, 207, 107]
+                "one": [24,  217, 128],
+                "two": [169, 232, 3]
             }
-        }, {
-            "text": [32,32,32],
-            "additionalInformation": [32,32,32],
-            "background": [186, 184, 178],
-            "image": {
-                "one": [32,32,32],
-                "two": [146, 207, 107]
-            }
-        }
+        },
         ],
 
         "text": {
@@ -607,9 +639,9 @@ function loadTemplates() {
             "alignment": [2],
             "rotation": [20, 45, 90, 0, -45, -90, 20],
 
-            "titleScale": 0.15,
-            "subTitleScale": 0.075,
-            "additionalScale": 0.05,
+            "titleScale": 0.16,
+            "subTitleScale": 0.08,
+            "additionalScale": 0.07,
 
             "titleCollumns": [1],
             "subTitleCollumns": [1],
@@ -739,11 +771,8 @@ function randTemplate(values) {
 function setTemplateFigure(temp) {
     mix_template.image = temp.image;
     imageInfo.overflowBool = mix_template.image[0].overflow;
-    if (mix_template.composition.columns == 1 && mix_template.image[0].shapes != 3) {
-        imageInfo.rotation = mix_template.text.rotation[randInt(0, mix_template.text.rotation.length)];
-    } else {
-        imageInfo.rotation = 0;
-    }
+    imageInfo.rotation = mix_template.text.rotation[randInt(0, mix_template.text.rotation.length)];
+
 }
 
 function setTemplateFont(temp) {

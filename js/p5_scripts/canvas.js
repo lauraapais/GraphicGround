@@ -173,8 +173,6 @@ s1 = function (sketch) {
 
         await setURLFormat();
 
-        await layoutChange();
-
         pdf = s1Sketch.createPDF();
 
         loadComplete();
@@ -199,21 +197,16 @@ s1 = function (sketch) {
                 if (imageInfo.overflow == -1) {
                     s1Sketch.translate(-canvasValues.marginWidth, 0)
                 }
+                s1Sketch.push();
+                s1Sketch.translate(imageInfo.posX, imageInfo.posY);
+                s1Sketch.translate(imageInfo.width / 2, imageInfo.height / 2);
+                s1Sketch.rotate(imageInfo.rotation);
+                s1Sketch.translate(-imageInfo.width / 2, -imageInfo.height / 2);
 
-                if (effectImg instanceof p5.Image || effectImg instanceof p5.Graphics) {
-                    s1Sketch.push();
-                    s1Sketch.translate(imageInfo.posX, imageInfo.posY);
-                    s1Sketch.translate(imageInfo.width / 2, imageInfo.height / 2);
-                    s1Sketch.rotate(imageInfo.rotation);
-                    s1Sketch.translate(-imageInfo.width / 2, -imageInfo.height / 2);
-                    s1Sketch.image(effectImg, 0, 0, imageInfo.width, imageInfo.height);
-                    s1Sketch.pop();
-                } else {
-                    s1Sketch.push();
-                    s1Sketch.translate(imageInfo.posX - canvasValues.posterWidth / 2, imageInfo.posY);
-                    drawEngravingVersion(effectImg);
-                    s1Sketch.pop();
-                }
+                if (effectImg instanceof p5.Image || effectImg instanceof p5.Graphics) s1Sketch.image(effectImg, 0, 0, imageInfo.width, imageInfo.height);
+                else drawEngravingVersion(effectImg);
+
+                s1Sketch.pop();
                 s1Sketch.pop();
             }
 
@@ -260,27 +253,28 @@ async function triangleTemplate(changed) {
             att_template.tipografia,
             att_template.composicao
         );
-    } else if (changed.id == 0) {
+        await layoutChange();
+    } else if (changed == 0) {
         // --- FIGURA ---
         setTemplateFigure(randTemplate(att_template.figura));
-        shapeChange();
-        setTextAvailability();
         clearAvailability();
+        await setTextAvailability();
+        shapeChange();
         await imageChange();
-        calcPosImage(false)
-    } else if (changed.id == 1) {
+        await calcPosImage(false)
+    } else if (changed == 1) {
         // ---- COR ----
         setTemplateColors(randTemplate(att_template.cor));
         shapeChange(true);
-    } else if (changed.id == 2) {
+    } else if (changed == 2) {
         // --- TIPOGRAFIA ---
         setTemplateFont(randTemplate(att_template.tipografia));
-    } else if (changed.id == 3) {
+    } else if (changed == 3) {
         // ---- COMPOSIÇÃO ----
         setTemplateComposition(randTemplate(att_template.composicao));
 
-        await loadPosterStyles();
-        layoutChange();
+        await loadPosterStyles(false);
+        await layoutChange();
     }
 }
 
@@ -332,14 +326,16 @@ async function onResize(scaling = true) {
     await loadPosterStyles();
 }
 
-async function loadPosterStyles() {
+async function loadPosterStyles(newImage = true) {
     canvasValues = calcPoster(s1Sketch.width, s1Sketch.height, 0.12, 0.12);
     gridValues = calcGrid(mix_template.composition.columns, 0.12, canvasValues.posterWidth, nLinhastmp, 0.17, canvasValues.posterHeight);
     // LOAD IMAGE EFFECT
-    if (originalImg) {
-        effectImg = imageEffect(originalImg);
-    } else {
-        effectImg = createShape()
+    if (newImage) {
+        if (originalImg) {
+            effectImg = imageEffect(originalImg);
+        } else {
+            effectImg = createShape()
+        }
     }
 
 
@@ -405,7 +401,7 @@ async function changeOrientation(value) {
 
 function windowSize(scaling = true) {
     let scale;
-    if(scaling) scale = 0.45;
+    if (scaling) scale = 0.45;
     else scale = 1;
 
     var wDiv = canvas_parent.clientWidth;
@@ -423,13 +419,25 @@ function windowSize(scaling = true) {
 
 function formatText(txt, boxWidth, txtSize, nCollumns, currentFont, rot) {
     s1Sketch.textFont(fonts[currentFont]);
+
+    // SCALE IF EXCEED CHARACTERS
+    if (txt.length > 20 && txt.length < 40) {
+        txtSize *= 0.90;
+    }
+    else if (txt.length > 40) {
+        txtSize *= 0.80;
+    }
+    // ----
     s1Sketch.textSize(txtSize);
-    s1Sketch.textLeading(txtSize * 1);
+    s1Sketch.textLeading(txtSize);
 
     var outputText = "";
     var currentText = "";
     var words = s1Sketch.split(txt, ' ');
     var nBreaks = 0;
+
+
+
     for (var i = 0; i < words.length; i++) { // Roda todas as palavras
         if (fonts[currentFont].textBounds(currentText + words[i], 0, 0, txtSize).w > boxWidth * mix_template.text.marginText) { // Verifica se o tamanho da linha atual + a palavra atual superou o tamanho da caixa
             if (fonts[currentFont].textBounds(words[i], 0, 0, txtSize).w > boxWidth * .8) {
@@ -506,7 +514,21 @@ function textSetup(textInput, gridValues) {
     }
 
     if (textInput.content.text != null && textInput.content.text != "") {
-        s1Sketch.textSize(textInput.size);
+        // SCALE IF EXCEED CHARACTERS
+        if(textInput.content.text.length < 20) {
+            s1Sketch.textSize(textInput.size);
+        }
+        else if(textInput.content.text.length > 20 && textInput.content.text.length < 30) {
+            s1Sketch.textSize(textInput.size * 0.85);
+        }
+        else if (textInput.content.text.length > 30 && textInput.content.text.length < 40) {
+            s1Sketch.textSize(textInput.size * 0.7);
+        }
+        else if (textInput.content.text.length > 40) {
+            s1Sketch.textSize(textInput.size * 0.6);
+        }
+
+        // ---
         s1Sketch.textLeading(textInput.content.leading);
         s1Sketch.text(textInput.content.text, xValue, yValue);
     }
@@ -680,10 +702,14 @@ function imageEffect(original) {
         // ---
 
         let image_size;
-        if (mix_template.composition.columns == 2 && mix_template.image[0].shapes == 2) {
-            image_size = original_size_w * 0.2;
-        } else if (mix_template.composition.columns == 2 && mix_template.image[0].shapes == 3) {
-            image_size = original_size_w * 0.05;
+        if (effectImg instanceof p5.Graphics) {
+            if (mix_template.composition.columns == 2 && mix_template.image[0].shapes == 2) {
+                image_size = original_size_w * 0.2;
+            } else if (mix_template.composition.columns == 2 && mix_template.image[0].shapes == 3) {
+                image_size = original_size_w * 0.05;
+            } else {
+                image_size = original_size_w * mix_template.composition.imageHorizontalScale[0]
+            }
         } else {
             image_size = original_size_w * mix_template.composition.imageHorizontalScale[0]
         }
@@ -713,7 +739,8 @@ function imageEffect(original) {
 
 async function calcPosImage(recreate = true) {
     if (mix_template.composition.imageAlignment == 1) { // CENTER
-        imageInfo.posX = imageInfo.originalWidth / 2 - imageInfo.width / 2 + canvasValues.posterWidth / 2;
+        imageInfo.posX = canvasValues.posterWidth / 2 - imageInfo.width / 2;
+
         imageInfo.columnStart = 0;
         imageInfo.columnEnd = gridValues.nColumns - 1;
         imageInfo.overflow = 0;
@@ -737,8 +764,8 @@ async function calcPosImage(recreate = true) {
         }
 
         // ----
-
         imageInfo.posX = gridValues.sizeColumn * (imageInfo.columnStart) + gridValues.gapColumn * Math.max(0, imageInfo.columnStart);
+
 
         imageInfo.columnEnd = imageInfo.columnStart + imageInfo.nCollumns - 1;
     } else if (mix_template.composition.imageAlignment == 2) { // RANDOM
@@ -753,12 +780,7 @@ async function calcPosImage(recreate = true) {
             imageInfo.rowEnd = imageInfo.rowStart + imageInfo.nRows;
         }
 
-        if (mix_template.composition.columns == 2 && mix_template.image[0].shapes == 2) {
-            imageInfo.posX = imageInfo.originalWidth / 2 - imageInfo.width / 2 + canvasValues.posterWidth / 2;
-            imageInfo.columnStart = 0;
-            imageInfo.columnEnd = gridValues.nColumns - 1;
-            imageInfo.overflow = 0;
-        } else if (mix_template.composition.columns == 2 && mix_template.image[0].shapes == 3) {
+        if (mix_template.composition.columns == 2 && (mix_template.image[0].shapes == 2 || mix_template.image[0].shapes == 3)) {
             imageInfo.posX = imageInfo.originalWidth / 2 - imageInfo.width / 2 + canvasValues.posterWidth / 2;
             imageInfo.columnStart = 0;
             imageInfo.columnEnd = gridValues.nColumns - 1;
@@ -845,7 +867,8 @@ function getEngravingVersion(baseImg, quadSize) {
 
 function drawEngravingVersion(info) {
     s1Sketch.strokeCap(s1Sketch.SQUARE);
-    s1Sketch.stroke(0);
+    s1Sketch.stroke(mix_template.palettes.image.one);
+    s1Sketch.push();
     for (let x = 0; x < info.quads.length; x++) {
         for (let y = 0; y < info.quads[x].length; y++) {
             if (info.quads[x][y] != null) {
@@ -858,6 +881,7 @@ function drawEngravingVersion(info) {
             }
         }
     }
+    s1Sketch.pop();
 }
 
 const create2Darr = (rows, columns) => {
